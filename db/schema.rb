@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_023757) do
+ActiveRecord::Schema.define(version: 2019_03_12_171209) do
 
   create_table "artists", force: :cascade do |t|
     t.string "artist_name"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2019_03_12_023757) do
     t.string "genre_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["genre_name"], name: "index_genres_on_genre_name", unique: true
   end
 
   create_table "labels", force: :cascade do |t|
