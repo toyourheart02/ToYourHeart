@@ -1,0 +1,13 @@
+<!-- Top/商品一覧ページ -->
+
+<!-- スライドショー -->
+
+<!-- 商品一覧（新着順） -->
+<!-- 並べ替えプルダウン -->
+<h1>商品一覧</h1>
+<% @products.each do |product| %>
+<%= product.title %>
+<% end %>
+<!-- カート追加ボタン -->
+<!-- ページャ -->
+<%= paginate @products, class: "paginate" %>

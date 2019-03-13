@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_033225) do
+ActiveRecord::Schema.define(version: 2019_03_13_065051) do
 
   create_table "administrators", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_033225) do
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
-
 
   create_table "artists", force: :cascade do |t|
     t.string "artist_name"
@@ -95,7 +94,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_033225) do
     t.string "genre_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["genre_name"], name: "index_genres_on_genre_name", unique: true
   end
 
   create_table "labels", force: :cascade do |t|
@@ -146,6 +144,8 @@ ActiveRecord::Schema.define(version: 2019_03_13_033225) do
     t.boolean "is_deleted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "artist_id"
+    t.index ["artist_id"], name: "index_products_on_artist_id"
     t.index ["genre_id"], name: "index_products_on_genre_id"
     t.index ["label_id"], name: "index_products_on_label_id"
     t.index ["scene_id"], name: "index_products_on_scene_id"
