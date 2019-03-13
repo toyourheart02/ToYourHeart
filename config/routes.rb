@@ -22,7 +22,13 @@ Rails.application.routes.draw do
   post 'scenes' => 'scenes#create'
   get 'scene' => 'master#new'
 
+  get 'products/new' => 'products#new'
+  post 'products' => 'products#create'
+
+
+
+
   post 'musics' => 'musics#create'
   get 'music' => 'master#new'
-  
+
 end
