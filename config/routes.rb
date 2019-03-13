@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   get 'products' => 'products#index'
   root 'products#index'
 
-  get 'prodcuts/new' => 'products#new'
+  get 'products/new' => 'products#new'
+  post 'products' => 'products#create'
 
 
 
