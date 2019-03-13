@@ -1,0 +1,13 @@
+<% if admin_signed_in? %>
+<span>ログイン中</span>
+<% end %>
+<br>
+<%= link_to "商品登録", "#" %>
+<br>
+<%= link_to "商品一覧", "#" %>
+<br>
+<%= link_to "ユーザ一覧", "#" %>
+<br>
+<%= link_to "マスタ登録", "#" %>
+<br>
+<%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
