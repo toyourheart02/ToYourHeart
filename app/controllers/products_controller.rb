@@ -1,9 +1,9 @@
 class ProductsController < ApplicationController
 	def index
-
-		
-		
+  	# config/initializers/kaminari_configで1ページの表示件数20件に設定
+		@products = Product.page(params[:page]).reverse_order
 	end
+
 
 	def new
 		@product = Product.new
@@ -20,7 +20,6 @@ class ProductsController < ApplicationController
          	flash[:warning] = "商品の登録に失敗しました。。"
          	redirect_to products_new_path
          end
-
 	end
 
 
@@ -29,5 +28,6 @@ class ProductsController < ApplicationController
     def product_params
         params.require(:product).permit(:music_image, :title, :price, :label_id, :genre_id, :scene_id, :release_date, :stock)
     end
+
 
 end

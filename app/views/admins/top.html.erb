@@ -1,0 +1,20 @@
+<% if admin_signed_in? %>
+	<%= current_admin.email %>
+	<span>ログイン中</span>
+<% end %>
+<br>
+<%= h(flash[:notice]) %>
+
+<br>
+<%= link_to "商品登録", "#" %>
+<br>
+<%= link_to "商品一覧", "#" %>
+<br>
+<%= link_to "ユーザ一覧", "#" %>
+<br>
+<%= link_to "マスタ登録", "#" %>
+<br>
+
+<% if admin_signed_in? %>
+	<%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+<% end %>

@@ -1,21 +1,25 @@
-<h1>AAAAAAAAA</h1>
+<% if user_signed_in? %>
+	<%= current_user.email %>
+	<span>ログイン中</span>
+<% end %>
+<%= h(flash[:notice]) %>
+
+<!-- Top/商品一覧ページ -->
+
+<!-- スライドショー -->
+
+<!-- 商品一覧（新着順） -->
+<!-- 並べ替えプルダウン -->
+<h1>商品一覧</h1>
+<% @products.each do |product| %>
+<%= product.title %>
+<% end %>
+<!-- カート追加ボタン -->
+<!-- ページャ -->
+<%= paginate @products, class: "paginate" %>
 
 
 
-<style type="">
-	
-
-h1{
-
-	height: 1000px;
-	text-align: center;
-
-
-
-}
-
-
-
-
-
-</style>
+<% if user_signed_in? %>
+	<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+<% end %>
