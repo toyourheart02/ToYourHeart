@@ -1,0 +1,44 @@
+<h1>マスタ登録ページ</h1>
+
+<%= h(flash[:notice]) %>
+<%= h(flash[:warning]) %>
+
+<h3>アーティスト登録</h3>
+<%= form_for(@artist) do |f| %>
+	<label class="">アーティスト名</label>
+	<%= f.text_field :artist_name %>
+	<%= f.submit "登録", class: "" %>
+<% end %>
+
+<h3>レーベル登録</h3>
+<%= form_for(@label) do |f| %>
+	<label class="">レーベル名</label>
+	<%= f.text_field :label_name %>
+	<%= f.submit "登録", class: "" %>
+<% end %>
+
+<h3>プレゼントシーン登録</h3>
+<%= form_for(@scene) do |f| %>
+	<label class="">シーン名</label>
+	<%= f.text_field :scene_name %>
+	<%= f.submit "登録", class: "" %>
+<% end %>
+
+<h3>ジャンル登録</h3>
+<%= form_for(@genre) do |f| %>
+	<label class="">ジャンル名</label>
+	<%= f.text_field :genre_name %>
+	<%= f.submit "登録", class: "" %>
+<% end %>
+
+<h3>楽曲登録</h3>
+<%= form_for(@music) do |f| %>
+	<label class="">楽曲名</label>
+	<%= f.text_field :music_name %>
+	<br>
+	<label class="">アーティスト名</label>
+	<%= f.text_field :artist_id %>
+	<%= f.submit "登録", class: "" %>
+<% end %>
+<br>
+<%= link_to '管理者TOPへ'%>
