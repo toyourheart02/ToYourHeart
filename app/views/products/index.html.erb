@@ -2,11 +2,16 @@
 
 <!-- スライドショー -->
 
+<!-- <%= attachment_image_tag @product_topten, #:music_image, :fill, 100, 100, format: 'jpeg' %> -->
+
 <!-- 商品一覧（新着順） -->
 <!-- 並べ替えプルダウン -->
 <h1>商品一覧</h1>
+
+
 <% @products.each do |product| %>
 <%= product.title %>
+<%= product.artist %>
 <% end %>
 <!-- カート追加ボタン -->
 <!-- ページャ -->
