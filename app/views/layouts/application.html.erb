@@ -10,6 +10,7 @@
 </head>
 
 
+
 <body>
 
   <nav class="navbar  navbar-default">
@@ -23,28 +24,73 @@
   </nav>
 
 
+<body>
+
+<header>
+  <nav class="navbar  navbar-default">
+
+
+    <ul class="nav navbar-nav col-md-6 col-md-offset-6">
+      <li class="active"><a href="#">HOME</a></li>
+      <li><a href="#">当サイトついて</a></li>
+      <li><a href="#footer">アクセス</a></li>
+      <li><a href="#footer">お問い合わせ</a></li>
+    </ul>
+
+    <ul class="nav navbar-nav col-lg-6 col-lg-offset-6">
+
+          <!--サインインしていた場合  -->
+          <% if user_signed_in? %>
+           <%= current_user.user_name %>
+           <span> 様   </span>
+           <span>ログイン中</span>
+
+
+            <li class="">
+              <%= link_to user_path(current_user.id), class: "mypage" do %>
+               <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
+               <span>マイページ</span>
+               <% end %>
+            </li>
+            <li class="">
+              <%= link_to destroy_user_session_path, method: :delete, class: "logout" do %>
+              <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+              <span>カート</span>
+              <% end %>
+            </li>
+            <li class="">
+              <%= link_to destroy_user_session_path, method: :delete, class: "logout" do %>
+                <i class="glyphicon glyphicon-book" aria-hidden="true"></i>
+                <span>お気に入り</span>
+              <% end %>
+            </li>
+            <li class="">
+              <%= link_to destroy_user_session_path, method: :delete, class: "logout" do %>
+                <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
+                 <span>ログアウト</span>
+              <% end %>
+            </li>
+
+          <!--サインインしていなかった場合  -->
+          <% else %>
+            <li class="">
+              <%= link_to new_user_registration_path, class: "sign_up" do %>
+                 <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
+                 <span>新規ユーザ登録</span>
+              <% end %>
+            </li>
+            <li class="">
+              <%= link_to user_session_path, class: "sign_in" do %>
+                  <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
+                  <span>ログイン</span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+  </nav>
 </header>
 
 
-
-
-
-
-<%= yield %>
-
-<footer class="navbar_footer  navbar-inverse" style="background-color: white;">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-3 col-xs-offset-9">
-        <h3>アクセス</h3>
-        <p>CopyRight Infratop.inc</p>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<!-- <script src="jquery-3.3.1.min.js"></script> -->
-<!-- <script src="app.js"></script> -->
 </body>
 </html>
 
