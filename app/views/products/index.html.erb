@@ -1,10 +1,3 @@
-<% if user_signed_in? %>
-	<%= current_user.user_name %>
-	<span> 様   </span>
-	<span>ログイン中</span>
-<% end %>
-
-<br>
 <%= h(flash[:notice]) %>
 
 <!-- Top/商品一覧ページ -->
@@ -21,8 +14,3 @@
 <!-- ページャ -->
 <%= paginate @products, class: "paginate" %>
 
-
-
-<% if user_signed_in? %>
-	<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-<% end %>

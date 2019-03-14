@@ -31,4 +31,6 @@ Rails.application.routes.draw do
   post 'musics' => 'musics#create'
   get 'music' => 'master#new'
 
+  resources :users, only: [:show, :index, :edit, :update]
+
 end
