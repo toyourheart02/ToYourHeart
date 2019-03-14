@@ -31,4 +31,10 @@ Rails.application.routes.draw do
   post 'musics' => 'musics#create'
   get 'music' => 'master#new'
 
+  post 'products/sort' => 'products#sort', as: 'products_sort'
+
+
+  # get 'products/sort_price_desc' => 'products#sort_price_desc'
+  # get 'products/sort_price_asc' => 'products#sort_price_asc'
+
 end
