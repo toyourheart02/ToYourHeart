@@ -12,24 +12,18 @@
 
 <body>
   <header>
-    <nav class="navbar  navbar-default">
-
-
-      <ul class="nav navbar-nav col-md-6 col-md-offset-6">
-        <li class="active"><a href="#">HOME</a></li>
-        <li><a href="#">当サイトついて</a></li>
-        <li><a href="#footer">アクセス</a></li>
-        <li><a href="#footer">お問い合わせ</a></li>
-      </ul>
-
-      <ul class="nav navbar-nav col-lg-6 col-lg-offset-6">
-
+    <!-- ロゴをクリックしてもHOMEと同じ動きをするようにする必要あり -->
+    <nav class="col-md-2" id="sitelogo" style="text-align:center"><%= image_tag 'sitelogo.png', :size =>'160x100' %></nav>
+    
+    <nav class="navbar col-md-10">
+          <ul class="nav navbar-nav" id="user_link">
             <!--サインインしていた場合  -->
             <% if user_signed_in? %>
-             <%= current_user.user_name %>
-             <span> 様   </span>
-             <span>ログイン中</span>
-
+              <li id="user_name">
+                <%= current_user.user_name %>
+                <span> 様   </span>
+                <span>ログイン中</span>
+              </li>
 
               <li class="">
                 <%= link_to user_path(current_user.id), class: "mypage" do %>
@@ -72,6 +66,13 @@
               </li>
             <% end %>
           </ul>
+
+          <ul class="nav navbar-nav" id="site_link">
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">当サイトついて</a></li>
+            <li><a href="#footer">アクセス</a></li>
+            <li><a href="#footer">お問い合わせ</a></li>
+          </ul>
     </nav>
   </header>
 
@@ -79,7 +80,7 @@
         <%= yield %>
     </div>
   
-    <footer id="footer" class="">
+    <footer id="footer">
       <div class="container">
         <div class="row">
           <div class="col-xs-3 col-xs-offset-9">
@@ -100,15 +101,59 @@
 
 
 <style>
-.main-content{
-  margin-bottom: 50px;
-  height: 700px;
-}
 
-footer{
-  background-color: black;
-  color:white;
-}
+  header{
+    height: 120px;
+    width: 100%;
+    background-color: #f8f8f8;
+  }
+
+  #sitelogo_img{
+    text-align: right;
+  }
+
+  #user_name{
+    padding: 15px;
+  }
+
+  #user_link{
+    /*強引なやり方なので左揃えに指定する必要あり*/
+    padding-left: 40%;
+    height: 50px;
+    width: 100%;
+    text-align: right;
+  }
+
+  #user_link li{
+    display: inline;
+  }
+
+
+  #site_link{
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    padding-left: 100px;
+  }
+
+  #site_link li{
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 17px;
+    display: inline;
+  }
+
+
+  .main-content{
+    margin-bottom: 50px;
+    height: 700px;
+  }
+
+  footer{
+    background-color: black;
+    color:white;
+  }
 
 </style>
 
