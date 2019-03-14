@@ -17,26 +17,27 @@
     <label>価格</label>
     <%= product.text_field :price %>
     <br>
-
+    <!-- アーティストの入力方法はより良いものに変更予定 -->
     <label>アーティスト</label>
-    <%= product.collection_select :artist_id, Artist.all, :id, :artist_name %>
+    <%= product.collection_select :artist_id, Artist.all, :id, :artist_name, { include_blank: true} %>
     <br>
 
     <label>レーベル</label>
-    <%= product.collection_select :label_id, Label.all, :id, :label_name %>
+    <%= product.collection_select :label_id, Label.all, :id, :label_name, { include_blank: true} %>
     <br>
 
     <label>ジャンル</label>
-    <%= product.collection_select :genre_id, Genre.all, :id, :genre_name %>
+    <%= product.collection_select :genre_id, Genre.all, :id, :genre_name, { include_blank: true} %>
 　　
     <br>
 
     <label>シーン</label>
-    <%= product.collection_select :scene_id, Scene.all, :id, :scene_name %>
+    <%= product.collection_select :scene_id, Scene.all, :id, :scene_name, { include_blank: true} %>
     <br>
 
+    <!-- カレンダーで入力-->
    <label>発売日</label>
-    <%= product.text_field :release_date %>
+    <%= product.date_field :release_date %>
     <br>
 
    <label>在庫数</label>
