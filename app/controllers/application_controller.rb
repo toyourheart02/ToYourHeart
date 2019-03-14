@@ -1,6 +1,16 @@
 class ApplicationController < ActionController::Base
 	# before_action :authenticate_admin!
 
+  # 任意の項目をユーザ登録するため
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+
+
+  def configure_permitted_parameters
+    #strong parametersを設定し、user_name, user_kanaを許可
+    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:user_name, :user_kana, :email, :password, :password_confirmation) }
+    # devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(:username, :password, :remember_me) }
+  end
 
 	private
 
