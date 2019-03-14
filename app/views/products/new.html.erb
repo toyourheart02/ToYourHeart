@@ -18,16 +18,21 @@
     <%= product.text_field :price %>
     <br>
 
+    <label>アーティスト</label>
+    <%= product.collection_select :artist_id, Artist.all, :id, :artist_name %>
+    <br>
+
     <label>レーベル</label>
-    <%= product.text_field :label_id %>
+    <%= product.collection_select :label_id, Label.all, :id, :label_name %>
     <br>
 
     <label>ジャンル</label>
-    <%= product.text_field :genre_id %>
+    <%= product.collection_select :genre_id, Genre.all, :id, :genre_name %>
+　　
     <br>
 
     <label>シーン</label>
-    <%= product.text_field :scene_id %>
+    <%= product.collection_select :scene_id, Scene.all, :id, :scene_name %>
     <br>
 
    <label>発売日</label>
@@ -37,6 +42,11 @@
    <label>在庫数</label>
     <%= product.text_field :stock %>
     <br>
+
+
+
+   
+
 
 
 
