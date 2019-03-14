@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ToYourHeart</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>ToYourHeart</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
 
 
 <body>
+
+  <nav class="navbar  navbar-default">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">HOME</a></li>
+      <li><a href="#">SERVICE</a></li>
+      <li><a href="#">BLOG</a></li>
+      <li><a href="#">ABOUT</a></li>
+      <li><a href="#">ABOUT</a></li>
+    </ul>
+  </nav>
+
+
+<body>
+  
   <header>
     <!-- ロゴをクリックしてもHOMEと同じ動きをするようにする必要あり -->
     <nav class="col-md-2" id="sitelogo" style="text-align:center"><%= image_tag 'sitelogo.png', :size =>'160x100' %></nav>
@@ -156,8 +171,6 @@
   }
 
 </style>
-
-
 
 
 

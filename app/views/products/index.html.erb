@@ -1,16 +1,91 @@
 <%= h(flash[:notice]) %>
 
-<!-- Top/商品一覧ページ -->
 
 <!-- スライドショー -->
 
-<!-- 商品一覧（新着順） -->
-<!-- 並べ替えプルダウン -->
-<h1>商品一覧</h1>
-<% @products.each do |product| %>
-<%= product.title %>
-<% end %>
-<!-- カート追加ボタン -->
-<!-- ページャ -->
-<%= paginate @products, class: "paginate" %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<h1 class="product_title">商品一覧</h1>
+      
+			<!-- 並べ替えプルダウン -->
 
+			<form>
+				<select id="sorting">
+					<option value="">-----</option>
+					<option value="price_desc">価格の高い順</option>
+					<option value="price_asc">価格の低い順</option>
+					<option value="review_score">評価順</option>
+				</select>
+			</form>
+
+			<!-- 商品一覧（新着順） -->
+			<div id="products">
+			<% @products.each do |product| %>
+				<div class="product_index">
+					<%= attachment_image_tag product, :music_image, :fill, 200, 200 %>
+					<p><%= product.title %></p>
+				</div>
+			<% end %>
+			</div>
+
+			<!-- カート追加ボタン -->
+			<!-- ページャ -->
+			<%= paginate @products, class: "paginate" %>
+
+
+
+			<% if user_signed_in? %>
+			<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+			<% end %>
+
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function(){
+		$("#sorting").on("change", function(){
+			console.log($(this).val())
+
+			const sortValue = $(this).val()
+			$.ajax({
+				url: '/products/sort',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					sortValue: sortValue
+				},
+				beforeSend: function(xhr){
+					xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+				}
+			})
+			.done((e)=>{
+				console.log(e)
+				$("#products").empty()
+				e.forEach((value)=>{
+					console.log(value)
+					$('#products').append('<div class="product_index"><p>'+value.title+'</p></div>')
+				})
+			})
+		})
+	})
+
+</script>
+
+<style>
+.product_title {
+	text-align: center;
+}
+.product_index {
+	background-color: #D4D7D8;
+	margin: 5px;
+	padding: 10px;
+	width: 230px;
+	float: left;
+}
+.dropdown {
+	float: right;
+}
+
+</style>
