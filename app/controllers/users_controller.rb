@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	def index
+		# 退会したユーザは表示させない処理を追加する
 		@users = User.all
 	end
 
