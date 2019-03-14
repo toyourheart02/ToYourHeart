@@ -1,7 +1,10 @@
 <% if user_signed_in? %>
-	<%= current_user.email %>
+	<%= current_user.user_name %>
+	<span> 様   </span>
 	<span>ログイン中</span>
 <% end %>
+
+<br>
 <%= h(flash[:notice]) %>
 
 <!-- Top/商品一覧ページ -->
