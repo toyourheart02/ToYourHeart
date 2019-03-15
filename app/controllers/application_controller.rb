@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
      # adminならこちらへ遷移
       if resource_or_scope.is_a?(Admin)
       	# flash[:notice] = "adminでログインしました。"
-        admins_path
+        admins_top_path
      # 一般userならこちらへ遷移
       elsif resource_or_scope.is_a?(User)
       	# flash[:notice] = "一般ユーザでログインしました。"
