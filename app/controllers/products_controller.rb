@@ -22,6 +22,22 @@ class ProductsController < ApplicationController
          end
 	end
 
+     def edit
+        @product = Product.find(params[:id])
+
+    end
+
+    def update
+        product = Product.find(params[:id])
+        if product.update(product_params)
+          flash[:notice] = 'ユーザ情報が更新されました。'
+          redirect_to product_path(product.id)
+        else
+          flash[:warning] = 'ユーザ情報の更新に失敗しました。'
+          redirect_to edit_product_path(product.id)
+        end
+    end
+
 
 	 private
    

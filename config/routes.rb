@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   get 'products/new' => 'products#new'
   post 'products' => 'products#create'
 
+  get 'products/:id/edit' => 'products#edit', as: 'product'
+  post 'products' => 'products#update'
+
+
 
 
 
@@ -34,3 +38,5 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :edit, :update]
 
 end
+
+
