@@ -3,7 +3,11 @@
 <br>
 <br>
 
-<%= form_for(@user) do |user| %>
+<% if flash[:warning] %>
+	<p class="alert alert-danger"><%= flash[:warning] %></p>
+<% end %>
+
+<%= form_for(@user,url: admins_userupdate_path) do |user| %>
 	<div class="col-md-3">
 		<label>プロフィール画像</label>
 		<%= attachment_image_tag @user, :profile_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>

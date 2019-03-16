@@ -7,10 +7,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'products' => 'products#index'
   root 'products#index'
+
   get 'admins/top'
   get 'admins' => 'admins#index'
-  # resources :admins, only: [:index]
   get 'admins/:id' => 'admins#usershow', as: 'admins_usershow'
+  patch 'admins/:id' => 'admins#userupdate', as: 'admins_userupdate'
   get 'admins/:id/edit' => 'admins#useredit', as: 'admins_useredit'
 
   post 'artists' => 'artists#create'
