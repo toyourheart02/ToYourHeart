@@ -3,6 +3,10 @@
 <br>
 <br>
 
+<% if flash[:notice] %>
+	<p class="alert alert-success"><%= flash[:notice] %></p>
+<% end %>
+
 <div class="col-md-3">
 	<label>プロフィール画像</label>
 	<%= attachment_image_tag @user, :profile_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
