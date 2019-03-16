@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   post 'products/sort' => 'products#sort', as: 'products_sort'
 
   resources :users, only: [:show, :index, :edit, :update]
+  resources :carts, only: [:index, :destroy]
+  get 'carts/create' => 'carts#create', as: 'carts_create'
 
 
 end
