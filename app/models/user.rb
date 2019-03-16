@@ -4,5 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
    attachment :profile_image
-   # validates :user_name, presence: true
+
+  has_many :carts
+  has_many :products, through: :carts
+
 end
