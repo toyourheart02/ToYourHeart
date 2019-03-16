@@ -4,9 +4,12 @@
 <% if flash[:warning] %>
        <p class="alert alert-danger"><%= flash[:warning] %></p>
 <% end %>
+<% if flash[:notice] %>
+       <p class="alert alert-success"><%= flash[:notice] %></p>
+<% end %>
 
 
-<%= form_for(@product) do |f| %>
+<%= form_for(@product,url: update_product_path) do |f| %>
 	<div class="col-md-3">
 		<label>画像</label>
 		<%= attachment_image_tag @product, :music_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
@@ -34,6 +37,10 @@
 					<td><%= f.collection_select :label_id, Label.all, :id, :label_name %></td>
 				</tr>
 				<tr>
+					<td>ジャンル</td>
+					<td><%= f.text_field :genre_id, Genre.all, :id, :genre_name %></td>   
+				</tr>
+				<tr>
 					<td>シーン</td>
 					<td><%= f.collection_select :scene_id, Scene.all, :id, :scene_name %></td>
 				</tr>
@@ -52,7 +59,7 @@
 
 			</tbody>
 		</table>
-		<%= f.submit "更新" %>
+		<%= f.submit "更新ggg" %>
 	</div>
 
 <% end %>
