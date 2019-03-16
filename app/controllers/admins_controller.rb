@@ -7,11 +7,11 @@ class AdminsController < ApplicationController
 		@users = User.all.order(user_kana: "ASC")
 	end
 
-	def show
+	def usershow
 		@user = User.find(params[:id])
 	end
 
-	def edit
+	def useredit
 		@user = User.find(params[:id])
 	end
 end

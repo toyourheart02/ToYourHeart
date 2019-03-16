@@ -1,0 +1,42 @@
+<h1>ユーザ情報編集ページ</h1>
+
+<br>
+<br>
+
+<%= form_for(@user) do |user| %>
+	<div class="col-md-3">
+		<label>プロフィール画像</label>
+		<%= attachment_image_tag @user, :profile_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
+		<%= user.attachment_field :profile_image, class: "" %><br>
+
+	</div>
+
+	<div class="col-md-5 col-md-offset-1">
+		<table class="table">
+			<tbody>
+				<tr>
+					<td>ユーザ名</td>
+					<td><%= user.text_field :user_name %></td>
+				</tr>
+				<tr>
+					<td>かな</td>
+					<td><%= user.text_field :user_kana %></td>
+				</tr>
+				<tr>
+					<td>郵便番号</td>
+					<td><%= user.text_field :zip_code %></td>
+				</tr>
+				<tr>
+					<td>住所</td>
+					<td><%= user.text_field :address %></td>
+				</tr>
+				<tr>
+					<td>電話番号</td>
+					<td><%= user.text_field :phone_number %></td>
+				</tr>
+			</tbody>
+		</table>
+		<%= user.submit "更新" %>
+	</div>
+
+<% end %>

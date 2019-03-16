@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_action :authenticate_user!
 	def index
 		# 退会したユーザは表示させない処理を追加する
 		@users = User.all
@@ -11,7 +12,7 @@ class UsersController < ApplicationController
 
     def edit
     	@user = User.find(params[:id])
-    	
+
     end
 
     def update
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
 
 
     private
-	
+
 	def user_params
 		params.require(:user).permit(:user_name, :user_kana, :zip_code, :address, :phone_number, :profile_image)
 	end

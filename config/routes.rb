@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   get 'products' => 'products#index'
   root 'products#index'
   get 'admins/top'
-  # get 'admins/index'
-  # get 'admins/show/:id' => 'admins#show'
-  resources :admins, only: [:show, :index, :edit]
+  get 'admins' => 'admins#index'
+  # resources :admins, only: [:index]
+  get 'admins/:id' => 'admins#usershow', as: 'admins_usershow'
+  get 'admins/:id/edit' => 'admins#useredit', as: 'admins_useredit'
 
   post 'artists' => 'artists#create'
   get 'artist' => 'master#new'
