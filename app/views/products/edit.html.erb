@@ -1,0 +1,65 @@
+<h1>商品編集ページ</h1>
+<br>
+<br>
+<% if flash[:warning] %>
+       <p class="alert alert-danger"><%= flash[:warning] %></p>
+<% end %>
+<% if flash[:notice] %>
+       <p class="alert alert-success"><%= flash[:notice] %></p>
+<% end %>
+
+
+<%= form_for(@product,url: update_product_path) do |f| %>
+	<div class="col-md-3">
+		<label>画像</label>
+		<%= attachment_image_tag @product, :music_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
+		<%= f.attachment_field :music_image, class: "" %><br>
+
+	</div>
+
+	<div class="col-md-5 col-md-offset-1">
+		<table class="table">
+			<tbody>
+				<tr>
+					<td>ユーザ名</td>
+					<td><%= f.text_field :title  %></td>
+				</tr>
+				<tr>
+					<td>値段</td>
+					<td><%= f.text_field :price %></td>
+				</tr>
+				<tr>
+					<td>アーティスト</td>
+					<td><%= f.collection_select :artist_id, Artist.all, :id, :artist_name %></td>
+				</tr>
+				<tr>
+					<td>レーベル</td>
+					<td><%= f.collection_select :label_id, Label.all, :id, :label_name %></td>
+				</tr>
+				<tr>
+					<td>ジャンル</td>
+					<td><%= f.text_field :genre_id, Genre.all, :id, :genre_name %></td>   
+				</tr>
+				<tr>
+					<td>シーン</td>
+					<td><%= f.collection_select :scene_id, Scene.all, :id, :scene_name %></td>
+				</tr>
+				<tr>
+					<td>発売日</td>
+					<td><%= f.text_field :release_date %></td>
+				</tr>
+				<tr>
+					<td>在庫数</td>
+					<td> <%= f.text_field :stock %></td>
+				</tr>
+
+
+
+
+
+			</tbody>
+		</table>
+		<%= f.submit "更新ggg" %>
+	</div>
+
+<% end %>

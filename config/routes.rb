@@ -25,6 +25,14 @@ Rails.application.routes.draw do
   get 'products/new' => 'products#new'
   post 'products' => 'products#create'
 
+  get 'products/:id/edit' => 'products#edit', as: 'product'
+  # post 'products' => 'products#update'
+  patch '/products/:id' => 'products#update', as: 'update_product'
+
+
+
+
+
 
 
 
@@ -38,3 +46,5 @@ Rails.application.routes.draw do
 
 
 end
+
+
