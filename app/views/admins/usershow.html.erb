@@ -1,8 +1,4 @@
-<h1>マイページ</h1>
-
-<% if flash[:notice] %>
-       <p class="alert alert-success"><%= flash[:notice] %></p>
-<% end %>
+<h1>ユーザ詳細ページ</h1>
 
 <br>
 <br>
@@ -38,10 +34,10 @@
 			</tr>
 		</tbody>
 	</table>
+	<%= link_to 'ユーザ情報編集', admins_useredit_path %>
 </div>
 
 <div class="col-md-10">
-	<%= link_to '注文履歴一覧', edit_user_path(current_user.id), class: "col-md-3 col-md-offset-3" %>
-
-	<%= link_to 'ユーザ情報変更', edit_user_path(current_user.id), class: "col-md-4 col-md-offset-2" %>
+	<h1>購入履歴</h1>
+	<%= link_to "戻る", admins_path %>
 </div>

@@ -1,0 +1,29 @@
+<h1>ユーザ一覧ページ</h1>
+
+<div class="col-md-8 col-md-offset-2">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>ユーザ名</th>
+				<th>かな</th>
+				<th>電話番号</th>
+				<th>メールアドレス</th>
+			</tr>
+		</thead>
+
+		<% @users.each do |user| %>
+		<tbody>
+			<tr>
+				<th><%= user.id %></th>
+				<th><%= link_to user.user_name, admins_usershow_path(user) %></th>
+				<th><%= user.user_kana %></th>
+				<th><%= user.phone_number %></th>
+				<th><%= user.email %></th>
+			</tr>
+		</tbody>
+		<% end %>
+	</table>
+
+	<%= link_to "戻る", admins_top_path %>
+</div>

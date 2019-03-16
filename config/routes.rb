@@ -7,9 +7,12 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'products' => 'products#index'
   root 'products#index'
-  get 'admins' => 'admins#top'
+  get 'admins/top'
+  get 'admins' => 'admins#index'
+  # resources :admins, only: [:index]
+  get 'admins/:id' => 'admins#usershow', as: 'admins_usershow'
+  get 'admins/:id/edit' => 'admins#useredit', as: 'admins_useredit'
 
-  
   post 'artists' => 'artists#create'
   get 'artist' => 'master#new'
 
@@ -43,6 +46,7 @@ Rails.application.routes.draw do
   post 'products/sort' => 'products#sort', as: 'products_sort'
 
   resources :users, only: [:show, :index, :edit, :update]
+
 
 
 end
