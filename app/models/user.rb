@@ -5,6 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
    attachment :profile_image
 
-  has_many :carts
+
+  # has_one :current_user_cart, -> {where(user_id: current_user.id)}, class_name: 'Cart'
+  # has_one :current_cart, through: :current_user_cart, source: :product
+
+
+  has_many :carts, dependent: :destroy
   has_many :products, through: :carts
 end

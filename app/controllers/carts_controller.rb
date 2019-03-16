@@ -1,9 +1,12 @@
 class CartsController < ApplicationController
   def index
   	# 現在ログイン中のユーザのカート内
-  	user = current_user
-  	@products = Product.where(user: user)
+  	# user = current_user
+  	# 
+
   	# @carts = Cart.where(user_id: current_user.id)
+  	# @carts = current_user.products
+  	@products = current_user.products
   end
 
   def create

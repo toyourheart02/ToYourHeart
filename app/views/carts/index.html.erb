@@ -1,1 +1,23 @@
 <!-- ログイン中のユーザのカート内一覧を表示 -->
+<h1>カート内商品</h1>
+<br>
+<% @products.each do |product| %>
+	<div>
+		<%= attachment_image_tag product, :music_image, :fill, 200, 200 %>
+		<p><%= product.title %></p>
+		<p><%= product.price %>円</p>
+		<form>
+			<select name="num">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+			</select>個
+		</form>
+	</div>
+<% end %>
