@@ -1,11 +1,10 @@
 class CartsController < ApplicationController
   def index
-  	# 現在ログイン中のユーザのカート内
-  	# @carts = Cart.where(user_id: current_user.id)
-  	# @carts = current_user.products
+  	# 現在ログイン中のユーザのカート内表示
   	@products = current_user.products
   end
 
+  # カートに商品を追加
   def create
   	cart = Cart.new
   	user = current_user
@@ -39,19 +38,17 @@ class CartsController < ApplicationController
 		redirect_to carts_path
 	end
   end
+
 # 個数変更
   def update
-  	# 更新したい商品を特定
-  	user = current_user
-  	product = Product.find(params[:id])
-  	# cartsテーブル内で個数更新するカラムを指定(１件取得のためfind_by)
-  	cart = user.carts.find_by(product_id: product.id)
-	cart.quantity = 2
-	cart.update
+	cart =  Cart.find(params[:id])
+	cart.update(cart_params)
+	flash[:notice] = "個数を変更しました。"
 	redirect_to carts_path
   end
 
+
   def cart_params
-			params.require(:cart).permit(:quantity)
+	params.require(:cart).permit(:quantity)
   end
 end

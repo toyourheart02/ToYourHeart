@@ -26,7 +26,7 @@
 					<%= attachment_image_tag product, :music_image, fallback: "no_image.jpg", size: "200x200"  %>
 					<p><%= product.title %></p>
 
-			<!-- Pカートアイコンをカート追加のリンクにする -->
+			<!-- カートアイコンをカート追加のリンクにする -->
 			<!-- カートへの追加は非同期処理で行う　-->
 					<div class="carticon">
                 		<%= link_to carts_create_path(product_id: product.id),remote: true do %>

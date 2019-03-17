@@ -9,43 +9,40 @@
 <h4>カート内に商品はありません</h4>
 <% end %>
 
-<div class="cart">
+<div class="cart col-md-offset-2">
 	<% @products.each do |product| %>
 	<div class="cart-content col-md-8">
 		<div class="col-md-3">
 			<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %>
 		</div>
-		
+
 		<div class="product-status col-md-4 col-md-offset-1">
 			<p><%= product.title %></p>
 			<p><%= product.artist.artist_name %></p>
 			<p><%= product.price %> 円</p>
 		</div>
+		<!-- 該当する商品の注文個数をDBから引っ張る -->
+		<% quantity = product.carts.find_by(user_id: current_user.id).quantity %>
+		<% @cart = product.carts.find_by(user_id: current_user.id) %>
 
-		
 		<!-- 個数の選択タブ　デフォルトの値をquantityにする -->
-		<form>
-			<select name="num">
-				<% for i in 1..9 %>
-				<% if  i == 1 %>
-				<option selected value=<%= i %>><%= i %></option>
-				<% else %>
-				<option value=<%= i %>><%= i %></option>
-				<% end %>
-				<% end %>
-			</select>個
-		</form>
-		<!-- 個数更新ボタン -->
-		<%= link_to '更新', cart_path(product), class: "btn btn-default" %>
+		<div class="product-status col-md-3">
+			<%= form_for(@cart) do |f| %>
+				<%= f.select :quantity, [[1,1], [2,2], [3,3], [4,4], [5,5], [6,6], [7,7], [8,8], [9,9]] ,:selected => quantity %>
+				<!-- 個数更新ボタン　個数変更後にクリックすることでDB更新、画面更新する -->
+				<%= f.submit '更新', class: "cart_update btn btn-default" %>
+			<% end %>
 
-		<p>小計：<%= product.price * 2 %> 円</p>
-		<!-- product.cart.quantity -->
-		
-		
-		<%= link_to '削除', cart_path(product), :method => :delete, data: { confirm: '削除しますか？' } , class: "cart_delete btn btn-default" %>
+			<!-- 選択済みのタブの個数をかけて非同期で金額を変えられるのがベスト -->
+			<p class="subtotal">小計：<%= product.price * quantity %> 円</p>
+		</div>
+			<%= link_to '削除', cart_path(product), :method => :delete, data: { confirm: '削除しますか？' } , class: "cart_delete btn btn-default col-md-1" %>
 	</div>
 	<% end %>
 </div>
+
+<!--会計処理  -->
+<%= link_to '会計へ進む' , class: "" %>
 
 
 <style >
@@ -67,7 +64,17 @@
 .product-status p{
 	margin-bottom: 30px;
 }
+
+.subtotal{
+	/*float: left;*/
+}
+
+.cart_update{
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
 .cart_delete{
-	float: left;
+	margin-top: 110px;
 }
 </style>
