@@ -1,9 +1,6 @@
 class CartsController < ApplicationController
   def index
   	# 現在ログイン中のユーザのカート内
-  	# user = current_user
-  	# 
-
   	# @carts = Cart.where(user_id: current_user.id)
   	# @carts = current_user.products
   	@products = current_user.products
@@ -20,9 +17,16 @@ class CartsController < ApplicationController
   	redirect_to products_path
   end
 
+# カート内の商品を削除するアクション
   def destroy
-
+  	# 削除したい商品を特定
+  	user = current_user
+  	product = Product.find(params[:id])
+  	# cartsテーブル内で削除するカラムを指定(１件取得のためfind_by)
+  	cart = user.carts.find_by(product_id: product.id)
+	if cart.destroy
+		flash[:notice] = "カート内商品を１件削除しました。"
+		redirect_to carts_path
+	end
   end
-
-  
 end

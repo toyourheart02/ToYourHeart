@@ -1,23 +1,27 @@
 <!-- ログイン中のユーザのカート内一覧を表示 -->
 <h1>カート内商品</h1>
 <br>
+<% if flash[:notice] %>
+       <p class="alert alert-success"><%= flash[:notice] %></p>
+<% end %>
+
 <% @products.each do |product| %>
 	<div>
 		<%= attachment_image_tag product, :music_image, :fill, 200, 200 %>
 		<p><%= product.title %></p>
 		<p><%= product.price %>円</p>
+		<!-- 個数の選択タブ　デフォルトの値をquantityにする -->
 		<form>
 			<select name="num">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				<option value="7">7</option>
-				<option value="8">8</option>
-				<option value="9">9</option>
+					<% for i in 1..9 %>
+						<% if  i == 1 %>
+							<option selected value=<%= i %>><%= i %></option>
+						<% else %>
+							<option value=<%= i %>><%= i %></option>
+						<% end %>
+					<% end %>
 			</select>個
 		</form>
+		<%= link_to '削除', cart_path(product), :method => :delete, data: { confirm: '削除しますか？' } , class: "btn btn-default" %>
 	</div>
 <% end %>
