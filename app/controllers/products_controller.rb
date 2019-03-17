@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
         @product = Product.find(params[:id])
         @label = Label.find(@product.label_id)
         @genre = Genre.find(@product.genre_id)
+        @review = Review.new
     end
 
 
