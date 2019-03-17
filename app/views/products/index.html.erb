@@ -23,12 +23,13 @@
 			<div id="products">
 			<% @products.each do |product| %>
 				<div class="product_index">
-					<%= attachment_image_tag product, :music_image, :fill, 200, 200 %>
+					<%= attachment_image_tag product, :music_image, fallback: "no_image.jpg", size: "200x200"  %>
 					<p><%= product.title %></p>
 
 			<!-- Pカートアイコンをカート追加のリンクにする -->
+			<!-- カートへの追加は非同期処理で行う　-->
 					<div class="carticon">
-                		<%= link_to carts_create_path(product_id: product.id) do %>
+                		<%= link_to carts_create_path(product_id: product.id),remote: true do %>
                 		<i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
                 		<% end %>
               		</div>
@@ -39,12 +40,6 @@
 			<!-- カート追加ボタン -->
 			<!-- ページャ -->
 			<%= paginate @products, class: "paginate" %>
-
-
-
-			<% if user_signed_in? %>
-			<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-			<% end %>
 
 		</div>
 	</div>

@@ -76,7 +76,7 @@
     </nav>
   </header>
 
-    <div class="main-content">
+    <div class="main-content clearfix">
         <%= yield %>
     </div>
   
@@ -101,6 +101,18 @@
 
 
 <style>
+  
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
 
   header{
     height: 120px;
@@ -147,10 +159,11 @@
 
   .main-content{
     margin-bottom: 50px;
-    height: 700px;
+    /*height: 1000px;*/
   }
 
   footer{
+    height: 200px;
     background-color: black;
     color:white;
   }

@@ -2,26 +2,72 @@
 <h1>カート内商品</h1>
 <br>
 <% if flash[:notice] %>
-       <p class="alert alert-success"><%= flash[:notice] %></p>
+<p class="alert alert-success"><%= flash[:notice] %></p>
 <% end %>
 
-<% @products.each do |product| %>
-	<div>
-		<%= attachment_image_tag product, :music_image, :fill, 200, 200 %>
-		<p><%= product.title %></p>
-		<p><%= product.price %>円</p>
+<% if @products.length == 0 %>
+<h4>カート内に商品はありません</h4>
+<% end %>
+
+<div class="cart">
+	<% @products.each do |product| %>
+	<div class="cart-content col-md-8">
+		<div class="col-md-3">
+			<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %>
+		</div>
+		
+		<div class="product-status col-md-4 col-md-offset-1">
+			<p><%= product.title %></p>
+			<p><%= product.artist.artist_name %></p>
+			<p><%= product.price %> 円</p>
+		</div>
+
+		
 		<!-- 個数の選択タブ　デフォルトの値をquantityにする -->
 		<form>
 			<select name="num">
-					<% for i in 1..9 %>
-						<% if  i == 1 %>
-							<option selected value=<%= i %>><%= i %></option>
-						<% else %>
-							<option value=<%= i %>><%= i %></option>
-						<% end %>
-					<% end %>
+				<% for i in 1..9 %>
+				<% if  i == 1 %>
+				<option selected value=<%= i %>><%= i %></option>
+				<% else %>
+				<option value=<%= i %>><%= i %></option>
+				<% end %>
+				<% end %>
 			</select>個
 		</form>
-		<%= link_to '削除', cart_path(product), :method => :delete, data: { confirm: '削除しますか？' } , class: "btn btn-default" %>
+		<!-- 個数更新ボタン -->
+		<%= link_to '更新', cart_path(product), class: "btn btn-default" %>
+
+		<p>小計：<%= product.price * 2 %> 円</p>
+		<!-- product.cart.quantity -->
+		
+		
+		<%= link_to '削除', cart_path(product), :method => :delete, data: { confirm: '削除しますか？' } , class: "cart_delete btn btn-default" %>
 	</div>
-<% end %>
+	<% end %>
+</div>
+
+
+<style >
+/*.cart{
+	height: 100px;
+	width: 90%;
+	border: solid 2px;
+}*/
+
+.cart-content{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.product-status{
+	font-size: 16px;
+	height: 200px;
+	padding-top: 30px;
+}
+.product-status p{
+	margin-bottom: 30px;
+}
+.cart_delete{
+	float: left;
+}
+</style>
