@@ -23,8 +23,12 @@
 			<div id="products">
 			<% @products.each do |product| %>
 				<div class="product_index">
-					<%= attachment_image_tag product, :music_image, :fill, 200, 200 %>
-					<p><%= product.title %></p>
+					<%= link_to products_show_path(product.id) do %>
+						<%= attachment_image_tag product, :music_image, :fill, 200, 200 %>
+					<% end %>
+					<%= link_to products_show_path(product.id) do %>
+						<p><%= product.title %></p>
+					<% end %>
 
 			<!-- Pカートアイコンをカート追加のリンクにする -->
 					<div class="carticon">
@@ -39,16 +43,11 @@
 			<!-- カート追加ボタン -->
 			<!-- ページャ -->
 			<%= paginate @products, class: "paginate" %>
-
-
-
-			<% if user_signed_in? %>
-			<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-			<% end %>
-
 		</div>
 	</div>
 </div>
+
+
 
 <script>
 	$(function(){

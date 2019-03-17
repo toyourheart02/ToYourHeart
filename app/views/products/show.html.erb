@@ -1,0 +1,36 @@
+<h1>商品詳細</h1>
+
+<div class="col-md-2 col-md-offset-4">
+	<%= attachment_image_tag @product, :music_image, :fill, 200, 200, format: 'jpeg', fallback: "no_image.jpg", class: "no_image" %>
+</div>
+
+<div class="col-md-4">
+	<div class="">商品名：<%= @product.title %></div>
+	<div class="">アーティスト：</div>
+	<div class="">価格：<%= @product.price %>円</div>
+	<div class="">レーベル：<%= @label.label_name %></div>
+	<div class="">ジャンル：<%= @genre.genre_name %></div>
+	<div class="">総レビュー数：</div>
+	<%= link_to "カートに入れる", "#", class: "btn btn-default btn-sm" %>
+
+	<br>
+	<br>
+
+	<div class="panel panel-default">
+  		<div class="panel-body">
+    		<p>Disc1</p>
+    		<p>01：</p>
+    		<p>02：</p>
+    		<p>03：</p>
+  		</div>
+	</div>
+
+
+
+</div>
+
+<style>
+	.panel {
+		width: 250px;
+	}
+</style>
