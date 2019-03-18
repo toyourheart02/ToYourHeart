@@ -50,7 +50,10 @@ Rails.application.routes.draw do
   resources :carts, only: [:index, :destroy, :update]
   get 'carts/create' => 'carts#create', as: 'carts_create'
 
+  resources :orders, only: [:new, :create, :index, :destroy,]
+  resources :destinations, only: [:create, :destroy,]
 
+  # resources :order_products, only: [:create, :destroy,]
 
 end
 
