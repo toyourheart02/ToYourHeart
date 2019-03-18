@@ -7,6 +7,8 @@
 
 <% if @products.length == 0 %>
 <h4>カート内に商品はありません</h4>
+<!-- 件数が０のときにフッタが上にきてしまうのを防ぐためのdiv -->
+<div class="space"></div>
 <% end %>
 
 <div class="cart col-md-offset-2">
@@ -42,15 +44,14 @@
 </div>
 
 <!--会計処理  -->
+<% if @products.length != 0 %>
 <%= link_to '会計へ進む' , class: "" %>
-
+<% end %>
 
 <style >
-/*.cart{
-	height: 100px;
-	width: 90%;
-	border: solid 2px;
-}*/
+.space{
+	height: 200px;
+}
 
 .cart-content{
 	margin-top: 10px;
