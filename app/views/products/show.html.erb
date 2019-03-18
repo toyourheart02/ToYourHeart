@@ -15,8 +15,8 @@
 	<div class="">商品名：<%= @product.title %></div>
 	<div class="">アーティスト：</div>
 	<div class="">価格：<%= @product.price %>円</div>
-	<div class="">レーベル：<%= @label.label_name %></div>
-	<div class="">ジャンル：<%= @genre.genre_name %></div>
+	<div class="">レーベル：<%= @product.label.label_name %></div>
+	<div class="">ジャンル：<%= @product.genre.genre_name %></div>
 	<div class="">総レビュー数：</div>
 	<%= link_to "カートに入れる", "#", class: "btn btn-default btn-sm" %>
 
@@ -58,9 +58,14 @@
 	<% @product.reviews.each do |review| %>
 	<div class="panel panel-default review_form">
 		<div class="panel-body">
-			<p>投稿者：<%= review.user_id %></p>
-			<p>タイトル：<%= review.title %></p>
-			<p>レビュー：<%= review.body %></p>
+			<div class="review_index">
+				<p>投稿者：<%= review.user.user_name %></p>
+				<p><strong><%= review.title %></strong><p>
+				<p><%= review.body %></p>
+			</div>
+			<div class="review_created_at">
+				<p><%= review.created_at.strftime('%Y年%m月%d日') %></p>
+			</div>
 		</div>
 	</div>
 	<% end %>
@@ -72,5 +77,14 @@
 	}
 	.review_form {
 		width: 500px;
+	}
+	.review_index {
+		float: left;
+		width: 330px;
+	}
+	.review_created_at {
+		float: right;
+		text-align: right;
+		width: 120px;
 	}
 </style>
