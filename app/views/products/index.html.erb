@@ -23,8 +23,13 @@
 			<div id="products">
 			<% @products.each do |product| %>
 				<div class="product_index">
-					<%= attachment_image_tag product, :music_image, fallback: "no_image.jpg", size: "200x200"  %>
-					<p><%= product.title %></p>
+
+					<%= link_to products_show_path(product.id) do %>
+						<%= attachment_image_tag product, :music_image, :fill, 200, 200, fallback: "no_image.jpg" %>
+					<% end %>
+					<%= link_to products_show_path(product.id) do %>
+						<p><%= product.title %></p>
+					<% end %>
 
 			<!-- カートアイコンをカート追加のリンクにする -->
 			<!-- カートへの追加は非同期処理で行う　-->
@@ -49,6 +54,8 @@
 		</div>
 	</div>
 </div>
+
+
 
 <script>
 	$(function(){

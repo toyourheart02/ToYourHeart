@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get 'products/:id/edit' => 'products#edit', as: 'product'
   # post 'products' => 'products#update'
   patch '/products/:id' => 'products#update', as: 'update_product'
+  get 'products/:id' => 'products#show', as: 'products_show'
 
 
 

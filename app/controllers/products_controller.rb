@@ -22,6 +22,12 @@ class ProductsController < ApplicationController
         render json: products
     end
 
+    def show
+        @product = Product.find(params[:id])
+        @label = Label.find(@product.label_id)
+        @genre = Genre.find(@product.genre_id)
+    end
+
 
 
 	def new
