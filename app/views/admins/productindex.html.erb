@@ -1,0 +1,98 @@
+
+<div class="col-md-10 col-md-offset-1 ">
+
+
+
+
+
+<div class="box9">
+	<p>商品一覧ページ</p>
+</div>
+
+
+
+	<% @products.each do |product| %>
+
+
+
+<div class="col-md-5 col-md-offset-1">
+		<table class="table">
+			<tbody>
+
+				<%= attachment_image_tag product, :music_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "150x150" %>
+				<tr>
+					<td>タイトル</td>
+					<td><%= product.title %></td>
+				</tr>
+				<tr>
+					<td>アーティスト</td>
+					<td><%= product.artist.artist_name %></td>
+				</tr>
+				<tr>
+					<td>レーベル</td>
+					<td><%= product.label.label_name %></td>
+				</tr>
+				<tr>
+					<td>ジャンル</td>
+					<td><%= product.genre.genre_name %></td>
+				</tr>
+				<tr>
+					<td>価格</td>
+					<td><%= product.price %></td>
+				</tr>
+				<tr>
+					<td>在庫数</td>
+					<td><%= product.stock %></td>
+				</tr>
+				<tr>
+					<td><button type="button" class="btn btn-success"><%=link_to "編集", product_path(product) %></button></td>
+					<td><button type="button" class="btn btn-danger">削除</button></td>
+
+				</tr>
+			</tbody>
+		</table>
+		
+</div>
+
+
+
+
+
+
+
+
+
+
+<% end %>
+
+</div>
+
+
+
+
+
+
+
+
+
+<style>
+	.box9 {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: black;
+    background: white;
+    border-bottom: solid 10px black;
+}
+.box9 p {
+    margin: 0; 
+    padding: 0;
+}
+/*
+.col-md-4{
+ text-align:center;
+}
+
+*/
+
+
+</style>

@@ -11,7 +11,6 @@
 
 <%= form_for(@product, url: update_product_path) do |f| %>
 	<div class="col-md-3">
-		<label>画像</label>
 		<%= attachment_image_tag @product, :music_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
 		<%= f.attachment_field :music_image, class: "" %><br>
 
@@ -21,7 +20,7 @@
 		<table class="table">
 			<tbody>
 				<tr>
-					<td>ユーザ名</td>
+					<td>商品名</td>
 					<td><%= f.text_field :title  %></td>
 				</tr>
 				<tr>
@@ -38,7 +37,6 @@
 				</tr>
 				<tr>
 					<td>ジャンル</td>
-					<td><%= f.text_field :genre_id, Genre.all, :id, :genre_name %></td>
 				</tr>
 				<tr>
 					<td>シーン</td>
@@ -54,12 +52,9 @@
 				</tr>
 
 
-
-
-
 			</tbody>
 		</table>
-		<%= f.submit "更新ggg" %>
+		<%= f.submit "更新" %>
 	</div>
 
 <% end %>
