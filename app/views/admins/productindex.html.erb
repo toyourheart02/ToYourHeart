@@ -20,6 +20,11 @@
 			<tbody>
 
 				<%= attachment_image_tag product, :music_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "150x150" %>
+
+				<% if  product.is_deleted == true  %>
+                         <span class="sakujyo">削除済み</span>
+                     <% end %>
+
 				<tr>
 					<td>タイトル</td>
 					<td><%= product.title %></td>
@@ -46,7 +51,11 @@
 				</tr>
 				<tr>
 					<td><button type="button" class="btn btn-success"><%=link_to "編集", product_path(product) %></button></td>
-					<td><button type="button" class="btn btn-danger">削除</button></td>
+					<td><button type="button" class="btn btn-danger"><%= link_to "削除", admins_destroy_path(product), method: :delete, "data-confirm" => "本当に削除しますか？" %></button></td>
+
+
+
+
 
 				</tr>
 			</tbody>
@@ -93,6 +102,17 @@
 }
 
 */
+
+.sakujyo{
+
+	background-color: black;
+	color: white;
+	margin-left: 100px;
+
+
+}
+
+
 
 
 </style>

@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   get 'admins/top'
   get 'admins/products' => 'admins#productindex'
+  delete 'admins/products/:id' => 'admins#productdestroy', as: 'admins_destroy'
+
+
   get 'admins' => 'admins#index'
   get 'admins/:id' => 'admins#usershow', as: 'admins_usershow'
   patch 'admins/:id' => 'admins#userupdate', as: 'admins_userupdate'
@@ -46,6 +49,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :edit, :update]
   resources :carts, only: [:index, :destroy, :update]
   get 'carts/create' => 'carts#create', as: 'carts_create'
+
 
 end
 

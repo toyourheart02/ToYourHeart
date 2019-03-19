@@ -37,6 +37,9 @@
 				</tr>
 				<tr>
 					<td>ジャンル</td>
+					<td><%= f.collection_select :genre_id, Genre.all, :id, :genre_name, {} %></td>
+
+
 				</tr>
 				<tr>
 					<td>シーン</td>
@@ -44,7 +47,8 @@
 				</tr>
 				<tr>
 					<td>発売日</td>
-					<td><%= f.text_field :release_date %></td>
+					<td><%= f.date_field :release_date %>
+</td>
 				</tr>
 				<tr>
 					<td>在庫数</td>
