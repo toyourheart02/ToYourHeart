@@ -43,6 +43,11 @@
               			<span class="new">New</span>
               		<% end %>
 
+              		<div class="favoriteicon">
+                		<%= link_to favorites_create_path(product_id: product.id), remote: true do %>
+                			<i class="favorite-icon glyphicon glyphicon-heart" aria-hidden="true"></i>
+                		<% end %>
+              		</div>
 				</div>
 			<% end %>
 			</div>
@@ -103,6 +108,13 @@
 }
 
 .cart-icon{
+	height: 30px;
+	width: 30px;
+	font-size: 24px;
+	float: left;
+}
+
+.favorite-icon{
 	height: 30px;
 	width: 30px;
 	font-size: 24px;

@@ -38,6 +38,7 @@
 <div class="col-md-4 col-md-offset-4">
 	<div class="panel panel-default review_form">
 		<div class="panel-body">
+			<div id="star-rating"></div>
 			<%= form_for(@review) do |f| %>
 				<label>タイトル</label>
 				<%= f.text_field :title %>
@@ -54,6 +55,7 @@
 
 
 <div class="col-md-4 col-md-offset-4">
+	<!-- current_userにレビュー削除機能を追加する -->
 	<h3>商品レビュー</h3>
 	<% @product.reviews.each do |review| %>
 	<div class="panel panel-default review_form">

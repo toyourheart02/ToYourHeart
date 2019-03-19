@@ -1,0 +1,36 @@
+<h1>お気に入り</h1>
+<br>
+
+<% if @products.length == 0 %>
+<h4>お気に入り商品はありません</h4>
+<!-- 件数が０のときにフッタが上にきてしまうのを防ぐためのdiv -->
+<div class="space"></div>
+<% end %>
+
+<div class="col-md-12 col-md-offset-1">
+	<% @products.each do |product| %>
+		<div class="product_index">
+			<%= attachment_image_tag product, :music_image, :fill, 150, 150, fallback: "no_image.jpg", class: "music_image" %><br>
+			<%= product.title %><br>
+			<%= product.artist.artist_name %>
+			<%= link_to '削除', favorite_path(product), :method => :delete, data: { confirm: '削除しますか？' } , class: "btn btn-default" %>
+		</div>
+	<% end %>
+</div>
+
+
+
+<style>
+.space{
+	height: 200px;
+}
+
+.product_index {
+	background-color: #D4D7D8;
+	margin: 5px;
+	padding: 15px;
+	width: 180px;
+	float: left;
+}
+
+</style>

@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   # post 'products' => 'products#update'
   patch '/products/:id' => 'products#update', as: 'update_product'
   get 'products/:id' => 'products#show', as: 'products_show'
+
   post 'products/:id/reviews' => 'reviews#create', as: 'reviews'
   delete 'products/:id/destroy' => 'reviews#destroy'
 
@@ -45,6 +46,9 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :edit, :update]
   resources :carts, only: [:index, :destroy, :update]
   get 'carts/create' => 'carts#create', as: 'carts_create'
+
+  resources :favorites, only: [:index, :destroy]
+  get 'favrites/create' => 'favorites#create', as: 'favorites_create'
 
 end
 
