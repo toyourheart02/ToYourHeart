@@ -2,11 +2,6 @@ class CartsController < ApplicationController
   def index
   	# 現在ログイン中のユーザのカート内表示
   	@products = current_user.products
-    # @products = Product.all
-    # @cart_products = []
-    # @products.each do |cart|
-    #   @cart_products << Product.find(cart.id)
-    # end
   end
 
   # カートに商品を追加

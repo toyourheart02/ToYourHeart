@@ -30,6 +30,7 @@
 					<%= link_to products_show_path(product.id) do %>
 						<p><%= product.title %></p>
 					<% end %>
+					<p><%= product.artist.artist_name %></p>
 
 			<!-- カートアイコンをカート追加のリンクにする -->
 			<!-- カートへの追加は非同期処理で行う　-->

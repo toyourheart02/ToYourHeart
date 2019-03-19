@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   get 'products/:id' => 'products#show', as: 'products_show'
 
   post 'products/:id/reviews' => 'reviews#create', as: 'reviews'
-  delete 'products/:id/destroy' => 'reviews#destroy'
+  resources :reviews, only: [:destroy]
 
   post 'musics' => 'musics#create'
   get 'music' => 'master#new'
