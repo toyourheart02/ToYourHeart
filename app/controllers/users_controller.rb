@@ -27,6 +27,16 @@ class UsersController < ApplicationController
     	end
     end
 
+    # 退会処理　論理削除
+    def destroy
+    	user = User.find(params[:id])
+    	user.is_deleted = true
+    	user.save
+    	# ログアウトさせる
+    	# redirect_to :controller => 'devise/sessions', :action => 'destroy'
+    	redirect_to destroy_user_session_path
+    end
+
 
     private
 

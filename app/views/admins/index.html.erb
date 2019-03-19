@@ -9,6 +9,7 @@
 				<th>かな</th>
 				<th>電話番号</th>
 				<th>メールアドレス</th>
+				<th>登録状況</th>
 			</tr>
 		</thead>
 
@@ -20,6 +21,8 @@
 				<th><%= user.user_kana %></th>
 				<th><%= user.phone_number %></th>
 				<th><%= user.email %></th>
+				<!-- 退会済みのユーザがわかるようにする -->
+				<th><% if user.is_deleted == true %> 退会　<% end %></th>
 			</tr>
 		</tbody>
 		<% end %>
