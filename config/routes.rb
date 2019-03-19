@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   root 'products#index'
 
   get 'admins/top'
+  get 'admins/products' => 'admins#productindex'
+  delete 'admins/products/:id' => 'admins#productdestroy', as: 'admins_destroy'
+
+
   get 'admins' => 'admins#index'
   get 'admins/:id' => 'admins#usershow', as: 'admins_usershow'
   patch 'admins/:id' => 'admins#userupdate', as: 'admins_userupdate'

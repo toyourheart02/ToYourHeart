@@ -1,7 +1,27 @@
 class AdminsController < ApplicationController
-	before_action :authenticate_admin!
+	# before_action :authenticate_admin!
 	def top
 	end
+
+	def productindex
+
+		@products = Product.all
+	end
+
+	def productdestroy
+		@product = Product.find(params[:id])
+		@product.is_deleted = true
+		@product.save
+		redirect_to  admins_products_path
+	end
+
+
+
+
+
+
+
+
 
 	def index
 		@users = User.all.order(user_kana: "ASC")
