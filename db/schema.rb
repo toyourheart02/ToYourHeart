@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_16_061544) do
+ActiveRecord::Schema.define(version: 2019_03_18_033255) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2019_03_16_061544) do
   create_table "orders", force: :cascade do |t|
     t.integer "user_id"
     t.integer "destination_id"
-    t.integer "status"
+    t.integer "status", default: 0
     t.integer "pay"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 2019_03_16_061544) do
     t.string "music_image_id"
     t.integer "label_id"
     t.integer "stock"
-    t.boolean "is_deleted"
+    t.boolean "is_deleted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "artist_id"
@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(version: 2019_03_16_061544) do
     t.string "address"
     t.string "phone_number"
     t.string "profile_image_id"
-    t.boolean "is_deleted"
+    t.boolean "is_deleted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
