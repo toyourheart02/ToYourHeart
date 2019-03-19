@@ -1,4 +1,14 @@
 class User < ApplicationRecord
+  # is_deletedがtrueのユーザはログインできないようにする
+  def active_for_authentication?
+    super && !is_deleted?
+  end
+
+# ここのメッセージが反映されない
+  def inactive_message
+    !is_deleted? ? super : :deleted_user
+    # !is_deleted? super : :deleted_user
+  end
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

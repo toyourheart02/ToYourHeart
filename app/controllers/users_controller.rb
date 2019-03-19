@@ -7,7 +7,9 @@ class UsersController < ApplicationController
 
 	#ユーザのマイページ用に作成。管理者からの機能は後ほど追加。
 	def show
+	  	
 	  	@user = User.find(params[:id])
+
   	end
 
     def edit
@@ -33,7 +35,6 @@ class UsersController < ApplicationController
     	user.is_deleted = true
     	user.save
     	# ログアウトさせる
-    	# redirect_to :controller => 'devise/sessions', :action => 'destroy'
     	redirect_to destroy_user_session_path
     end
 
