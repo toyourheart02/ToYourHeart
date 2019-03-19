@@ -5,7 +5,7 @@
        <p class="alert alert-danger"><%= flash[:warning] %></p>
 <% end %>
 
-
+<div class="col-md-offset-2">
 <%= form_for(@user) do |user| %>
 	<div class="col-md-3">
 		<label>プロフィール画像</label>
@@ -13,7 +13,8 @@
 		<%= user.attachment_field :profile_image, class: "" %><br>
 
 	</div>
-
+	<br>
+	<br>
 	<div class="col-md-5 col-md-offset-1">
 		<table class="table">
 			<tbody>
@@ -39,7 +40,15 @@
 				</tr>
 			</tbody>
 		</table>
-		<%= user.submit "更新" %>
-	</div>
+			<%= user.submit "更新", class: "update-profile-btn" %>
+		</div>
+</div>
 
 <% end %>
+
+<style>
+	.update-profile-btn{
+		padding: 5px;
+		text-align: right;
+	}
+</style>

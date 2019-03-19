@@ -8,7 +8,7 @@ class DestinationsController < ApplicationController
 		dest.user_id = current_user.id
 		if dest.save
 			# 成功したら非同期でメッセージ出す
-			flash[:notice] = "新規配送先を登録しました。配送先タブより選択してください。"
+			flash[:notice] = "新規配送先を登録しました。配送先を配送先タブより選択してください。"
 			redirect_to new_order_path
 		else
 			# 失敗したら非同期でメッセージ出す
