@@ -22,7 +22,7 @@ class AdminsController < ApplicationController
 	      redirect_to admins_usershow_path(user)
 	    else
 	      flash[:warning] = 'ユーザ情報の更新に失敗しました。'
-	      render "useredit"
+	      render "admins/useredit"
     	end
     end
 

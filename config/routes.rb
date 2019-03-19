@@ -32,13 +32,9 @@ Rails.application.routes.draw do
   get 'products/:id/edit' => 'products#edit', as: 'product'
   # post 'products' => 'products#update'
   patch '/products/:id' => 'products#update', as: 'update_product'
-
-
-
-
-
-
-
+  get 'products/:id' => 'products#show', as: 'products_show'
+  post 'products/:id/reviews' => 'reviews#create', as: 'reviews'
+  delete 'products/:id/destroy' => 'reviews#destroy'
 
   post 'musics' => 'musics#create'
   get 'music' => 'master#new'
@@ -49,6 +45,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :edit, :update]
   resources :carts, only: [:index, :destroy, :update]
   get 'carts/create' => 'carts#create', as: 'carts_create'
+
 
   resources :orders, only: [:new, :create, :index, :destroy,]
   resources :destinations, only: [:create, :destroy,]

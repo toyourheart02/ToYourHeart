@@ -9,7 +9,7 @@
 <% end %>
 
 
-<%= form_for(@product,url: update_product_path) do |f| %>
+<%= form_for(@product, url: update_product_path) do |f| %>
 	<div class="col-md-3">
 		<label>画像</label>
 		<%= attachment_image_tag @product, :music_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
@@ -38,7 +38,7 @@
 				</tr>
 				<tr>
 					<td>ジャンル</td>
-					<td><%= f.text_field :genre_id, Genre.all, :id, :genre_name %></td>   
+					<td><%= f.text_field :genre_id, Genre.all, :id, :genre_name %></td>
 				</tr>
 				<tr>
 					<td>シーン</td>

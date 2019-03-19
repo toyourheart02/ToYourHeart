@@ -1,0 +1,90 @@
+<h1>商品詳細</h1>
+
+<% if flash[:notice] %>
+       <p class="alert alert-success"><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:warning] %>
+       <p class="alert alert-danger"><%= flash[:warning] %></p>
+<% end %>
+
+<div class="col-md-2 col-md-offset-4">
+	<%= attachment_image_tag @product, :music_image, :fill, 200, 200, format: 'jpeg', fallback: "no_image.jpg", class: "no_image" %>
+</div>
+
+<div class="col-md-4">
+	<div class="">商品名：<%= @product.title %></div>
+	<div class="">アーティスト：</div>
+	<div class="">価格：<%= @product.price %>円</div>
+	<div class="">レーベル：<%= @product.label.label_name %></div>
+	<div class="">ジャンル：<%= @product.genre.genre_name %></div>
+	<div class="">総レビュー数：</div>
+	<%= link_to "カートに入れる", "#", class: "btn btn-default btn-sm" %>
+
+	<br>
+	<br>
+
+	<div class="panel panel-default disc_form">
+  		<div class="panel-body">
+    		<p>Disc1</p>
+    		<p>01：</p>
+    		<p>02：</p>
+    		<p>03：</p>
+  		</div>
+	</div>
+</div>
+
+
+<% if user_signed_in? %>
+<div class="col-md-4 col-md-offset-4">
+	<div class="panel panel-default review_form">
+		<div class="panel-body">
+			<%= form_for(@review) do |f| %>
+				<label>タイトル</label>
+				<%= f.text_field :title %>
+				<br><br>
+				<label>本　文　</label>
+				<%= f.text_area :body %>
+				<br><br>
+				<%= f.submit "投稿" %>
+			<% end %>
+		</div>
+	</div>
+</div>
+<% end %>
+
+
+<div class="col-md-4 col-md-offset-4">
+	<h3>商品レビュー</h3>
+	<% @product.reviews.each do |review| %>
+	<div class="panel panel-default review_form">
+		<div class="panel-body">
+			<div class="review_index">
+				<p>投稿者：<%= review.user.user_name %></p>
+				<p><strong><%= review.title %></strong><p>
+				<p><%= review.body %></p>
+			</div>
+			<div class="review_created_at">
+				<p><%= review.created_at.strftime('%Y年%m月%d日') %></p>
+			</div>
+		</div>
+	</div>
+	<% end %>
+</div>
+
+<style>
+	.disc_form {
+		width: 250px;
+	}
+	.review_form {
+		width: 500px;
+	}
+	.review_index {
+		float: left;
+		width: 330px;
+	}
+	.review_created_at {
+		float: right;
+		text-align: right;
+		width: 120px;
+	}
+</style>

@@ -22,6 +22,11 @@ class ProductsController < ApplicationController
         render json: products
     end
 
+    def show
+        @product = Product.find(params[:id])
+        @review = Review.new
+    end
+
 
 
 	def new
