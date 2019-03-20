@@ -21,27 +21,41 @@
 
 			<!-- 商品一覧（新着順） -->
 			<div id="products">
-			<% @products.each do |product| %>
+				<% @products.each do |product| %>
 				<div class="product_index">
 
 					<%= link_to products_show_path(product.id) do %>
 						<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %>
 					<% end %>
 					<%= link_to products_show_path(product.id) do %>
-						<p><%= product.title %></p>
+					<p><%= product.title %></p>
+					<% end %>
+					<p><%= product.artist.artist_name %></p>
+
+					<!-- カートアイコンをカート追加のリンクにする -->
+					<!-- カートへの追加は非同期処理で行う　-->
+					<% if user_signed_in? %>
+					<div class="carticon">
+
+						<%= link_to carts_create_path(product_id: product.id),remote: true do %>
+						<i class="cart-icon glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
+						<% end %>
+					</div>
+					<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
+					<% if (Date.today - product.release_date) < 7 %>
+					<span class="new">New</span>
 					<% end %>
 
-			<!-- カートアイコンをカート追加のリンクにする -->
-			<!-- カートへの追加は非同期処理で行う　-->
-					<div class="carticon">
-                		<%= link_to carts_create_path(product_id: product.id),remote: true do %>
-                		<i class="cart-icon glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-                		<% end %>
-              		</div>
-              		<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
-              		
+					<!-- お気に入りの追加・削除をアイコンのクリックで変更できるようにするか検討中 -->
+					<div class="favoriteicon">
+						<%= link_to favorites_create_path(product_id: product.id), remote: true do %>
+						<i class="favorite-icon glyphicon glyphicon-heart" aria-hidden="true"></i>
+						<% end %>
+					</div>
+					<% end %>
+
 				</div>
-			<% end %>
+				<% end %>
 			</div>
 
 			<!-- カート追加ボタン -->
@@ -106,13 +120,20 @@
 	float: left;
 }
 
+.favorite-icon{
+	height: 30px;
+	width: 30px;
+	font-size: 24px;
+	float: left;
+}
+
 .new {
-  display: inline-block;
-  padding: 5px 8px;
-  background-color: #ffc0cb;
-  border-radius: 3px;
-  color: #fff;
-  font-size: 14px;
-  float: right;
+	display: inline-block;
+	padding: 5px 8px;
+	background-color: #ffc0cb;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 14px;
+	float: right;
 }
 </style>

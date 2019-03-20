@@ -10,13 +10,16 @@
 </head>
 
 <body>
-  
+
   <header>
     <!-- ロゴをクリックしてもHOMEと同じ動きをするようにする必要あり -->
+
+
     <nav class="col-md-2" id="sitelogo" style="text-align:center">
       <a href="/"><%= image_tag 'sitelogo.png', :size =>'160x100' %></a>
     </nav>
     
+
     <nav class="navbar col-md-10">
           <ul class="nav navbar-nav" id="user_link">
             <!--サインインしていた場合  -->
@@ -40,7 +43,7 @@
                 <% end %>
               </li>
               <li class="">
-                <%= link_to destroy_user_session_path, method: :delete, class: "logout" do %>
+                <%= link_to favorites_path, class: "favorite" do %>
                   <i class="glyphicon glyphicon-heart-empty" aria-hidden="true"></i>
                   <span>お気に入り</span>
                 <% end %>
@@ -81,7 +84,7 @@
     <div class="main-content clearfix">
         <%= yield %>
     </div>
-  
+
     <footer id="footer">
       <div class="container">
         <div class="row">
@@ -103,7 +106,7 @@
 
 
 <style>
-  
+
 * {
     margin: 0;
     padding: 0;
@@ -165,16 +168,12 @@
   }
 
   footer{
-    height: 200px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
     background-color: black;
     color:white;
   }
 
 </style>
-
-
-
-
-
-
-
