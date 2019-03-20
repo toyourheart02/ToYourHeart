@@ -1,21 +1,46 @@
-<% if admin_signed_in? %>
+<div id="master-login">
+	<% if admin_signed_in? %>
 	<%= current_admin.email %>
 	<span>ログイン中</span>
-<% end %>
-<br>
-<%= h(flash[:notice]) %>
+	<br>
+	<br>
+	<%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "" %>
+	<% end %>
+	<br>
+	
+</div>
+
+<div id="master-content">
+	<br>
+	<%= link_to "商品登録", products_new_path, class: "master-content-link" %>
+	<br>
+	<br>
+	<%= link_to "商品一覧", "#", class: "master-content-link" %>
+	<br>
+	<br>
+	<%= link_to "ユーザ一覧", admins_path, class: "master-content-link" %>
+	<br>
+	<br>
+	<%= link_to "マスタ登録", master_new_path, class: "master-content-link" %>
+	<br>
+	<br>
+</div>
 
 
-<br>
-<%= link_to "商品登録", products_new_path %>
-<br>
-<%= link_to "商品一覧", "#" %>
-<br>
-<%= link_to "ユーザ一覧", admins_path %>
-<br>
-<%= link_to "マスタ登録", master_new_path %>
-<br>
-<br>
-<% if admin_signed_in? %>
-<%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-default btn-sm" %>
-<% end %>
+<style>
+	#master-login{
+		font-size: 16px;
+		text-align: right;
+		width: 90%
+	}
+
+	#master-content{
+		font-size: 30px;
+		text-align: center;
+		height: 400px;
+	}
+
+	.master-content-link{
+		padding-bottom: 20px;
+	}
+</style>

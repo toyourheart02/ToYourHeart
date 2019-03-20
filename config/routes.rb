@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :users
 
+  
   devise_for :admins
   get 'master/new'
 
-  devise_for :users
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'products' => 'products#index'
   root 'products#index'
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
   get 'admins/:id' => 'admins#usershow', as: 'admins_usershow'
   patch 'admins/:id' => 'admins#userupdate', as: 'admins_userupdate'
   get 'admins/:id/edit' => 'admins#useredit', as: 'admins_useredit'
+  delete 'admins/:id/destroy' => 'admins#userdestroy', as: 'admins_userdestroy'
 
   post 'artists' => 'artists#create'
   get 'artist' => 'master#new'
@@ -46,7 +49,7 @@ Rails.application.routes.draw do
 
   post 'products/sort' => 'products#sort', as: 'products_sort'
 
-  resources :users, only: [:show, :index, :edit, :update]
+  resources :users, only: [:show, :index, :edit, :update, :destroy]
   resources :carts, only: [:index, :destroy, :update]
   get 'carts/create' => 'carts#create', as: 'carts_create'
 
