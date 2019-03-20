@@ -37,6 +37,7 @@
 					<% if user_signed_in? %>
 					<div class="carticon">
 
+
 						<%= link_to carts_create_path(product_id: product.id),remote: true do %>
 						<i class="cart-icon glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
 						<% end %>
@@ -57,7 +58,6 @@
 				</div>
 				<% end %>
 			</div>
-
 			<!-- カート追加ボタン -->
 			<!-- ページャ -->
 			<%= paginate @products, class: "paginate" %>

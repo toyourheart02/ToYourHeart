@@ -5,6 +5,10 @@
 <% if flash[:warning] %>
        <p class="alert alert-success"><%= flash[:warnign] %></p>
 <% end %>
+<% if alert %>
+  <p class="alert alert-error"><%= alert %></p>
+<% end %>
+
 <h2>ログイン</h2>
   <br>
 
