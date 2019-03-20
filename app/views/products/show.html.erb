@@ -6,6 +6,9 @@
 <% if flash[:warning] %>
        <p class="alert alert-danger"><%= flash[:warning] %></p>
 <% end %>
+<% if flash[:delete] %>
+	<p class="alert alert-success"><%= flash[:delete] %></p>
+<% end %>
 
 <div class="col-md-2 col-md-offset-4">
 	<%= attachment_image_tag @product, :music_image, :fill, 200, 200, format: 'jpeg', fallback: "no_image.jpg", class: "no_image" %>
@@ -13,11 +16,12 @@
 
 <div class="col-md-4">
 	<div class="">商品名：<%= @product.title %></div>
-	<div class="">アーティスト：</div>
+	<div class="">アーティスト：<%= @product.artist.artist_name %></div>
 	<div class="">価格：<%= @product.price %>円</div>
 	<div class="">レーベル：<%= @product.label.label_name %></div>
 	<div class="">ジャンル：<%= @product.genre.genre_name %></div>
-	<div class="">総レビュー数：</div>
+	<div class="">総レビュー数：<%= link_to "#product_review" do %>
+		<%= @product.reviews.count %><% end %>件</div>
 	<%= link_to "カートに入れる", "#", class: "btn btn-default btn-sm" %>
 
 	<br>
@@ -38,6 +42,7 @@
 <div class="col-md-4 col-md-offset-4">
 	<div class="panel panel-default review_form">
 		<div class="panel-body">
+			<div id="star-rating"></div>
 			<%= form_for(@review) do |f| %>
 				<label>タイトル</label>
 				<%= f.text_field :title %>
@@ -54,7 +59,14 @@
 
 
 <div class="col-md-4 col-md-offset-4">
-	<h3>商品レビュー</h3>
+	<!-- current_userにレビュー削除機能を追加する -->
+	<h3 id="product_review">商品レビュー</h3>
+	<% if @product.reviews.length == 0 %>
+		<h4>商品レビューがありません</h4>
+		<!-- 件数が０のときにフッタが上にきてしまうのを防ぐためのdiv -->
+		<div class="space"></div>
+	<% end %>
+
 	<% @product.reviews.each do |review| %>
 	<div class="panel panel-default review_form">
 		<div class="panel-body">
@@ -65,6 +77,11 @@
 			</div>
 			<div class="review_created_at">
 				<p><%= review.created_at.strftime('%Y年%m月%d日') %></p>
+				<br>
+				<br>
+				<% if review.user == current_user %>
+					<%= link_to '削除', review_path(@product), :method => :delete, data: { confirm: '削除しますか？' } , class: "btn btn-default" %>
+				<% end %>
 			</div>
 		</div>
 	</div>
