@@ -1,6 +1,5 @@
 <h1>配送先・支払い方法選択</h1>
 
-
 <% if flash[:notice] %>
 	<p class="alert alert-success"><%= flash[:notice] %></p>
 <% elsif flash[:warning] %>
@@ -11,11 +10,12 @@
 	<div class="dest">
 	<!-- 配送先 -->
 	<h3>配送先</h3>
+
 		<div class="dest-registered col-md-5">
 			<h4 style="text-decoration: underline">登録済みの配送先</h4>
 			<% i = 1 %>
 
-			
+
 
 			<% @dests.each do |f| %>
 				<label>送り先<%= i %></label>
@@ -29,7 +29,11 @@
 				<% i += 1 %>
 				<br>
 			<% end %>
+
+			
+
 		</div>
+
 		<div class="dest-new col-md-5">
 			<h4 style="text-decoration: underline">新規配送先登録</h4>
 				<%= form_for(@dest) do |f| %>
@@ -40,7 +44,7 @@
 					<label>住所</label><br>
 					<%= f.text_field :address, class: "" %><br>
 					<br>
-					<!-- 非同期処理にすると、登録先を選ぶ部分が面倒になるため、同期処理にする -->
+				<!-- 非同期処理にすると、登録先を選ぶ部分が面倒になるため、同期処理にする -->
 					<%= f.submit "登録", class: "btn btn-default" %>
 				<% end %>
 		</div>
@@ -50,24 +54,30 @@
 	<div class="pay">
 		<h3>支払い方法</h3>
 		<br>
+		<!-- はじめは代引きにチェックが入っているようにするための処理 -->
+		<% @order.pay = 0 %>
 
 		<%= form_for(@order) do |f| %>
 			<%=f.radio_button :pay, 0, class: "" %>代引き
 			<br>
 			<br>
 			<%=f.radio_button :pay, 1, class: "" %>クレジットカード
-			<%=f.submit '注文を完了する' %>
+			<br>
+			<br>
+			<%=f.submit '注文を確定する', class: "submitbtn" %>
 		<% end %>
-	</div>
-	<div class="finish-order col-md-8">
-		<%= link_to '注文を完了する', orders_path, class: "finish-order-btn btn btn-default" %>
 	</div>
 </div>
 
 <style>
+	h1{
+		text-align: center;
+	}
+
 	.dest{
 		height: 300px;
 		margin-bottom: 50px;
+
 	}
 
 	.pay{
@@ -77,5 +87,12 @@
 
 	.finish-order{
 		text-align: right;
+	}
+
+	.submitbtn{
+		margin-top: 30px;
+		text-align: center;
+		margin-left: 100px;
+		width: 40%;
 	}
 </style>

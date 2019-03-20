@@ -42,11 +42,9 @@
               		<% if (Date.today - product.release_date) < 7 %>
               			<span class="new">New</span>
               		<% end %>
-
 				</div>
 			<% end %>
 			</div>
-
 			<!-- カート追加ボタン -->
 			<!-- ページャ -->
 			<%= paginate @products, class: "paginate" %>
