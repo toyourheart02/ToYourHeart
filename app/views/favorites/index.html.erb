@@ -7,13 +7,19 @@
 <div class="space"></div>
 <% end %>
 
-<div class="col-md-12 col-md-offset-1">
+<div class="col-md-8 col-md-offset-2">
 	<% @products.each do |product| %>
 		<div class="product_index">
-			<%= attachment_image_tag product, :music_image, :fill, 150, 150, fallback: "no_image.jpg", class: "music_image" %><br>
-			<%= product.title %><br>
+			<%= link_to products_show_path(product.id) do %>
+				<%= attachment_image_tag product, :music_image, fallback: "no_image.jpg", size: "150x150" %><br>
+			<% end %>
+			<%= link_to products_show_path(product.id) do %>
+				<%= product.title %><br>
+			<% end %>
 			<%= product.artist.artist_name %>
-			<%= link_to '削除', favorite_path(product), :method => :delete, data: { confirm: '削除しますか？' } , class: "btn btn-default" %>
+			<%= link_to favorite_path(product), :method => :delete, data: { confirm: '削除しますか？' } , class: "btn btn-default btn-xs" do %>
+				<i class="delete-icon glyphicon glyphicon-trash" aria-hidden="true"></i>
+			<% end %>
 		</div>
 	<% end %>
 </div>
@@ -27,10 +33,19 @@
 
 .product_index {
 	background-color: #D4D7D8;
-	margin: 5px;
+	margin: 5px 15px;
 	padding: 15px;
 	width: 180px;
 	float: left;
 }
 
+.btn.btn-default {
+	float: right;
+}
+.delete-icon {
+	height: 24px;
+	width: 20px;
+	padding: 3px;
+	font-size: 14px;
+}
 </style>

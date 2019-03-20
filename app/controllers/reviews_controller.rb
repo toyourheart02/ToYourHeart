@@ -9,7 +9,6 @@ class ReviewsController < ApplicationController
 		else
 			flash[:warning] = "投稿できませんでした。"
 			redirect_to products_show_path(product)
-			# render 'products/show'
 		end
 	end
 

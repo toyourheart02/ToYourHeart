@@ -7,7 +7,9 @@ class Product < ApplicationRecord
   has_many :carts, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
-
   has_many :users, through: :carts
-  # has_many :users, through: :favorites
+
+  # def favorited_by?(user)
+  #   favorites.where(user_id: user.id).exists?
+  # end
 end
