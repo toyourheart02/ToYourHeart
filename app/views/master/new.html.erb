@@ -3,42 +3,120 @@
 <%= h(flash[:notice]) %>
 <%= h(flash[:warning]) %>
 
-<h3>アーティスト登録</h3>
-<%= form_for(@artist) do |f| %>
-	<label class="">アーティスト名</label>
-	<%= f.text_field :artist_name %>
-	<%= f.submit "登録", class: "" %>
-<% end %>
+<div class="master">
+	<h3>アーティスト登録</h3>
+	<%= form_for(@artist) do |f| %>
+		<label class="">アーティスト名</label>
+		<%= f.text_field :artist_name %>
+		<br>
+		<label class="">よみがな</label>
+		<%= f.text_field :artist_kana %>
+		<%= f.submit "登録", class: "" %>
+	<% end %>
 
-<h3>レーベル登録</h3>
-<%= form_for(@label) do |f| %>
-	<label class="">レーベル名</label>
-	<%= f.text_field :label_name %>
-	<%= f.submit "登録", class: "" %>
-<% end %>
+	<h3>レーベル登録</h3>
+	<%= form_for(@label) do |f| %>
+		<label class="">レーベル名</label>
+		<%= f.text_field :label_name %>
+		<%= f.submit "登録", class: "" %>
+	<% end %>
 
-<h3>プレゼントシーン登録</h3>
-<%= form_for(@scene) do |f| %>
-	<label class="">シーン名</label>
-	<%= f.text_field :scene_name %>
-	<%= f.submit "登録", class: "" %>
-<% end %>
+	<h3>プレゼントシーン登録</h3>
+	<%= form_for(@scene) do |f| %>
+		<label class="">シーン名</label>
+		<%= f.text_field :scene_name %>
+		<%= f.submit "登録", class: "" %>
+	<% end %>
 
-<h3>ジャンル登録</h3>
-<%= form_for(@genre) do |f| %>
-	<label class="">ジャンル名</label>
-	<%= f.text_field :genre_name %>
-	<%= f.submit "登録", class: "" %>
-<% end %>
+	<h3>ジャンル登録</h3>
+	<%= form_for(@genre) do |f| %>
+		<label class="">ジャンル名</label>
+		<%= f.text_field :genre_name %>
+		<%= f.submit "登録", class: "" %>
+	<% end %>
 
-<h3>楽曲登録</h3>
-<%= form_for(@music) do |f| %>
-	<label class="">楽曲名</label>
-	<%= f.text_field :music_name %>
+	<h3>楽曲登録</h3>
+	<%= form_for(@music) do |f| %>
+		<label class="">楽曲名</label>
+		<%= f.text_field :music_name %>
+		<br>
+		<label class="">よみがな</label>
+		<%= f.text_field :music_kana %>
+		<br>
+		<label class="">アーティスト名</label>
+		<ul id="tab-menu" class="clearfix">
+        <li><a href="#tab1" class="active">あ行</a></li>
+        <li><a href="#tab2" class="">か行</a></li>
+        <li><a href="#tab3" class="">さ行</a></li>
+        <li><a href="#tab4" class="">た行</a></li>
+        <li><a href="#tab1" class="">な行</a></li>
+        <li><a href="#tab2" class="">は行</a></li>
+        <li><a href="#tab3" class="">ま行</a></li>
+        <li><a href="#tab4" class="">や行</a></li>
+        <li><a href="#tab4" class="">ら行</a></li>
+        <li><a href="#tab4" class="">わ行</a></li>
+      	</ul>
+      	<div id="tab-contents">
+	        <%= f.collection_select :artist_id, @artists_a, :id, :artist_name, { include_blank: true}, class: "artist a", id: "tab1" %>
+	        <%= f.collection_select :artist_id, @artists_ka, :id, :artist_name, { include_blank: true}, class: "artist ka", id: "tab2" %>
+	        <%= f.collection_select :artist_id, @artists_sa, :id, :artist_name, { include_blank: true}, class: "artist sa" %>
+	        <%= f.collection_select :artist_id, @artists_ta, :id, :artist_name, { include_blank: true}, class: "artist ta" %>
+	        <%= f.collection_select :artist_id, @artists_na, :id, :artist_name, { include_blank: true}, class: "artist na" %>
+	        <%= f.collection_select :artist_id, @artists_ha, :id, :artist_name, { include_blank: true}, class: "artist ha" %>
+	        <%= f.collection_select :artist_id, @artists_ma, :id, :artist_name, { include_blank: true}, class: "artist ma" %>
+	        <%= f.collection_select :artist_id, @artists_ya, :id, :artist_name, { include_blank: true}, class: "artist ya" %>
+	        <%= f.collection_select :artist_id, @artists_ra, :id, :artist_name, { include_blank: true}, class: "artist ra" %>
+	        <%= f.collection_select :artist_id, @artists_wa, :id, :artist_name, { include_blank: true}, class: "artist wa" %>
+        </div>
+        <br>
+        <br>
+		<%= f.submit "登録", class: "" %>
+	<% end %>
 	<br>
-	<label class="">アーティスト名</label>
-	<%= f.text_field :artist_id %>
-	<%= f.submit "登録", class: "" %>
-<% end %>
-<br>
-<%= link_to '戻る', admins_top_path%>
+	<%= link_to '戻る', admins_top_path%>
+</div>
+
+
+
+<style>
+	h1{
+		text-align: center;
+	}
+
+	h3{
+		text-align: left;
+	}
+
+#tab-menu li {
+  float: left;
+  list-style-type: none;
+  width: 40px;
+}
+
+	.active{
+		display: inline-block;
+	}
+
+	.artist{
+		width: 200px;
+		/*display: none;*/
+	}
+
+	.master{
+		margin-left: 30%;
+		width: 40%;
+	}
+</style>
+
+<script >
+$('#tab-contents .tab[id != "tab1"]').hide();
+ 
+$('#tab-menu a').on('click', function() {
+  $("#tab-contents .artist").hide();
+  $("#tab-menu .active").removeClass("active");
+  $(this).addClass("active");
+  $($(this).attr("href")).show();
+  return false;
+});
+
+</script>
