@@ -28,7 +28,6 @@
 
     <label>ジャンル</label>
     <%= product.collection_select :genre_id, Genre.all, :id, :genre_name, { include_blank: true} %>
-　　
     <br>
 
     <label>シーン</label>
@@ -45,5 +44,7 @@
     <br>
 
     <%= product.submit '投稿' %>
- 
+
 <% end %>
+
+<%= link_to "戻る", admins_top_path %>

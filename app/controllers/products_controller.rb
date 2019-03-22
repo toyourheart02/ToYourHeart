@@ -39,7 +39,7 @@ class ProductsController < ApplicationController
         # DBへ保存する
          if product.save!
          	flash[:notice] = "商品が1件登録されました。"
-         	redirect_to products_new_path
+         	redirect_to new_product_music_path(product)
          else
          	flash[:warning] = "商品の登録に失敗しました。。"
          	redirect_to products_new_path
