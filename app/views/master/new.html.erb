@@ -1,7 +1,12 @@
 <h1>マスタ登録ページ</h1>
 
-<%= h(flash[:notice]) %>
-<%= h(flash[:warning]) %>
+<% if flash[:notice] %>
+       <p class="alert alert-success"><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:warning] %>
+       <p class="alert alert-warning"><%= flash[:warning] %></p>
+<% end %>
+
 
 <div class="master">
 	<h3>アーティスト登録</h3>
@@ -49,24 +54,33 @@
         <li><a href="#tab2" class="">か行</a></li>
         <li><a href="#tab3" class="">さ行</a></li>
         <li><a href="#tab4" class="">た行</a></li>
-        <li><a href="#tab1" class="">な行</a></li>
-        <li><a href="#tab2" class="">は行</a></li>
-        <li><a href="#tab3" class="">ま行</a></li>
-        <li><a href="#tab4" class="">や行</a></li>
-        <li><a href="#tab4" class="">ら行</a></li>
-        <li><a href="#tab4" class="">わ行</a></li>
+        <li><a href="#tab5" class="">な行</a></li>
+        <li><a href="#tab6" class="">は行</a></li>
+        <li><a href="#tab7" class="">ま行</a></li>
+        <li><a href="#tab8" class="">や行</a></li>
+        <li><a href="#tab9" class="">ら行</a></li>
+        <li><a href="#tab10" class="">わ行</a></li>
       	</ul>
       	<div id="tab-contents">
 	        <%= f.collection_select :artist_id, @artists_a, :id, :artist_name, { include_blank: true}, class: "artist a", id: "tab1" %>
+
 	        <%= f.collection_select :artist_id, @artists_ka, :id, :artist_name, { include_blank: true}, class: "artist ka", id: "tab2" %>
-	        <%= f.collection_select :artist_id, @artists_sa, :id, :artist_name, { include_blank: true}, class: "artist sa" %>
-	        <%= f.collection_select :artist_id, @artists_ta, :id, :artist_name, { include_blank: true}, class: "artist ta" %>
-	        <%= f.collection_select :artist_id, @artists_na, :id, :artist_name, { include_blank: true}, class: "artist na" %>
-	        <%= f.collection_select :artist_id, @artists_ha, :id, :artist_name, { include_blank: true}, class: "artist ha" %>
-	        <%= f.collection_select :artist_id, @artists_ma, :id, :artist_name, { include_blank: true}, class: "artist ma" %>
-	        <%= f.collection_select :artist_id, @artists_ya, :id, :artist_name, { include_blank: true}, class: "artist ya" %>
-	        <%= f.collection_select :artist_id, @artists_ra, :id, :artist_name, { include_blank: true}, class: "artist ra" %>
-	        <%= f.collection_select :artist_id, @artists_wa, :id, :artist_name, { include_blank: true}, class: "artist wa" %>
+
+	        <%= f.collection_select :artist_id, @artists_sa, :id, :artist_name, { include_blank: true}, class: "artist sa", id: "tab3" %>
+
+	        <%= f.collection_select :artist_id, @artists_ta, :id, :artist_name, { include_blank: true}, class: "artist ta", id: "tab4" %>
+
+	        <%= f.collection_select :artist_id, @artists_na, :id, :artist_name, { include_blank: true}, class: "artist na", id: "tab5" %>
+
+	        <%= f.collection_select :artist_id, @artists_ha, :id, :artist_name, { include_blank: true}, class: "artist ha", id: "tab6" %>
+
+	        <%= f.collection_select :artist_id, @artists_ma, :id, :artist_name, { include_blank: true}, class: "artist ma", id: "tab7" %>
+
+	        <%= f.collection_select :artist_id, @artists_ya, :id, :artist_name, { include_blank: true}, class: "artist ya", id: "tab8" %>
+
+	        <%= f.collection_select :artist_id, @artists_ra, :id, :artist_name, { include_blank: true}, class: "artist ra", id: "tab9" %>
+
+	        <%= f.collection_select :artist_id, @artists_wa, :id, :artist_name, { include_blank: true}, class: "artist wa", id: "tab10" %>
         </div>
         <br>
         <br>
@@ -87,6 +101,7 @@
 		text-align: left;
 	}
 
+
 #tab-menu li {
   float: left;
   list-style-type: none;
@@ -94,7 +109,7 @@
 }
 
 	.active{
-		display: inline-block;
+		text-orientation: underline;
 	}
 
 	.artist{
@@ -109,14 +124,35 @@
 </style>
 
 <script >
-$('#tab-contents .tab[id != "tab1"]').hide();
- 
+//あ行のタブ以外は隠す
+$('#tab-contents .artist[id != "tab1"]').hide();
+//あ行以外のタブを無効化する
+// var array = document.getElementByName("artist");
+// for(var i = 1; i < array.length; i++){
+// 	array[i].disabled = true;
+// }
+// 　var obj = document.getElementById("tab1");
+//   obj.disabled = true;
+
+//いずれかの行がクリックされた時のイベント
 $('#tab-menu a').on('click', function() {
-  $("#tab-contents .artist").hide();
-  $("#tab-menu .active").removeClass("active");
-  $(this).addClass("active");
-  $($(this).attr("href")).show();
-  return false;
+
+	  // $("#tab-contents .artist").hide();
+	  //$("#tab-menu .active").removeClass("active");
+	  //$(this).addClass("active");
+
+	  //全タブを隠す
+$("#tab-contents .artist").hide();
+
+	  // $("#tab-contents .artist").disabled = true;
+
+	  //選択されたタブは表示する　$(this).attr("href") の部分が表示したいコンテンツのid値に置き換わる
+	  //選択されたタブは有効化する
+	  // obj = document.getElementById($($(this).attr("href")));
+	  // obj.disabled = false;
+	  $($(this).attr("href")).show();
+
+	  return false;
 });
 
 </script>

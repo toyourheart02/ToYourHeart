@@ -1,4 +1,4 @@
-<div class="col-md-offset-4">
+
 <h1>商品登録</h1>
 
 <% if flash[:notice] %>
@@ -13,6 +13,7 @@
 
 <br>
 <br>
+<div class="col-md-offset-4">
     <%= form_for(@product) do |product| %>
         <div id="img">
             <label>ジャケット画像</label>
@@ -23,6 +24,10 @@
         <div class="attr">
             <label>タイトル</label>
             <%= product.text_field :title, class: "form" %>
+            <br>
+
+            <label>かな</label>
+            <%= product.text_field :kana, class: "form" %>
             <br>
 
             <label>価格</label>
@@ -55,6 +60,9 @@
             <br>
 
             <%= product.submit '登録', class: "" %>
+             <br>
+              <br>
+            <%= link_to '戻る', admins_top_path %>
 
         </div>
 
@@ -62,6 +70,9 @@
 </div>
 
 <style>
+    h1  {
+        text-align: center;
+    }
     #img{
         margin-left: 15px;
     }

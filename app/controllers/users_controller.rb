@@ -12,6 +12,17 @@ class UsersController < ApplicationController
 
   	end
 
+	def showorder
+	  	@user = User.find(params[:id])
+	  	@orders = Order.where(user_id: @user.id).reverse_order
+		@orderproducts = OrderProduct.all
+
+	  	# @products = []
+	  	# @orders.each do |order|
+	  	# 	@products.push(OrderProduct.where(order_id: order.id))
+	  	# end
+  	end
+
     def edit
     	@user = User.find(params[:id])
 
@@ -34,7 +45,7 @@ class UsersController < ApplicationController
     	user = User.find(params[:id])
     	user.is_deleted = true
     	user.save
-    	# ログアウトさせる
+    	# ログアウトさせる(現在不具合あり)
     	redirect_to destroy_user_session_path
     end
 
