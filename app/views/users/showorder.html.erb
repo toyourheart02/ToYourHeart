@@ -1,56 +1,9 @@
-<h1>ユーザ詳細ページ</h1>
-
-<br>
-
+<h1>注文履歴</h1>
 <% if flash[:notice] %>
-	<p class="alert alert-success"><%= flash[:notice] %></p>
+       <p class="alert alert-success"><%= flash[:notice] %></p>
 <% end %>
-<div class="profile col-md-offset-2">
-<div class="col-md-3">
-	<label>プロフィール画像</label>
-	<%= attachment_image_tag @user, :profile_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
-</div>
 
-
-<div class="col-md-5 col-md-offset-1">
-	<table class="table">
-		<tbody>
-			<tr>
-				<td>ユーザ名</td>
-				<td><%= @user.user_name %></td>
-			</tr>
-			<tr>
-				<td>かな</td>
-				<td><%= @user.user_kana %></td>
-			</tr>
-			<tr>
-				<td>郵便番号</td>
-				<td><%= @user.zip_code %></td>
-			</tr>
-			<tr>
-				<td>住所</td>
-				<td><%= @user.address %></td>
-			</tr>
-			<tr>
-				<td>電話番号</td>
-				<td><%= @user.phone_number %></td>
-			</tr>
-		</tbody>
-	</table>
-	<%= link_to 'ユーザ情報編集', admins_useredit_path %>
-	<br><br>
-	<%= link_to '退会させる', admins_userdestroy_path ,method: :delete, "data-confirm" => '退会処理をしてよろしいですか？', class: "" %>
-	<br><br>
-	<%= link_to "戻る", admins_path %>
-</div>
-</div>
-
-
-<div class="col-md-10">
-	<br>
-	<h3>購入履歴</h3>
-
-	<div class="orders">
+<div class="orders">
 	<% @orders.each do |order| %>
 	<!-- 注文ごとの合計金額変数 -->
 	<% totalamount = 0 %>
@@ -76,8 +29,12 @@
 					<span class="pay status">代引き</span>
 				<%when 1%>
   					<span class="pay status">クレジットカード</span>
-  			<% end %>
-  			<br>
+  		<% end %>
+  		<br>
+  		<br>
+  		<% if order.status == 0 %>
+  			<%= link_to '注文キャンセル', order_path, method: :delete, "data-confirm" => '注文をキャンセルしてよろしいですか？', class: "btn btn-warning" %>
+  		<% end %>
   		</div>
 
   		<div class="right-content">
@@ -110,19 +67,15 @@
 		</div>
 	<% end %>
 </div>
-	
-</div>
+
+
 
 <style>
 	h1{
 		text-align: center;
 	}
 
-	h3{
-		padding-left: 250px;
-	}
 	.orders{
-		width: 100%;
 		margin-top: 70px;
 		margin-left: 20%;
 	}

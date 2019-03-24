@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_20_031437) do
+
+ActiveRecord::Schema.define(version: 2019_03_21_085316) do
 
 
   create_table "admins", force: :cascade do |t|
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 2019_03_20_031437) do
     t.string "artist_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "artist_kana"
   end
 
   create_table "carts", force: :cascade do |t|
@@ -91,6 +93,7 @@ ActiveRecord::Schema.define(version: 2019_03_20_031437) do
     t.integer "artist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "music_kana"
     t.index ["artist_id"], name: "index_musics_on_artist_id"
   end
 
@@ -140,6 +143,7 @@ ActiveRecord::Schema.define(version: 2019_03_20_031437) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "artist_id"
+    t.string "kana"
     t.index ["artist_id"], name: "index_products_on_artist_id"
     t.index ["genre_id"], name: "index_products_on_genre_id"
     t.index ["label_id"], name: "index_products_on_label_id"

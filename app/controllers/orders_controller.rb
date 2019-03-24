@@ -7,17 +7,6 @@ class OrdersController < ApplicationController
 		# そのユーザの配送先を全件取得
 		user = current_user
 		@dests = user.destinations
-
-		# binding.pry
-		# select_tagのデフォルト値に使用。ユーザの配送先の１件目を指定
-    	# dest_first = @dests.first.id
-    	# select_tagから現在選択されているクラスのid取得
-    	# 未選択時はデフォルトのclass_first
-    	# binding.pry
-  #   	dest_id = 6
-  #   	@dest_id = params[dest_id] || dest_first
-		# # 表示する配送先を１件
-		# dest = @dests.find(@dest_id)
 	end
 
 	# order, order_productsテーブルに追加。cartテーブルからは削除
@@ -62,6 +51,20 @@ class OrdersController < ApplicationController
 	     	end
 	    end
 	    redirect_to carts_path
+	end
+
+	# order, order_productsテーブルから削除。
+	def destroy
+		binding.pry
+		orders = Order.find(params[:id])
+		orderproducts = OrderProduct.where(order_id: orders.id)
+		orderproducts.each do |orderproduct|
+			orderproduct.destroy
+		end
+
+		orders.destroy
+		flash[:notice] = "注文のキャンセルが完了しました。"
+		redirect_to showorder_path
 	end
 
 	private

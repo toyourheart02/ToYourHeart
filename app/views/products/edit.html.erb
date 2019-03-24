@@ -10,13 +10,13 @@
 
 
 <%= form_for(@product, url: update_product_path) do |f| %>
-	<div class="col-md-3">
+	<div class="col-md-3 col-md-offset-1">
 		<%= attachment_image_tag @product, :music_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
 		<%= f.attachment_field :music_image, class: "" %><br>
 
 	</div>
 
-	<div class="col-md-5 col-md-offset-1">
+	<div class="col-md-5">
 		<table class="table">
 			<tbody>
 				<tr>
@@ -62,3 +62,10 @@
 	</div>
 
 <% end %>
+
+
+<style>
+	h1{
+		text-align: center;
+	}
+</style>
