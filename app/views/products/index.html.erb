@@ -41,23 +41,15 @@
 		<hr width="200">
 
 	  <div class="form-group">
-	  	 <%= f.text_field :title_cont,:placeholder => "商品名"%>
-	  	 <%= f.search_field :artist_id,:placeholder => "アーティスト名"%><br />
-	     <%= f.label :ジャンル %><br />
-	     <%= f.collection_select :genre_id_eq, Genre.all, :id, :genre_name, { include_blank: true} %><br>
-	     <%= f.label :シーン %><br />
-         <%= f.collection_select :scene_id, Scene.all, :id, :scene_name, { include_blank: true} %><br>
+	  	 <%= f.text_field :title_cont,:placeholder => "商品名" ,class: "form"%>
+	  	 <%= f.search_field :artist_id_eq,:placeholder => "アーティスト名" ,class: "form"%><br />
+	  	 <%= f.collection_select :artist_id_eq, Artist.all, :id, :artist_name, { include_blank: true} ,class: "form"%><br>
+	     <%= f.collection_select :genre_id_eq, Genre.all, :id, :genre_name, { include_blank: true} ,class: "form" %><br>
+         <%= f.collection_select :scene_id_eq, Scene.all, :id, :scene_name, { first_as_label: true} ,class: "form" %><br>
 
 
-
-
-         <label>発売日</label><br>
-         <%= f.date_field :release_date %>
-         <br>
-
-	  </div>
 	  <div class="actions"><%= f.submit "検索" %></div>
-
+	 </div>
 
 
 	<% end %>
@@ -174,10 +166,15 @@
 .search{
 
 	margin-top: 10px;
-
 }
 
+.form{
+	width: 100%;
+}
 
+.actions{
+	text-align: center;
+}
 
 
 
