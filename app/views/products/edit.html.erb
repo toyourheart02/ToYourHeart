@@ -10,7 +10,7 @@
 
 
 <%= form_for(@product, url: update_product_path) do |f| %>
-	<div class="col-md-3 col-md-offset-1">
+	<div class="col-md-3 col-md-offset-2">
 		<%= attachment_image_tag @product, :music_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
 		<%= f.attachment_field :music_image, class: "" %><br>
 

@@ -1,7 +1,7 @@
-<h1>ユーザ詳細ページ</h1>
-
+<div class="title">
+	<h3>ユーザ詳細</h3>
+</div>
 <br>
-
 <% if flash[:notice] %>
 	<p class="alert alert-success"><%= flash[:notice] %></p>
 <% end %>
@@ -48,7 +48,7 @@
 
 <div class="col-md-10">
 	<br>
-	<h3>購入履歴</h3>
+	<h4>購入履歴</h4>
 
 	<div class="orders">
 	<% @orders.each do |order| %>
@@ -110,11 +110,7 @@
 </div>
 
 <style>
-	h1{
-		text-align: center;
-	}
-
-	h3{
+	h4{
 		padding-left: 250px;
 	}
 	.orders{
