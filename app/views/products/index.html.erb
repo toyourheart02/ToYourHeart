@@ -136,11 +136,19 @@
 			<!-- カート追加ボタン -->
 			<!-- ページャ -->
 
+
+		</div>
+		<!-- ページャ -->
+
+		<div class="col-md-10 col-md-offset-1">
+			<%= paginate @products, class: "paginate" %>
 		</div>
 	</div>
 </div>
 
 </div>
+
+
 
 
 
@@ -172,7 +180,6 @@
 			})
 		})
 	})
-
 </script>
 
 <style>

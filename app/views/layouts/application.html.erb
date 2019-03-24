@@ -14,170 +14,168 @@
 </head>
 
 <body>
+  <div class="wrapper">
+    <header>
+      <!-- ロゴをクリックしてもHOMEと同じ動きをするようにする必要あり -->
+      <nav class="col-md-2" id="sitelogo" style="text-align:center"><%= image_tag 'sitelogo.png', :size =>'160x100' %></nav>
 
-  <header>
-    <!-- ロゴをクリックしてもHOMEと同じ動きをするようにする必要あり -->
+      <nav class="navbar col-md-10">
+        <ul class="nav navbar-nav" id="user_link">
+          <!--サインインしていた場合  -->
+          <% if user_signed_in? %>
+          <li id="user_name">
+            <%= current_user.user_name %>
+            <span> 様   </span>
+            <span>ログイン中</span>
+          </li>
 
-
-    <nav class="col-md-2" id="sitelogo" style="text-align:center">
-      <a href="/"><%= image_tag 'sitelogo.png', :size =>'160x100' %></a>
-    </nav>
-    
-
-    <nav class="navbar col-md-10">
-          <ul class="nav navbar-nav" id="user_link">
-            <!--サインインしていた場合  -->
-            <% if user_signed_in? %>
-              <li id="user_name">
-                <%= current_user.user_name %>
-                <span> 様   </span>
-                <span>ログイン中</span>
-              </li>
-
-              <li class="">
-                <%= link_to user_path(current_user.id), class: "mypage" do %>
-                 <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
-                 <span>マイページ</span>
-                 <% end %>
-              </li>
-              <li class="">
-                <%= link_to carts_path class: "cart" do %>
-                <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-                <span>カート</span>
-                <% end %>
-              </li>
-              <li class="">
-                <%= link_to favorites_path, class: "favorite" do %>
-                  <i class="glyphicon glyphicon-heart-empty" aria-hidden="true"></i>
-                  <span>お気に入り</span>
-                <% end %>
-              </li>
-              <li class="">
-                <%= link_to destroy_user_session_path, method: :delete, class: "logout" do %>
-                  <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
-                   <span>ログアウト</span>
-                <% end %>
-              </li>
-
-            <!--サインインしていなかった場合  -->
-            <% else %>
-              <li class="">
-                <%= link_to new_user_registration_path, class: "sign_up" do %>
-                   <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-                   <span>新規ユーザ登録</span>
-                <% end %>
-              </li>
-              <li class="">
-                <%= link_to user_session_path, class: "sign_in" do %>
-                    <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
-                    <span>ログイン</span>
-                <% end %>
-              </li>
+          <li class="">
+            <%= link_to user_path(current_user.id), class: "mypage" do %>
+            <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
+            <span>マイページ</span>
             <% end %>
-          </ul>
+          </li>
+          <li class="">
+            <%= link_to carts_path class: "cart" do %>
+            <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
+            <span>カート</span>
+            <% end %>
+          </li>
+          <li class="">
+            <%= link_to favorites_path, class: "favorite" do %>
+            <i class="glyphicon glyphicon-heart-empty" aria-hidden="true"></i>
+            <span>お気に入り</span>
+            <% end %>
+          </li>
+          <li class="">
+            <%= link_to destroy_user_session_path, method: :delete, class: "logout" do %>
+            <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
+            <span>ログアウト</span>
+            <% end %>
+          </li>
 
-          <ul class="nav navbar-nav" id="site_link">
-            <li><a href="/">HOME</a></li>
-            <li><a href="#">当サイトついて</a></li>
-            <li><a href="#footer">アクセス</a></li>
-            <li><a href="#footer">お問い合わせ</a></li>
-          </ul>
-    </nav>
-  </header>
+          <!--サインインしていなかった場合  -->
+          <% else %>
+          <li class="">
+            <%= link_to new_user_registration_path, class: "sign_up" do %>
+            <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+            <span>新規ユーザ登録</span>
+            <% end %>
+          </li>
+          <li class="">
+            <%= link_to user_session_path, class: "sign_in" do %>
+            <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
+            <span>ログイン</span>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+
+        <ul class="nav navbar-nav" id="site_link">
+          <li><a href="/">HOME</a></li>
+          <li><a href="#">当サイトついて</a></li>
+          <li><a href="#footer">アクセス</a></li>
+          <li><a href="#footer">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </header>
 
     <div class="main-content clearfix">
-        <%= yield %>
+      <%= yield %>
     </div>
-
-    <footer id="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-3 col-xs-offset-9">
-            <h3>アクセス</h3>
-            <p>CopyRight Infratop.inc</p>
-          </div>
+  </div>
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-3 col-xs-offset-9">
+          <h3>アクセス</h3>
+          <p>CopyRight Infratop.inc</p>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
 
-  </body>
+</body>
 </html>
 
 
-
-
-
-
-
 <style>
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.wrapper {
+  flex: 1;
+}
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  .clearfix::after {
+.clearfix::after {
   content: "";
   display: block;
   clear: both;
 }
 
-  header{
-    height: 120px;
-    width: 100%;
-    background-color: #f8f8f8;
-  }
+header{
+  height: 120px;
+  width: 100%;
+  background-color: #f8f8f8;
+}
 
-  #sitelogo_img{
-    text-align: right;
-  }
+#sitelogo_img{
+  text-align: right;
+}
 
-  #user_name{
-    padding: 15px;
-  }
+#user_name{
+  padding: 15px;
+}
 
-  #user_link{
-    /*強引なやり方なので左揃えに指定する必要あり*/
-    padding-left: 30%;
-    height: 50px;
-    width: 100%;
-    text-align: right;
-  }
+#user_link{
+  /*強引なやり方なので左揃えに指定する必要あり*/
+  padding-left: 40%;
+  height: 50px;
+  width: 100%;
+  text-align: right;
+}
 
-  #user_link li{
-    display: inline;
-  }
-
-
-  #site_link{
-    height: 50px;
-    width: 100%;
-    text-align: center;
-    margin-top: 20px;
-    padding-left: 100px;
-  }
-
-  #site_link li{
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 17px;
-    display: inline;
-  }
+#user_link li{
+  display: inline;
+}
 
 
-  .main-content{
-    margin-bottom: 50px;
-    /*height: 1000px;*/
-  }
+#site_link{
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  padding-left: 100px;
+}
 
-  footer{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-    background-color: black;
-    color:white;
-  }
+#site_link li{
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 17px;
+  display: inline;
+}
+
+
+.main-content{
+  margin-bottom: 50px;
+  /*height: 1000px;*/
+}
+
+footer {
+  height: 100px;
+  background-color: black;
+  color:white;
+}
 
 </style>
