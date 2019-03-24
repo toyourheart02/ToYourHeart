@@ -37,6 +37,7 @@ class ProductsController < ApplicationController
     end
 
     def show
+      binding.pry
         @product = Product.find(params[:id])
         @review = Review.new
     end
@@ -53,36 +54,42 @@ class ProductsController < ApplicationController
         # DBへ保存する
          if product.save!
          	flash[:notice] = "商品が1件登録されました。"
-         	redirect_to products_new_path
+         	redirect_to new_product_music_path(product)
          else
          	flash[:warning] = "商品の登録に失敗しました。。"
          	redirect_to products_new_path
          end
 	end
 
-     def edit
+  def edit
         @product = Product.find(params[:id])
+  end
 
-    end
-
-    def update
-        # binding.pry
+  def update
         product = Product.find(params[:id])
-        if product.update(product_params)
+        if product_music_params
+          product.update(product_music_params)
+          # binding.pry
+          # product_music_params[:product_musics_attributes]
+          flash[:notice] = "商品が1件登録されました。"
+          redirect_to products_new_path
+        elsif product_params
+          product.update(product_params)
           flash[:notice] = '商品情報が更新されました。'
           redirect_to product_path(product.id)
         else
           flash[:warning] = '商品情報の更新に失敗しました。'
           redirect_to product_path(product.id)
         end
-    end
+  end
 
 
 	 private
 
     def product_params
-        params.require(:product).permit(:music_image, :title, :price, :label_id, :genre_id, :scene_id, :release_date, :stock, :artist_id)
+        params.require(:product).permit(:music_image, :title, :kana, :price, :label_id, :genre_id, :scene_id, :release_date, :stock, :artist_id)
     end
-
-
+    def product_music_params
+        params.require(:product).permit(product_musics_attributes: [:disc_num, :track_num, :music_id])
+    end
 end

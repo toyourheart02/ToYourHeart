@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_18_033255) do
+
+ActiveRecord::Schema.define(version: 2019_03_21_085316) do
+
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,6 +30,7 @@ ActiveRecord::Schema.define(version: 2019_03_18_033255) do
     t.string "artist_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "artist_kana"
   end
 
   create_table "carts", force: :cascade do |t|
@@ -90,6 +93,7 @@ ActiveRecord::Schema.define(version: 2019_03_18_033255) do
     t.integer "artist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "music_kana"
     t.index ["artist_id"], name: "index_musics_on_artist_id"
   end
 
@@ -115,6 +119,17 @@ ActiveRecord::Schema.define(version: 2019_03_18_033255) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "product_musics", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "disc_num"
+    t.integer "track_num"
+    t.integer "music_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["music_id"], name: "index_product_musics_on_music_id"
+    t.index ["product_id"], name: "index_product_musics_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.integer "price"
@@ -128,6 +143,7 @@ ActiveRecord::Schema.define(version: 2019_03_18_033255) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "artist_id"
+    t.string "kana"
     t.index ["artist_id"], name: "index_products_on_artist_id"
     t.index ["genre_id"], name: "index_products_on_genre_id"
     t.index ["label_id"], name: "index_products_on_label_id"

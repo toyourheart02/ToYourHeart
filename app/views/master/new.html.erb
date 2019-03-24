@@ -1,44 +1,158 @@
 <h1>マスタ登録ページ</h1>
 
-<%= h(flash[:notice]) %>
-<%= h(flash[:warning]) %>
-
-<h3>アーティスト登録</h3>
-<%= form_for(@artist) do |f| %>
-	<label class="">アーティスト名</label>
-	<%= f.text_field :artist_name %>
-	<%= f.submit "登録", class: "" %>
+<% if flash[:notice] %>
+       <p class="alert alert-success"><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:warning] %>
+       <p class="alert alert-warning"><%= flash[:warning] %></p>
 <% end %>
 
-<h3>レーベル登録</h3>
-<%= form_for(@label) do |f| %>
-	<label class="">レーベル名</label>
-	<%= f.text_field :label_name %>
-	<%= f.submit "登録", class: "" %>
-<% end %>
 
-<h3>プレゼントシーン登録</h3>
-<%= form_for(@scene) do |f| %>
-	<label class="">シーン名</label>
-	<%= f.text_field :scene_name %>
-	<%= f.submit "登録", class: "" %>
-<% end %>
+<div class="master">
+	<h3>アーティスト登録</h3>
+	<%= form_for(@artist) do |f| %>
+		<label class="">アーティスト名</label>
+		<%= f.text_field :artist_name %>
+		<br>
+		<label class="">よみがな</label>
+		<%= f.text_field :artist_kana %>
+		<%= f.submit "登録", class: "" %>
+	<% end %>
 
-<h3>ジャンル登録</h3>
-<%= form_for(@genre) do |f| %>
-	<label class="">ジャンル名</label>
-	<%= f.text_field :genre_name %>
-	<%= f.submit "登録", class: "" %>
-<% end %>
+	<h3>レーベル登録</h3>
+	<%= form_for(@label) do |f| %>
+		<label class="">レーベル名</label>
+		<%= f.text_field :label_name %>
+		<%= f.submit "登録", class: "" %>
+	<% end %>
 
-<h3>楽曲登録</h3>
-<%= form_for(@music) do |f| %>
-	<label class="">楽曲名</label>
-	<%= f.text_field :music_name %>
+	<h3>プレゼントシーン登録</h3>
+	<%= form_for(@scene) do |f| %>
+		<label class="">シーン名</label>
+		<%= f.text_field :scene_name %>
+		<%= f.submit "登録", class: "" %>
+	<% end %>
+
+	<h3>ジャンル登録</h3>
+	<%= form_for(@genre) do |f| %>
+		<label class="">ジャンル名</label>
+		<%= f.text_field :genre_name %>
+		<%= f.submit "登録", class: "" %>
+	<% end %>
+
+	<h3>楽曲登録</h3>
+	<%= form_for(@music) do |f| %>
+		<label class="">楽曲名</label>
+		<%= f.text_field :music_name %>
+		<br>
+		<label class="">よみがな</label>
+		<%= f.text_field :music_kana %>
+		<br>
+		<label class="">アーティスト名</label>
+		<ul id="tab-menu" class="clearfix">
+        <li><a href="#tab1" class="active">あ行</a></li>
+        <li><a href="#tab2" class="">か行</a></li>
+        <li><a href="#tab3" class="">さ行</a></li>
+        <li><a href="#tab4" class="">た行</a></li>
+        <li><a href="#tab5" class="">な行</a></li>
+        <li><a href="#tab6" class="">は行</a></li>
+        <li><a href="#tab7" class="">ま行</a></li>
+        <li><a href="#tab8" class="">や行</a></li>
+        <li><a href="#tab9" class="">ら行</a></li>
+        <li><a href="#tab10" class="">わ行</a></li>
+      	</ul>
+      	<div id="tab-contents">
+	        <%= f.collection_select :artist_id, @artists_a, :id, :artist_name, { include_blank: true}, class: "artist a", id: "tab1" %>
+
+	        <%= f.collection_select :artist_id, @artists_ka, :id, :artist_name, { include_blank: true}, class: "artist ka", id: "tab2" %>
+
+	        <%= f.collection_select :artist_id, @artists_sa, :id, :artist_name, { include_blank: true}, class: "artist sa", id: "tab3" %>
+
+	        <%= f.collection_select :artist_id, @artists_ta, :id, :artist_name, { include_blank: true}, class: "artist ta", id: "tab4" %>
+
+	        <%= f.collection_select :artist_id, @artists_na, :id, :artist_name, { include_blank: true}, class: "artist na", id: "tab5" %>
+
+	        <%= f.collection_select :artist_id, @artists_ha, :id, :artist_name, { include_blank: true}, class: "artist ha", id: "tab6" %>
+
+	        <%= f.collection_select :artist_id, @artists_ma, :id, :artist_name, { include_blank: true}, class: "artist ma", id: "tab7" %>
+
+	        <%= f.collection_select :artist_id, @artists_ya, :id, :artist_name, { include_blank: true}, class: "artist ya", id: "tab8" %>
+
+	        <%= f.collection_select :artist_id, @artists_ra, :id, :artist_name, { include_blank: true}, class: "artist ra", id: "tab9" %>
+
+	        <%= f.collection_select :artist_id, @artists_wa, :id, :artist_name, { include_blank: true}, class: "artist wa", id: "tab10" %>
+        </div>
+        <br>
+        <br>
+		<%= f.submit "登録", class: "" %>
+	<% end %>
 	<br>
-	<label class="">アーティスト名</label>
-	<%= f.text_field :artist_id %>
-	<%= f.submit "登録", class: "" %>
-<% end %>
-<br>
-<%= link_to '戻る', admins_top_path%>
+	<%= link_to '戻る', admins_top_path%>
+</div>
+
+
+
+<style>
+	h1{
+		text-align: center;
+	}
+
+	h3{
+		text-align: left;
+	}
+
+
+#tab-menu li {
+  float: left;
+  list-style-type: none;
+  width: 40px;
+}
+
+	.active{
+		text-orientation: underline;
+	}
+
+	.artist{
+		width: 200px;
+		/*display: none;*/
+	}
+
+	.master{
+		margin-left: 30%;
+		width: 40%;
+	}
+</style>
+
+<script >
+//あ行のタブ以外は隠す
+$('#tab-contents .artist[id != "tab1"]').hide();
+//あ行以外のタブを無効化する
+// var array = document.getElementByName("artist");
+// for(var i = 1; i < array.length; i++){
+// 	array[i].disabled = true;
+// }
+// 　var obj = document.getElementById("tab1");
+//   obj.disabled = true;
+
+//いずれかの行がクリックされた時のイベント
+$('#tab-menu a').on('click', function() {
+
+	  // $("#tab-contents .artist").hide();
+	  //$("#tab-menu .active").removeClass("active");
+	  //$(this).addClass("active");
+
+	  //全タブを隠す
+$("#tab-contents .artist").hide();
+
+	  // $("#tab-contents .artist").disabled = true;
+
+	  //選択されたタブは表示する　$(this).attr("href") の部分が表示したいコンテンツのid値に置き換わる
+	  //選択されたタブは有効化する
+	  // obj = document.getElementById($($(this).attr("href")));
+	  // obj.disabled = false;
+	  $($(this).attr("href")).show();
+
+	  return false;
+});
+
+</script>

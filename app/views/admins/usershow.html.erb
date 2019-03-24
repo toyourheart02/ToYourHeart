@@ -5,7 +5,7 @@
 <% if flash[:notice] %>
 	<p class="alert alert-success"><%= flash[:notice] %></p>
 <% end %>
-
+<div class="profile col-md-offset-2">
 <div class="col-md-3">
 	<label>プロフィール画像</label>
 	<%= attachment_image_tag @user, :profile_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
@@ -38,9 +38,140 @@
 		</tbody>
 	</table>
 	<%= link_to 'ユーザ情報編集', admins_useredit_path %>
-</div>
-
-<div class="col-md-10">
-	<h1>購入履歴</h1>
+	<br><br>
+	<%= link_to '退会させる', admins_userdestroy_path ,method: :delete, "data-confirm" => '退会処理をしてよろしいですか？', class: "" %>
+	<br><br>
 	<%= link_to "戻る", admins_path %>
 </div>
+</div>
+
+
+<div class="col-md-10">
+	<br>
+	<h3>購入履歴</h3>
+
+	<div class="orders">
+	<% @orders.each do |order| %>
+	<!-- 注文ごとの合計金額変数 -->
+	<% totalamount = 0 %>
+	<!-- ８桁の番号になるように左から０埋め -->
+	<div class="order-content">
+		<div class="left-content">
+		<p><strong>注文番号：<%= "%08d" % order.id %></strong></p>
+		<!-- それぞれカラムの値によって表示を変更 -->
+		<label>配送ステータス</label>
+			<% case order.status
+				when 0 %>
+					<span id="status1" class="status">受付中</span>
+				<%when 1%>
+  					<span id="status2" class="status">配送中</span>
+  				<%when 2%>
+  					<span id="status3" class="status">配送済</span>
+  			<% end %>
+  			<br>
+  			<br>
+		<label>支払い方法</label>
+		<% case order.pay
+				when 0 %>
+					<span class="pay status">代引き</span>
+				<%when 1%>
+  					<span class="pay status">クレジットカード</span>
+  			<% end %>
+  			<br>
+  		</div>
+
+  		<div class="right-content">
+  			<!-- orderproductテーブルのレコード -->
+  			<div class="">
+  			<% @orderproducts.each do |product| %>
+				<% if product.order_id == order.id %>
+					<%= link_to products_show_path(product.product.id) do %>
+					<div class="">
+						<%= attachment_image_tag product.product, :music_image, class: "", fallback: "no_image.jpg", size: "100x100" %>
+					</div>
+					<% end %>
+					<div class="">
+					<%= link_to products_show_path(product.product.id) do %>
+						<p><%= product.product.title %></p>
+					<% end %>
+					<p><%= product.price %>円</p>
+					<p><%= product.quantity %>個</p>
+					<p>小計：<%= sum = product.price * product.quantity %>円</p>
+					</div>
+					<% totalamount += sum %>
+					<br>
+					<br>
+
+				<% end %>
+			<% end %>
+			<p id="amount">合計：<%= totalamount %>円</p>
+			</div>
+		</div>
+		</div>
+	<% end %>
+</div>
+	
+</div>
+
+<style>
+	h1{
+		text-align: center;
+	}
+
+	h3{
+		padding-left: 250px;
+	}
+	.orders{
+		width: 100%;
+		margin-top: 70px;
+		margin-left: 20%;
+	}
+
+	.order-content{
+		margin-bottom: 30px;
+		padding: 20px;
+		width: 80%;
+		background-color: #f5f5f5;
+		overflow: hidden;
+	}
+
+
+
+	
+
+	.left-content{
+		width: 30%;
+		margin-right: 120px;
+		float: left;
+	}
+
+	.right-content{
+		float: left;
+	}
+
+	.status {
+	display: inline-block;
+	padding: 5px 5px;
+	/*background-color: #ffc0cb;*/
+	border-radius: 3px;
+	color: #fff;
+	font-size: 14px;
+	}
+	.pay{
+		margin-left: 28px;
+		background-color: gray;
+	}
+
+	#status1{
+		background-color: #1e90ff;
+	}
+
+	#status2{
+		background-color: green;
+	}
+
+	#status3{
+		background-color: gray;
+	}
+
+</style>

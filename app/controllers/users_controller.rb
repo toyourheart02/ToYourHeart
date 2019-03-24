@@ -7,7 +7,15 @@ class UsersController < ApplicationController
 
 	#ユーザのマイページ用に作成。管理者からの機能は後ほど追加。
 	def show
+	  	
 	  	@user = User.find(params[:id])
+
+  	end
+
+	def showorder
+	  	@user = User.find(params[:id])
+	  	@orders = Order.where(user_id: @user.id).reverse_order
+		@orderproducts = OrderProduct.all
   	end
 
     def edit
@@ -25,6 +33,15 @@ class UsersController < ApplicationController
 	      flash[:warning] = 'ユーザ情報の更新に失敗しました。'
 	      redirect_to edit_user_path(user.id)
     	end
+    end
+
+    # 退会処理　論理削除
+    def destroy
+    	user = User.find(params[:id])
+    	user.is_deleted = true
+    	user.save
+    	# ログアウトさせる(現在不具合あり)
+    	redirect_to destroy_user_session_path
     end
 
 

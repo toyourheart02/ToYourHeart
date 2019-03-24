@@ -1,49 +1,96 @@
-<h1>新規投稿</h1>
 
-<%= h(flash[:notice])  %>
+<h1>商品登録</h1>
 
-
-<%= h(flash[:warning])  %>
-<!-- form_for部分 -->
-<%= form_for(@product) do |product| %>
-
-	<label>画像</label>
-    <%= product.attachment_field :music_image %>
-
-    <label>タイトル</label>
-    <%= product.text_field :title %>
-    <br>
-
-    <label>価格</label>
-    <%= product.text_field :price %>
-    <br>
-    <!-- アーティストの入力方法はより良いものに変更予定 -->
-    <label>アーティスト</label>
-    <%= product.collection_select :artist_id, Artist.all, :id, :artist_name, { include_blank: true} %>
-    <br>
-
-    <label>レーベル</label>
-    <%= product.collection_select :label_id, Label.all, :id, :label_name, { include_blank: true} %>
-    <br>
-
-    <label>ジャンル</label>
-    <%= product.collection_select :genre_id, Genre.all, :id, :genre_name, { include_blank: true} %>
-　　
-    <br>
-
-    <label>シーン</label>
-    <%= product.collection_select :scene_id, Scene.all, :id, :scene_name, { include_blank: true} %>
-    <br>
-
-    <!-- カレンダーで入力-->
-   <label>発売日</label>
-    <%= product.date_field :release_date %>
-    <br>
-
-   <label>在庫数</label>
-    <%= product.text_field :stock %>
-    <br>
-
-    <%= product.submit '投稿' %>
- 
+<% if flash[:notice] %>
+       <p class="alert alert-success"><%= flash[:notice] %></p>
 <% end %>
+
+
+<% if flash[:warning] %>
+       <p class="alert alert-success"><%= flash[:warning] %></p>
+<% end %>
+
+
+<br>
+<br>
+<div class="col-md-offset-4">
+    <%= form_for(@product) do |product| %>
+        <div id="img">
+            <label>ジャケット画像</label>
+            <%= product.attachment_field :music_image %>
+        </div>
+        <br>
+
+        <div class="attr">
+            <label>タイトル</label>
+            <%= product.text_field :title, class: "form" %>
+            <br>
+
+            <label>かな</label>
+            <%= product.text_field :kana, class: "form" %>
+            <br>
+
+            <label>価格</label>
+            <%= product.text_field :price, class: "form" %>
+            <br>
+            <!-- アーティストの入力方法はより良いものに変更予定 -->
+            <label>アーティスト</label>
+            <%= product.collection_select :artist_id, Artist.all, :id, :artist_name, { include_blank: true}, class: "form" %>
+            <br>
+
+            <label>レーベル</label>
+            <%= product.collection_select :label_id, Label.all, :id, :label_name, { include_blank: true}, class: "form" %>
+            <br>
+
+            <label>ジャンル</label>
+            <%= product.collection_select :genre_id, Genre.all, :id, :genre_name, { include_blank: true}, class: "form" %>
+            <br>
+
+            <label>シーン</label>
+            <%= product.collection_select :scene_id, Scene.all, :id, :scene_name, { include_blank: true}, class: "form" %>
+            <br>
+
+            <!-- カレンダーで入力-->
+           <label>発売日</label>
+            <%= product.date_field :release_date, class: "form" %>
+            <br>
+
+           <label>在庫数</label>
+            <%= product.text_field :stock, class: "form" %>
+            <br>
+
+            <%= product.submit '登録', class: "" %>
+             <br>
+              <br>
+            <%= link_to '戻る', admins_top_path %>
+
+        </div>
+
+    <% end %>
+<%= link_to "戻る", admins_top_path %>
+</div>
+
+<style>
+    h1  {
+        text-align: center;
+    }
+    #img{
+        margin-left: 15px;
+    }
+
+    .attr{
+        text-align: right;
+        width: 250px;
+    }
+
+
+    .label{
+        display: inline-block;
+        width: 100px;
+    }
+
+    .form{
+
+        width: 130px;
+    }
+</style>
