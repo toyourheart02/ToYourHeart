@@ -1,15 +1,19 @@
 <!-- ログイン中のユーザのカート内一覧を表示 -->
-<h1>カート内商品</h1>
-<br>
-<% if flash[:notice] %>
-<p class="alert alert-success"><%= flash[:notice] %></p>
-<% end %>
 
-<% if @products.length == 0 %>
-<h4>カート内に商品はありません</h4>
-<!-- 件数が０のときにフッタが上にきてしまうのを防ぐためのdiv -->
-<div class="space"></div>
-<% end %>
+	<h1>カート内商品</h1>
+	<br>
+	<% if flash[:notice] %>
+	<p class="alert alert-success"><%= flash[:notice] %></p>
+	<% end %>
+	<% if flash[:warning] %>
+	<p class="alert alert-success"><%= flash[:warning] %></p>
+	<% end %>
+
+	<% if @products.length == 0 %>
+	<h4>カート内に商品はありません</h4>
+	<!-- 件数が０のときにフッタが上にきてしまうのを防ぐためのdiv -->
+	<!-- <div class="space"></div> -->
+	<% end %>
 
 <div class="cart col-md-offset-2">
 	<% @products.each do |product| %>
@@ -22,12 +26,13 @@
 			<p><%= product.title %></p>
 			<p><%= product.artist.artist_name %></p>
 			<p><%= product.price %> 円</p>
+			<p>在庫数：<%= product.stock %> 個</p>
 		</div>
 		<!-- 該当する商品の注文個数をDBから引っ張る -->
 		<% quantity = product.carts.find_by(user_id: current_user.id).quantity %>
-		<% @cart = product.carts.find_by(user_id: current_user.id) %>
 
 		<!-- 個数の選択タブ　デフォルトの値をquantityにする -->
+		<% @cart = product.carts.find_by(user_id: current_user.id) %>
 		<div class="product-status col-md-3">
 			<%= form_for(@cart) do |f| %>
 				<%= f.select :quantity, [[1,1], [2,2], [3,3], [4,4], [5,5], [6,6], [7,7], [8,8], [9,9]] ,:selected => quantity %>
@@ -43,12 +48,23 @@
 	<% end %>
 </div>
 
-<!--会計処理  -->
-<% if @products.length != 0 %>
-<%= link_to '会計へ進む' , class: "" %>
-<% end %>
+<div class="orderbtn col-md-12">
+	<!--会計処理リンクはカート内に商品があるときのみ表示  -->
+	<% if @products.length != 0 %>
+	<%= link_to '会計へ進む',new_order_path , class: "neworderbtn btn btn-default" %>
+	<% end %>
+</div>
 
 <style >
+h1{
+	text-align: center;
+}
+
+h4{
+	margin-top: 100px;
+	text-align: center;
+}
+
 .space{
 	height: 200px;
 }
@@ -60,7 +76,7 @@
 .product-status{
 	font-size: 16px;
 	height: 200px;
-	padding-top: 30px;
+	padding-top: 10px;
 }
 .product-status p{
 	margin-bottom: 30px;
@@ -71,11 +87,20 @@
 }
 
 .cart_update{
-	margin-top: 10px;
+	margin-top: 15px;
 	margin-bottom: 20px;
 }
 
 .cart_delete{
-	margin-top: 110px;
+	margin-top: 90px;
+}
+
+.orderbtn{
+	margin-top: 50px;
+	text-align: center;
+}
+
+.neworderbtn{
+	width: 40%;
 }
 </style>

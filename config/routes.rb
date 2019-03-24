@@ -1,18 +1,25 @@
 Rails.application.routes.draw do
+  devise_for :users
 
+  
   devise_for :admins
   get 'master/new'
 
-  devise_for :users
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'products' => 'products#index'
   root 'products#index'
 
   get 'admins/top'
+  get 'admins/products' => 'admins#productindex'
+  delete 'admins/products/:id' => 'admins#productdestroy', as: 'admins_destroy'
+
+
   get 'admins' => 'admins#index'
   get 'admins/:id' => 'admins#usershow', as: 'admins_usershow'
   patch 'admins/:id' => 'admins#userupdate', as: 'admins_userupdate'
   get 'admins/:id/edit' => 'admins#useredit', as: 'admins_useredit'
+  delete 'admins/:id/destroy' => 'admins#userdestroy', as: 'admins_userdestroy'
 
   post 'artists' => 'artists#create'
   get 'artist' => 'master#new'
@@ -43,15 +50,23 @@ Rails.application.routes.draw do
 
   post 'products/sort' => 'products#sort', as: 'products_sort'
 
-  resources :users, only: [:show, :index, :edit, :update]
+  resources :users, only: [:show, :index, :edit, :update, :destroy]
   resources :carts, only: [:index, :destroy, :update]
   get 'carts/create' => 'carts#create', as: 'carts_create'
+
 
   resources :favorites, only: [:index, :destroy]
   get 'favrites/create' => 'favorites#create', as: 'favorites_create'
   resources :product_musics, only: [:edit, :destroy]
   get 'products/:id/product_musics/new' => 'product_musics#new', as: 'new_product_music'
   post 'products/:id/product_musics' => 'product_musics#create', as: 'product_musics'
+
+
+  resources :orders, only: [:new, :create, :index, :destroy,]
+  resources :destinations, only: [:create, :destroy,]
+
+  # resources :order_products, only: [:create, :destroy,]
+
 
 end
 
