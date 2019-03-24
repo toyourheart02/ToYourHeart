@@ -16,11 +16,6 @@ class UsersController < ApplicationController
 	  	@user = User.find(params[:id])
 	  	@orders = Order.where(user_id: @user.id).reverse_order
 		@orderproducts = OrderProduct.all
-
-	  	# @products = []
-	  	# @orders.each do |order|
-	  	# 	@products.push(OrderProduct.where(order_id: order.id))
-	  	# end
   	end
 
     def edit

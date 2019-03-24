@@ -29,6 +29,8 @@ class AdminsController < ApplicationController
 
 	def usershow
 		@user = User.find(params[:id])
+		@orders = Order.where(user_id: @user.id).reverse_order
+		@orderproducts = OrderProduct.all
 	end
 
 	def useredit
