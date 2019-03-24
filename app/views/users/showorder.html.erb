@@ -13,6 +13,7 @@
 		<p><strong>注文番号：<%= "%08d" % order.id %></strong></p>
 		<!-- それぞれカラムの値によって表示を変更 -->
 		<label>配送ステータス</label>
+
 			<% case order.status
 				when 0 %>
 					<span id="status1" class="status">受付中</span>

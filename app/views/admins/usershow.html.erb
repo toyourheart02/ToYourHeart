@@ -60,14 +60,10 @@
 		<p><strong>注文番号：<%= "%08d" % order.id %></strong></p>
 		<!-- それぞれカラムの値によって表示を変更 -->
 		<label>配送ステータス</label>
-			<% case order.status
-				when 0 %>
-					<span id="status1" class="status">受付中</span>
-				<%when 1%>
-  					<span id="status2" class="status">配送中</span>
-  				<%when 2%>
-  					<span id="status3" class="status">配送済</span>
-  			<% end %>
+			<%= form_for order do |f|%>
+				<%= f.select :status, [["受付中", "0"],["配送中", "1"],["配送済", "2"]],:selected=>order.status %>
+				<%= f.submit '更新'%>
+			<% end %>
   			<br>
   			<br>
 		<label>支払い方法</label>
@@ -135,9 +131,6 @@
 		overflow: hidden;
 	}
 
-
-
-	
 
 	.left-content{
 		width: 30%;

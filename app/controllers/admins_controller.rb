@@ -16,13 +16,6 @@ class AdminsController < ApplicationController
 	end
 
 
-
-
-
-
-
-
-
 	def index
 		@users = User.all.order(user_kana: "ASC")
 	end

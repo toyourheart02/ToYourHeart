@@ -18,7 +18,7 @@
 				<div class="">
 
 					<%= link_to products_show_path(product.id) do %>
-						<%= attachment_image_tag product, :music_image, :fill, 200, 200, fallback: "no_image.jpg",class: "slideimg" %>
+						<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %>
 					<% end %>
 					
               		<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->

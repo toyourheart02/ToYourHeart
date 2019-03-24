@@ -55,8 +55,7 @@ class OrdersController < ApplicationController
 
 	# order, order_productsテーブルから削除。
 	def destroy
-		binding.pry
-		orders = Order.find(params[:id])
+		orders = Order.find_by(params[:id])
 		orderproducts = OrderProduct.where(order_id: orders.id)
 		orderproducts.each do |orderproduct|
 			orderproduct.destroy
@@ -67,8 +66,15 @@ class OrdersController < ApplicationController
 		redirect_to showorder_path
 	end
 
+	# ステータス変更
+	def update
+		order = Order.find(params[:id])
+  		order.update(order_params)
+  		redirect_to admins_path
+	end
+
 	private
 	def order_params
-		params.require(:order).permit(:pay)
+		params.require(:order).permit(:pay, :status)
 	end
 end
