@@ -12,23 +12,25 @@
 		</tr>
 	</thead>
 
-	<tbody id="musicTablebody">
-		<%= form_for(@product_music) do |f| %>
-		<% 5.times do |times| %>
-		<tr id="musi_row">
-			<td id="disc_num">
+	<tbody>
+		<%= form_for(@product, :url => update_product_path ) do |form| %>
+
+		<%= form.fields_for :product_musics do |f| %>
+
+		<tr>
+			<td>
 				<%= f.select :disc_num, [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6,],[7,7],[8,8],[9,9],[10,10],[11,11],[12,12],[13,13],[14,14],[15,15]] %>
 			</td>
-			<td id="track_num">
+			<td>
 				<%= f.select :track_num, [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6,],[7,7],[8,8],[9,9],[10,10],[11,11],[12,12],[13,13],[14,14],[15,15]] %>
 			</td>
-			<td id="music_name">
+			<td>
 				<%= f.collection_select :music_id, Music.all, :id, :music_name, :include_blank => true %>
 			</td>
 			<td></td>
 		</tr>
 		<% end %>
-		<%= f.submit '登録', class: "cart_update btn btn-default btn-sm" %>
+		<%= form.submit '登録', class: "cart_update btn btn-default btn-sm" %>
 		<% end %>
 	</tbody>
 </table>
