@@ -12,8 +12,19 @@ $('.center').slick({
   centerMode: true,
   centerPadding: '0px',
   infinite: true,
-  speed: 300,
+  // speed: 300,
   slidesToShow: 3,
+   // arrows: false,  // ←この階層
+
+  autoplaySpeed: 0, //待ち時間を０に
+  speed: 8000, // スピードをゆっくり
+  swipe: false, // 操作による切り替えはさせない
+  cssEase: 'linear', // 切り替えイージングを'linear'に
+  // 以下、操作後に止まってしまう仕様の対策
+  pauseOnFocus: false,
+  // pauseOnHover: false,
+  pauseOnDotsHover: false,
+  // slidesToScroll: 5
 
 
  
