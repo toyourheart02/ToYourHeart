@@ -29,10 +29,10 @@
 
 	<div class="panel panel-default disc_form">
   		<div class="panel-body">
-    		<p>Disc1</p>
-    		<p>01：</p>
-    		<p>02：</p>
-    		<p>03：</p>
+  			<% @product.product_musics.each do |product_music| %>
+  				<p><%= product_music.disc_num %></p>
+    			<p><%= product_music.track_num %> : <%= product_music.music.music_name %></p>
+    		<% end %>
   		</div>
 	</div>
 </div>
