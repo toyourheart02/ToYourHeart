@@ -1,7 +1,21 @@
 class ProductsController < ApplicationController
 	def index
   	# config/initializers/kaminari_configで1ページの表示件数20件に設定
+    @slideproducts = Product.page(params[:page]).reverse_order
+
+        # if params[:q]
+        #   @search = Product.search(params[:q])
+        #   # @products = @search.result
+        #   @products = Product.where(title: params[:q][:title]).or(Product.where(:genre_id params[:q][:genre_id]))
+        # else
+
+        #   @products = Product.page(params[:page]).reverse_order
+        #   @search = Product.search(params[:q])
+        # end
         @products = Product.page(params[:page]).reverse_order
+
+        @search = Product.ransack(params[:q])
+        @result = @search.result.page(params[:page])
 	end
 
     def sort

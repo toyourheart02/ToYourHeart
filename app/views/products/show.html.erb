@@ -13,7 +13,7 @@
 
 <div class="col-md-4">
 	<div class="">商品名：<%= @product.title %></div>
-	<div class="">アーティスト：</div>
+	<div class="">アーティスト：<%= @product.artist.artist_name %></div>
 	<div class="">価格：<%= @product.price %>円</div>
 	<div class="">レーベル：<%= @product.label.label_name %></div>
 	<div class="">ジャンル：<%= @product.genre.genre_name %></div>
