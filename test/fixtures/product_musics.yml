@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: one
+  disc_num: 1
+  track_num: 1
+  music: one
+
+two:
+  product: two
+  disc_num: 1
+  track_num: 1
+  music: two
