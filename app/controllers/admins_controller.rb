@@ -46,6 +46,14 @@ class AdminsController < ApplicationController
     	end
     end
 
+    # 退会処理：ユーザを論理削除させる 退会処理されたユーザはログインできなくする
+    def userdestroy
+    	user = User.find(params[:id])
+    	user.is_deleted = true
+    	user.save
+    	redirect_to admins_path
+    end
+
 
     private
 
