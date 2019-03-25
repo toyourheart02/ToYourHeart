@@ -27,69 +27,69 @@
       
       <!-- adminでサインインしてない場合の処理 -->
       <% else %>
-        <!-- ロゴをクリックしてもHOMEと同じ動きをするようにする必要あり -->
-        <nav class="col-md-2" id="sitelogo" style="text-align:center"><%= image_tag 'sitelogo.png', :size =>'160x100' %></nav>
+      <!-- ロゴをクリックしてもHOMEと同じ動きをするようにする必要あり -->
+      <nav class="col-md-2" id="sitelogo" style="text-align:center"><%= image_tag 'sitelogo.png', :size =>'160x100' %></nav>
 
-        <nav class="navbar col-md-10">
-          <ul class="" id="user_link">
+      <nav class="navbar col-md-10">
+        <ul class="" id="user_link">
 
-            <!--サインインしていた場合  -->
-            <% if user_signed_in? %>
-            <li id="user_name">
-              <%= current_user.user_name %>
-              <span> 様   </span>
-              <span>ログイン中</span>
-            </li>
+          <!--サインインしていた場合  -->
+          <% if user_signed_in? %>
+          <li id="user_name">
+            <%= current_user.user_name %>
+            <span> 様   </span>
+            <span>ログイン中</span>
+          </li>
 
-            <li class="">
-              <%= link_to user_path(current_user.id), class: "icons mypage" do %>
-              <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
-              <span>マイページ</span>
+          <li class="">
+            <%= link_to user_path(current_user.id), class: "icons mypage" do %>
+            <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
+            <span>マイページ</span>
 
-              <% end %>
-            </li>
-            <li class="">
-              <%= link_to carts_path, class: "icons cart" do %>
-              <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-              <span>カート</span>
-              <% end %>
-            </li>
-            <li class="">
-              <%= link_to favorites_path, class: "favorite icons" do %>
-              <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
-              <span>お気に入り</span>
-              <% end %>
-            </li>
-            <li class="">
-              <%= link_to destroy_user_session_path, method: :delete, class: "logout icons" do %>
-              <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
-              <span>ログアウト</span>
-              <% end %>
-            </li>
-
-            <!--サインインしていなかった場合  -->
-            <% else %>
-            <li class="">
-              <%= link_to new_user_registration_path, class: "sign_up icons" do %>
-              <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-              <span>新規ユーザ登録</span>
-              <% end %>
-            </li>
-            <li class="">
-              <%= link_to user_session_path, class: "sign_in icons" do %>
-              <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
-              <span>ログイン</span>
-              <% end %>
-            </li>
             <% end %>
-          </ul>
+          </li>
+          <li class="">
+            <%= link_to carts_path, class: "icons cart" do %>
+            <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
+            <span>カート</span>
+            <% end %>
+          </li>
+          <li class="">
+            <%= link_to favorites_path, class: "favorite icons" do %>
+            <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
+            <span>お気に入り</span>
+            <% end %>
+          </li>
+          <li class="">
+            <%= link_to destroy_user_session_path, method: :delete, class: "logout icons" do %>
+            <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
+            <span>ログアウト</span>
+            <% end %>
+          </li>
 
-          <ul class="nav navbar-nav" id="site_link">
-            <li><a href="/">HOME</a></li>
-            <li><a href="#">当サイトついて</a></li>
-            <li><a href="#footer">アクセス</a></li>
-            <li><a href="#footer">お問い合わせ</a></li>
-          </ul>
+          <!--サインインしていなかった場合  -->
+          <% else %>
+          <li class="">
+            <%= link_to new_user_registration_path, class: "sign_up icons" do %>
+            <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+            <span>新規ユーザ登録</span>
+            <% end %>
+          </li>
+          <li class="">
+            <%= link_to user_session_path, class: "sign_in icons" do %>
+            <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
+            <span>ログイン</span>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+
+        <ul class="nav navbar-nav" id="site_link">
+          <li><a href="/">HOME</a></li>
+          <li><a href="#">当サイトついて</a></li>
+          <li><a href="#footer">アクセス</a></li>
+          <li><a href="#footer">お問い合わせ</a></li>
+        </ul>
         <% end %>
       </nav>
     </header>

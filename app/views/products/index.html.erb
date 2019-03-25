@@ -1,3 +1,9 @@
+
+<% if flash[:notice] %>
+	<p class="alert alert-success"><%= flash[:notice] %></p>
+<% elsif flash[:warning] %>
+	<p class="alert alert-warning"><%= flash[:warning] %></p>
+<% end %>
 <div class="bg_move">
 <!-- スライドショー -->
 
@@ -21,7 +27,6 @@
 			<!-- 検索バー -->
 
 <div class="search col-md-2">
-	
 
 	<%= search_form_for @search do |f| %>
 		<h3>検索メニュー</h3>
