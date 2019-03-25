@@ -16,7 +16,8 @@ class ProductsController < ApplicationController
 
         @search = Product.ransack(params[:q])
         @result = @search.result.page(params[:page]).reverse_order
-	end
+        @result = Product.page(params[:page]).reverse_order
+  end
 
     def sort
         sortValue = params["sortValue"]
