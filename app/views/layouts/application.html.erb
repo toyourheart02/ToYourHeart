@@ -85,7 +85,7 @@
         </ul>
 
         <ul class="nav navbar-nav" id="site_link">
-          <li><a href="/">HOME</a></li>
+          <li><%= link_to "トップページ", products_path %></li>       
           <li><a href="#">当サイトついて</a></li>
           <li><a href="#footer">アクセス</a></li>
           <li><a href="#footer">お問い合わせ</a></li>
@@ -98,7 +98,19 @@
       <%= yield %>
     </div>
 
+</div>
+
+    <footer id="footer">
+      <div class="container">
+          <div class="col-xs-3 col-xs-offset-9">
+            <h3>アクセス</h3>
+            <p>〒105-8335</p>
+            <p>東京都港区芝3-23-1 セレスティン芝三井ビルディング 12・13階</p>
+          </div>
+           <p class="footer_logo">CopyRight Infratop.inc</p>
+
   </div>
+
 
   <footer id="footer">
     <div class="container">
@@ -128,6 +140,10 @@ body {
 }
 .wrapper {
   flex: 1;
+}
+
+.footer_logo{
+  float: left;
 }
 
 * {
@@ -220,6 +236,68 @@ footer{
   background-color: black;
   color:white;
 }
+
+  
+.wrapper {
+ flex: 1;
+}
+
+  header{
+    height: 120px;
+    width: 100%;
+    background-color: #f8f8f8;
+  }
+
+  #sitelogo_img{
+    text-align: right;
+  }
+
+  #user_name{
+    padding: 15px;
+  }
+
+  #user_link{
+    /*強引なやり方なので左揃えに指定する必要あり*/
+    padding-left: 30%;
+    height: 50px;
+    width: 100%;
+    text-align: right;
+  }
+
+  #user_link li{
+    display: inline;
+  }
+
+
+  #site_link{
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    padding-left: 100px;
+  }
+
+  #site_link li{
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 17px;
+    display: inline;
+  }
+
+
+  .main-content{
+    margin-bottom: 50px;
+    /*height: 1000px;*/
+  }
+
+  footer{
+    /*position: fixed;*/
+    bottom: 0;
+    /*width: 100%;*/
+    height: 200px;
+    background-color: black;
+    color: white;
+  }
 
 
 </style>
