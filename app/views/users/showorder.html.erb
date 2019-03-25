@@ -1,4 +1,6 @@
-<h1>注文履歴</h1>
+<div class="title">
+	<h3>カート内商品</h3>
+</div>
 <% if flash[:notice] %>
        <p class="alert alert-success"><%= flash[:notice] %></p>
 <% end %>
@@ -13,6 +15,7 @@
 		<p><strong>注文番号：<%= "%08d" % order.id %></strong></p>
 		<!-- それぞれカラムの値によって表示を変更 -->
 		<label>配送ステータス</label>
+
 			<% case order.status
 				when 0 %>
 					<span id="status1" class="status">受付中</span>
@@ -91,6 +94,14 @@
 
 
 	
+.title{
+	width: 80%;
+    padding: 0.5em 1em;
+    margin: 0 10%;
+    color: black;
+    background: white;
+    border-bottom: solid 10px black;
+}
 
 	.left-content{
 		width: 30%;
@@ -105,7 +116,6 @@
 	.status {
 	display: inline-block;
 	padding: 5px 5px;
-	/*background-color: #ffc0cb;*/
 	border-radius: 3px;
 	color: #fff;
 	font-size: 14px;

@@ -14,16 +14,7 @@ autoplaySpeed: 0, //待ち時間を０に
   pauseOnFocus: false,
   pauseOnHover: false,
   pauseOnDotsHover: false,
-
-arrows: false,
-
-
-
-
-
-
-
-
+  arrows: false,
  
   responsive: [
     {

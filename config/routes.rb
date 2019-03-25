@@ -59,12 +59,12 @@ Rails.application.routes.draw do
 
   resources :favorites, only: [:index, :destroy]
   get 'favrites/create' => 'favorites#create', as: 'favorites_create'
-  resources :product_musics, only: [:edit, :destroy]
-  get 'products/:id/product_musics/new' => 'product_musics#new', as: 'new_product_music'
-  post 'products/:id/product_musics' => 'product_musics#create', as: 'product_musics'
+  # resources :product_musics, only: [:edit, :destroy]
+  # get 'products/:id/product_musics/new' => 'product_musics#new', as: 'new_product_music'
+  # post 'products/:id/product_musics' => 'product_musics#create', as: 'product_musics'
 
 
-  resources :orders, only: [:new, :create, :index, :destroy,]
+  resources :orders, only: [:new, :create, :index, :destroy, :update]
   resources :destinations, only: [:create, :destroy,]
 
   # resources :order_products, only: [:create, :destroy,]

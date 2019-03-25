@@ -1,6 +1,10 @@
 
-
-
+<% if flash[:notice] %>
+	<p class="alert alert-success"><%= flash[:notice] %></p>
+<% elsif flash[:warning] %>
+	<p class="alert alert-warning"><%= flash[:warning] %></p>
+<% end %>
+<div class="bg_move">
 <!-- スライドショー -->
 
 <div id="products", class="center">
@@ -8,14 +12,14 @@
 
 	<div class="img-width">
 
+
 		<%= link_to products_show_path(product.id) do %>
 		<%= attachment_image_tag product, :music_image, :fill, 300, 300, fallback: "no_image.jpg",class: "slideimg" %>
 		<% end %>
-
+			
 		<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
 		<% if (Date.today - product.release_date) < 7 %>
 		<% end %>
-
 	</div>
 	<% end %>
 </div>
@@ -23,11 +27,9 @@
 <!-- 検索メニュー -->
 
 <div class="search col-md-2">
-	
 
 	<%= search_form_for @search do |f| %>
 	<h4>検索メニュー</h4>
-
 
 	<div class="form-group">
 		<div class="form-box">
@@ -36,10 +38,6 @@
 			<%= f.collection_select :artist_id_eq, Artist.all, :id, :artist_name, { include_blank: true} ,class: "form"%><br>
 			<%= f.collection_select :genre_id_eq, Genre.all, :id, :genre_name, { include_blank: true} ,class: "form" %><br>
 			<%= f.collection_select :scene_id_eq, Scene.all, :id, :scene_name, { include_blank: true} ,class: "form" %><br>
-
-
-
-
 
 			<div class="actions glyphicon glyphicon-zoom-in">
 				<%= f.submit "検索",class: "kensaku" %>
@@ -56,11 +54,14 @@
 </div>
 
 <div class="container">
-
-	<div class="col-md-8 col-md-offset-1">
-		<h1 class="product_title">商品一覧</h1>
+	<div class="row">
+	<div class="title">
+		<h3>商品一覧</h3>
+	</div>
+		<div class="col-md-9 col-md-offset-1">
 
 		<!-- 並べ替えプルダウン -->
+
 
 		<table border="2" width="150"  class="sort_box" >
 		　<tr>
@@ -73,17 +74,13 @@
 	
 	</div>
 
+			<!-- 商品一覧（ransack） -->
+			<div id="products">
 
+			<% @result.each do |product| %>
+				<% if product.is_deleted == false %>
+				<div class="product_index">
 
-
-
-
-
-
-<!-- 商品一覧（ransack） -->
-<div id="products">
-
-	<% @result.each do |product| %>
 
 	<div class="product_index">
 
@@ -120,14 +117,11 @@
 		</div>
 		<% end %>
 
-	</div>
-	<% end %>
-</div>
+				</div>
 
-<!-- カート追加ボタン -->
-<!-- ページャ -->
-
-
+<% end %>
+				<% end %>
+			</div>
 </div>
 <!-- ページャ -->
 
@@ -138,11 +132,6 @@
 </div>
 
 </div>
-
-
-
-
-
 
 <script>
 	$(function(){
@@ -174,7 +163,6 @@
 </script>
 
 <style>
-
 .sort_box{
 
 
@@ -200,7 +188,6 @@
 }
 
 .search{
-
 	margin-top: 10px;
 }
 
@@ -243,7 +230,6 @@
 .container {
 	width: 1000px;
 }
-
 
 .product_title {
 	/*text-align: center;*/
