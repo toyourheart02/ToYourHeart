@@ -16,11 +16,23 @@
 <body>
   <div class="wrapper">
     <header>
+      <!-- adminでサインインしていた場合は管理者用ヘッダ -->
+      <% if admin_signed_in? %>
+      <nav class="col-md-2" id="sitelogo" style="text-align:center"><%= image_tag 'sitelogo.png', :size =>'160x100' %></nav>
+      <div id="adminheader">
+        <%= current_admin.email %><span>ログイン中</span>
+        <br>
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "" %>
+      </div>
+      
+      <!-- adminでサインインしてない場合の処理 -->
+      <% else %>
       <!-- ロゴをクリックしてもHOMEと同じ動きをするようにする必要あり -->
       <nav class="col-md-2" id="sitelogo" style="text-align:center"><%= image_tag 'sitelogo.png', :size =>'160x100' %></nav>
 
       <nav class="navbar col-md-10">
-        <ul class="nav navbar-nav" id="user_link">
+        <ul class="" id="user_link">
+
           <!--サインインしていた場合  -->
           <% if user_signed_in? %>
           <li id="user_name">
@@ -30,26 +42,26 @@
           </li>
 
           <li class="">
-            <%= link_to user_path(current_user.id), class: "mypage" do %>
+            <%= link_to user_path(current_user.id), class: "icons mypage" do %>
             <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
             <span>マイページ</span>
 
             <% end %>
           </li>
           <li class="">
-            <%= link_to carts_path class: "cart" do %>
+            <%= link_to carts_path, class: "icons cart" do %>
             <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
             <span>カート</span>
             <% end %>
           </li>
           <li class="">
-            <%= link_to favorites_path, class: "favorite" do %>
-            <i class="glyphicon glyphicon-heart-empty" aria-hidden="true"></i>
+            <%= link_to favorites_path, class: "favorite icons" do %>
+            <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
             <span>お気に入り</span>
             <% end %>
           </li>
           <li class="">
-            <%= link_to destroy_user_session_path, method: :delete, class: "logout" do %>
+            <%= link_to destroy_user_session_path, method: :delete, class: "logout icons" do %>
             <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
             <span>ログアウト</span>
             <% end %>
@@ -58,13 +70,13 @@
           <!--サインインしていなかった場合  -->
           <% else %>
           <li class="">
-            <%= link_to new_user_registration_path, class: "sign_up" do %>
+            <%= link_to new_user_registration_path, class: "sign_up icons" do %>
             <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
             <span>新規ユーザ登録</span>
             <% end %>
           </li>
           <li class="">
-            <%= link_to user_session_path, class: "sign_in" do %>
+            <%= link_to user_session_path, class: "sign_in icons" do %>
             <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
             <span>ログイン</span>
             <% end %>
@@ -73,11 +85,12 @@
         </ul>
 
         <ul class="nav navbar-nav" id="site_link">
-          <li><a href="/">HOME</a></li>
+          <li><%= link_to "トップページ", products_path %></li>       
           <li><a href="#">当サイトついて</a></li>
           <li><a href="#footer">アクセス</a></li>
           <li><a href="#footer">お問い合わせ</a></li>
         </ul>
+        <% end %>
       </nav>
     </header>
 
@@ -89,16 +102,28 @@
 
     <footer id="footer">
       <div class="container">
-        <div class="row">
           <div class="col-xs-3 col-xs-offset-9">
             <h3>アクセス</h3>
-            <p>CopyRight Infratop.inc</p>
+            <p>〒105-8335</p>
+            <p>東京都港区芝3-23-1 セレスティン芝三井ビルディング 12・13階</p>
           </div>
+           <p class="footer_logo">CopyRight Infratop.inc</p>
 
+  </div>
+
+
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-3 col-xs-offset-9">
+          <h3>アクセス</h3>
+          <p>CopyRight Infratop.inc</p>
         </div>
+
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 </body>
 </html>
 
@@ -116,6 +141,10 @@ body {
   flex: 1;
 }
 
+.footer_logo{
+  float: left;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -128,14 +157,86 @@ body {
   clear: both;
 }
 
-html {
- height: 100%;
+
+header{
+  height: 140px;
+  width: 100%;
+  background-color: #f8f8f8;
 }
-body {
- min-height: 100%;
- display: flex;
- flex-direction: column;
+
+#adminheader{
+  font-size: 16px;
+  padding-top: 80px;
+  padding-right: 30px;
+  text-align: right;
 }
+
+#sitelogo_img{
+  text-align: right;
+}
+
+#user_name{
+  padding: 15px;
+}
+
+#user_link{
+  padding-top: 20px;
+  font-size: 16px;
+  height: 50px;
+  width: 100%;
+  text-align: right;
+}
+
+#user_link li{
+  display: inline;
+}
+
+
+#site_link{
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  padding-left: 100px;
+}
+
+#site_link li{
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 17px;
+  display: inline;
+}
+
+
+.main-content{
+  margin-bottom: 50px;
+  /*height: 1000px;*/
+}
+
+.icons{
+  padding-right: 30px;
+  /*margin-right: 30px;*/
+  /*margin-left: 30px;*/
+}
+.title{
+  width: 80%;
+  padding: 0.5em 1em;
+  margin: 0 10%;
+  color: black;
+  background: white;
+  border-bottom: solid 10px black;
+}
+
+footer{
+  /*position: fixed;*/
+  bottom: 0;
+  /*width: 100%;*/
+  height: 100px;
+  background-color: black;
+  color:white;
+}
+
+  
 .wrapper {
  flex: 1;
 }
@@ -192,9 +293,9 @@ body {
     /*position: fixed;*/
     bottom: 0;
     /*width: 100%;*/
-    height: 100px;
+    height: 200px;
     background-color: black;
-    color:white;
+    color: white;
   }
 
 

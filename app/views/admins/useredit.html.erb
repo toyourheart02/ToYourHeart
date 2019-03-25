@@ -1,4 +1,6 @@
-<h1>ユーザ情報編集ページ</h1>
+<div class="title">
+	<h3>ユーザ編集</h3>
+</div>
 
 <br>
 
@@ -7,7 +9,7 @@
 <% end %>
 
 <%= form_for(@user,url: admins_userupdate_path) do |user| %>
-	<div class="col-md-3">
+	<div class="col-md-2 col-md-offset-2">
 		<label>プロフィール画像</label>
 		<%= attachment_image_tag @user, :profile_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
 		<%= user.attachment_field :profile_image, class: "" %><br>
@@ -40,10 +42,8 @@
 			</tbody>
 		</table>
 		<%= user.submit "更新" %>
+		<br><br><br><br>
+		<%= link_to "戻る", :back %>
 	</div>
-
 <% end %>
 
-<div class="col-md-10">
-	<%= link_to "戻る", :back %>
-</div>

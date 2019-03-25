@@ -1,14 +1,15 @@
-<h1>お気に入り</h1>
+<div class="title">
+	<h3>お気に入り</h3>
+</div>
 <br>
 
 <% if @products.length == 0 %>
-<h4>お気に入り商品はありません</h4>
-<!-- 件数が０のときにフッタが上にきてしまうのを防ぐためのdiv -->
-<div class="space"></div>
-<% end %>
-
+	<h4>お気に入り商品はありません</h4>
+	<% end %>
 <div class="col-md-8 col-md-offset-2">
+
 	<% @products.each do |product| %>
+
 		<div class="product_index">
 			<%= link_to products_show_path(product.id) do %>
 				<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %><br>
@@ -24,9 +25,12 @@
 	<% end %>
 </div>
 
-
-
 <style>
+
+h4{
+	margin-top: 50px;
+	text-align: center
+}
 .space{
 	height: 200px;
 }

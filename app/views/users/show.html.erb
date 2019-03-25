@@ -1,4 +1,6 @@
-<h1>マイページ</h1>
+<div class="title">
+	<h3>マイページ</h3>
+</div>
 
 <% if flash[:notice] %>
        <p class="alert alert-success"><%= flash[:notice] %></p>
@@ -53,6 +55,14 @@
 
 	h1{
 		text-align: center;
+	}
+	.title{
+	width: 80%;
+    padding: 0.5em 1em;
+    margin: 0 10%;
+    color: black;
+    background: white;
+    border-bottom: solid 10px black;
 	}
 	.link{
 		margin-top: 100px;
