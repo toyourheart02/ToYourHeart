@@ -22,7 +22,7 @@
 	<div class="">ジャンル：<%= @product.genre.genre_name %></div>
 	<div class="">総レビュー数：<%= link_to "#product_review" do %>
 		<%= @product.reviews.count %><% end %>件</div>
-	<%= link_to "カートに入れる", "#", class: "btn btn-default btn-sm" %>
+	<%= link_to "カートに入れる", carts_create_path(product_id: @product.id),remote: true, class: "btn btn-default btn-sm" %>
 
 	<br>
 	<br>

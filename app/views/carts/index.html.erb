@@ -12,8 +12,10 @@
 	<% end %>
 
 	<% if @products.length == 0 %>
-	<h4>カート内に商品はありません</h4>
+	<div class="orderlink col-md-12">
+	<h4>カート内に商品はありません</h4><br><br><br><br>
 	<%= link_to '注文履歴一覧へ', showorder_path(current_user), class: "orderlink" %>
+	</div>
 	<% end %>
 
 <div class="cart col-md-offset-2">

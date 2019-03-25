@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
 		order.user_id = current_user.id
 		#配送先は仮で1番目が選ばれる
 		dests = current_user.destinations
-	    order.destination_id = dests[0].id
+	    # order.destination_id = dests[0].id
 	    # payはフォームから取得済み
 	    order.save
 
@@ -75,6 +75,6 @@ class OrdersController < ApplicationController
 
 	private
 	def order_params
-		params.require(:order).permit(:pay, :status)
+		params.require(:order).permit(:pay, :status, :destination_id)
 	end
 end
