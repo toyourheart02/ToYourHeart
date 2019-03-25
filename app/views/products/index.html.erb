@@ -1,19 +1,17 @@
 <% if flash[:notice] %>
-	<p class="alert alert-success"><%= flash[:notice] %></p>
+<p class="alert alert-success"><%= flash[:notice] %></p>
 <% elsif flash[:warning] %>
-	<p class="alert alert-warning"><%= flash[:warning] %></p>
+<p class="alert alert-warning"><%= flash[:warning] %></p>
 <% end %>
 <!-- スライドショー -->
 
 <div id="products", class="center">
 	<% @slideproducts.each do |product| %>
-
 	<div class="img-width">
-
 		<%= link_to products_show_path(product.id) do %>
 		<%= attachment_image_tag product, :music_image, :fill, 300, 300, fallback: "no_image.jpg",class: "slideimg" %>
 		<% end %>
-			
+
 		<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
 		<% if (Date.today - product.release_date) < 7 %>
 		<% end %>
@@ -24,10 +22,8 @@
 <!-- 検索メニュー -->
 
 <div class="search col-md-2">
-
 	<%= search_form_for @search do |f| %>
 	<h4>検索メニュー</h4>
-
 	<div class="form-group">
 		<div class="form-box">
 			<%= f.text_field :title_cont,:placeholder => "商品名" ,class: "form"%>
@@ -38,95 +34,36 @@
 
 			<div class="actions glyphicon glyphicon-zoom-in">
 				<%= f.submit "検索",class: "kensaku" %>
-					
 			</div>
-
 		</div>
-
 	</div>
-
-
 	<% end %>
-
 </div>
 
 <div class="container">
 	<div class="row">
-	<div class="title">
-		<h3>商品一覧</h3>
-	</div>
+		<div class="title">
+			<h3>商品一覧</h3>
+		</div>
 		<div class="col-md-9 col-md-offset-1">
+			<!-- 並べ替えプルダウン -->
+			<table border="2" width="150"  class="sort_box" >
+				　<tr>
+					　　<th><%= sort_link(@search, :price, '値段順') %></th>
+					　　<th><%= sort_link(@search, :release_date, '発売日順') %></th>
+				　</tr>
+			</table>
+		</div>
 
-		<!-- 並べ替えプルダウン -->
+<!-- 商品一覧（ransack） -->
+<div id="products">
+	<% @result.each do |product| %>
 
-
-		<table border="2" width="150"  class="sort_box" >
-		　<tr>
-		　　<th><%= sort_link(@search, :price, '値段順') %></th>
-		　　<th><%= sort_link(@search, :release_date, '発売日順') %></th>
-		　</tr>
-		　</td>
-		　</tr>
-		</table>
-	
-	</div>
-
-			<!-- 商品一覧（ransack） -->
-			<div id="products">
-
-			<% @result.each do |product| %>
-				<% if product.is_deleted == false %>
-				<div class="product_index">
-					<%= link_to products_show_path(product.id) do %>
-						<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %>
-					<% end %>
-					<%= link_to products_show_path(product.id) do %>
-
-						<p><%= product.title.truncate(15) %></p>
-					<% end %>
-					<p><%= product.artist.artist_name %></p>
-
-					<!-- カートアイコンをカート追加のリンクにする -->
-					<!-- カートへの追加は非同期処理で行う　-->
-					<% if user_signed_in? %>
-							<div class="carticon">
-								<%= link_to carts_create_path(product_id: product.id),remote: true do %>
-								<i class="cart-icon glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-								<% end %>
-							</div>
-					<% end %>
-
-						<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
-						<% if (Date.today - product.release_date) < 7 %>
-						<span class="new">New</span>
-						<% end %>
-
-						<% if product.stock == 0 %>
-						<span class="soldout">Soldout</span>
-						<% end %>
-
-						<!-- お気に入りの追加・削除をアイコンのクリックで変更できるようにするか検討中 -->
-          
-						<% if product.favorited_by?(current_user) %>
-							<%= link_to favorite_path(product), :method => :delete, remote: true do %>
-								<i class="glyphicon glyphicon-heart delete-icon" aria-hidden="true" style="color: red;"></i>
-	                		<% end %>
-
-						<% else %>
-							<%= link_to favorites_create_path(product_id: product.id), remote: true, class: "" do %>
-								<i class="glyphicon glyphicon-heart-empty favorite-icon" aria-hidden="true"></i>
-							<% end %>
-						<% end %>
-				<% end %>
-				</div>
-				<% end %>
-			</div>
-
+	<div class="product_index">
 		<%= link_to products_show_path(product.id) do %>
 		<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %>
 		<% end %>
 		<%= link_to products_show_path(product.id) do %>
-
 		<p><%= product.title.truncate(15) %></p>
 		<% end %>
 		<p><%= product.artist.artist_name %></p>
@@ -134,62 +71,65 @@
 		<!-- カートアイコンをカート追加のリンクにする -->
 		<!-- カートへの追加は非同期処理で行う　-->
 		<% if user_signed_in? %>
-
 		<div class="carticon">
 			<%= link_to carts_create_path(product_id: product.id),remote: true do %>
 			<i class="cart-icon glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
 			<% end %>
 		</div>
 		<% end %>
+
 		<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
 		<% if (Date.today - product.release_date) < 7 %>
 		<span class="new">New</span>
 		<% end %>
 
-		<!-- お気に入りの追加・削除をアイコンのクリックで変更できるようにするか検討中 -->
-		<% if user_signed_in? %>
-		<div class="favoriteicon">
-			<%= link_to favorites_create_path(product_id: product.id), remote: true do %>
-			<i class="favorite-icon glyphicon glyphicon-heart" aria-hidden="true"></i>
-			<% end %>
-		</div>
+		<% if product.stock == 0 %>
+		<span class="soldout">Soldout</span>
 		<% end %>
 
-				</div>
-
-<% end %>
+		<!-- お気に入りの追加・削除をアイコンのクリックで変更できるようにするか検討中 -->
+		<% if user_signed_in? %>
+			<% if product.favorited_by?(current_user) %>
+				<%= link_to favorite_path(product), :method => :delete, remote: true do %>
+				<i class="glyphicon glyphicon-heart delete-icon" aria-hidden="true" style="color: red;"></i>
 				<% end %>
-			</div>
+			<% else %>
+				<%= link_to favorites_create_path(product_id: product.id), remote: true, class: "" do %>
+				<i class="glyphicon glyphicon-heart-empty favorite-icon" aria-hidden="true"></i>
+				<% end %>
+			<% end %>
+		<% end %>
+	</div>
+
+	<% end %>
+</div>
+</div>
 </div>
 <!-- ページャ -->
 
 <div class="col-md-10 col-md-offset-1">
 	<%= paginate @products, class: "paginate" %>
 </div>
-</div>
-</div>
-
-</div>
 
 <script>
-$(function(){
-	$("body").on("click", ".favorite-icon", function(){
-		swal('お気に入りに登録しました！');
-		$(this).attr("class","glyphicon glyphicon-heart delete-icon")
-		$(this).css("color", "red")
-	});
-	$("body").on("click", ".delete-icon", function(){
-		swal('お気に入りから削除しました！')
-		$(this).attr("class","glyphicon glyphicon-heart-empty favorite-icon")
-	});
-
-	$("body").on("click", ".cart-icon", function(){
-		swal({
-			title: "カートに追加しました！",
-			icon: "success",
-			button: "OK",
+	$(function(){
+		$("body").on("click", ".favorite-icon", function(){
+			swal('お気に入りに登録しました！');
+			$(this).attr("class","glyphicon glyphicon-heart delete-icon")
+			$(this).css("color", "red")
 		});
-	});
+		$("body").on("click", ".delete-icon", function(){
+			swal('お気に入りから削除しました！')
+			$(this).attr("class","glyphicon glyphicon-heart-empty favorite-icon")
+		});
+
+		$("body").on("click", ".cart-icon", function(){
+			swal({
+				title: "カートに追加しました！",
+				icon: "success",
+				button: "OK",
+			});
+		});
 
 	// 	$("#sorting").on("change", function(){
 	// 		console.log($(this).val())
@@ -221,11 +161,6 @@ $(function(){
 </script>
 
 <style>
-.sort_box{
-
-
-}
-
 .img-width{
 	margin: 11px;
 	border-style: solid;
@@ -236,9 +171,6 @@ $(function(){
 	border-bottom: solid 3px;
 	background-color: #f2f2f2;
 	width: 147px;
-
-
-
 }
 
 .sort_box{
@@ -252,50 +184,33 @@ $(function(){
 .form{
 	width: 90%;
 	margin-top: 10px;
-
-
 }
-
 
 .kensaku{
 	padding:4px;
 }
 
-
 .favorite-icon{
 	color: gray;
-
-.actions{
-	text-align: center;
-	margin-top: 20px;
 }
 
 .form-group{
-
 	border-style: 10px;
-	border-top: 3px solid #000000;  	width: 200px;
+	border-top: 3px solid #000000;
+	width: 200px;
 	height: 300px;
 	border-style: solid 10px;
-/*	background-color: red;
-*/}
-
-.form-box{
-	
-	text-align: center;
-	padding-bottom: 50px;
 }
 
-.center{
-
+.form-box{
+	text-align: center;
+	padding-bottom: 50px;
 }
 
 .container {
 	width: 1000px;
 }
 
-.product_title {
-	/*text-align: center;*/
-}
 .product_index {
 	background-color: #D4D7D8;
 	margin: 5px;
@@ -303,7 +218,7 @@ $(function(){
 	height: 310px;
 	width: 230px;
 	float: left;
-		border-style: solid;
+	border-style: solid;
 
 }
 .dropdown {
@@ -315,9 +230,6 @@ $(function(){
 	width: 30px;
 	font-size: 24px;
 	float: left;
-}
-
-.slideimg{
 }
 .favorite-icon {
 	height: 30px;
@@ -358,5 +270,4 @@ $(function(){
 {
 	width: 100%;
 }
-
 </style>
