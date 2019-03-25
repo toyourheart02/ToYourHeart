@@ -1,5 +1,6 @@
 class AdminsController < ApplicationController
-	# before_action :authenticate_admin!
+	before_action :authenticate_admin!
+
 	def top
 	end
 
@@ -14,13 +15,6 @@ class AdminsController < ApplicationController
 		@product.save
 		redirect_to  admins_products_path
 	end
-
-
-
-
-
-
-
 
 
 	def index

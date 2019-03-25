@@ -1,15 +1,4 @@
-
-
-
-
-
-
-
-
-
 <div class="bg_move">
-
-
 <!-- スライドショー -->
 
 <div id="products", class="center">
@@ -18,7 +7,7 @@
 				<div class="">
 
 					<%= link_to products_show_path(product.id) do %>
-						<%= attachment_image_tag product, :music_image, :fill, 200, 200, fallback: "no_image.jpg",class: "slideimg" %>
+						<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %>
 					<% end %>
 					
               		<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
@@ -35,7 +24,7 @@
 	
 
 	<%= search_form_for @search do |f| %>
-		<h2>検索メニュー</h2>
+		<h3>検索メニュー</h3>
 		<hr width="200">
 
 	  <div class="form-group">
@@ -64,8 +53,10 @@
 
 <div class="container">
 	<div class="row">
+	<div class="title">
+		<h3>商品一覧</h3>
+	</div>
 		<div class="col-md-9 col-md-offset-1">
-			<h1 class="product_title">商品一覧</h1>
 
 
 
@@ -80,18 +71,11 @@
 				</select>
 			</form>
 
-
-
-
-
-
-
-
 			<!-- 商品一覧（ransack） -->
 			<div id="products">
 
 			<% @result.each do |product| %>
-
+				<% if product.is_deleted == false %>
 				<div class="product_index">
 
 					<%= link_to products_show_path(product.id) do %>
@@ -128,6 +112,8 @@
 					<% end %>
 
 				</div>
+
+<% end %>
 				<% end %>
 			</div>
 
@@ -181,19 +167,9 @@
 </script>
 
 <style>
-
 .search{
-
 	margin-top: 10px;
-
 }
-
-
-
-
-
-
-
 
 .product_title {
 	/*text-align: center;*/

@@ -1,4 +1,6 @@
-<h1>マスタ登録ページ</h1>
+<div class="title">
+	<h3>マスタ登録</h3>
+</div>
 
 <% if flash[:notice] %>
        <p class="alert alert-success"><%= flash[:notice] %></p>
@@ -6,6 +8,7 @@
 <% if flash[:warning] %>
        <p class="alert alert-warning"><%= flash[:warning] %></p>
 <% end %>
+<br>
 
 
 <div class="master">
@@ -124,6 +127,7 @@
 </style>
 
 <script >
+	
 //あ行のタブ以外は隠す
 $('#tab-contents .artist[id != "tab1"]').hide();
 //あ行以外のタブを無効化する
@@ -140,9 +144,10 @@ $('#tab-menu a').on('click', function() {
 	  // $("#tab-contents .artist").hide();
 	  //$("#tab-menu .active").removeClass("active");
 	  //$(this).addClass("active");
-
+	window.artist = <%= raw @artists_a.to_json %>
+	console.log(window.artist)
 	  //全タブを隠す
-$("#tab-contents .artist").hide();
+		$("#tab-contents .artist").hide();
 
 	  // $("#tab-contents .artist").disabled = true;
 
