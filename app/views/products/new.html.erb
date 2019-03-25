@@ -3,19 +3,20 @@
 </div>
 
 <% if flash[:notice] %>
-       <p class="alert alert-success"><%= flash[:notice] %></p>
+<p class="alert alert-success"><%= flash[:notice] %></p>
 <% end %>
 
 
 <% if flash[:warning] %>
-       <p class="alert alert-success"><%= flash[:warning] %></p>
+<p class="alert alert-success"><%= flash[:warning] %></p>
 <% end %>
 
 
 <br>
 <br>
-<div class="col-md-offset-4">
-    <%= form_for(@product) do |product| %>
+<div class="col-md-offset-2 col-md-10">
+<%= form_for(@product) do |product| %>
+    <div class="col-md-4">
         <div id="img">
             <label>ジャケット画像</label>
             <%= product.attachment_field :music_image %>
@@ -52,46 +53,59 @@
             <br>
 
             <!-- カレンダーで入力-->
-           <label>発売日</label>
+            <label>発売日</label>
             <%= product.date_field :release_date, class: "form" %>
             <br>
 
-           <label>在庫数</label>
+            <label>在庫数</label>
             <%= product.text_field :stock, class: "form" %>
             <br>
 
-            <%= product.submit '登録', class: "" %>
-             <br>
-              <br>
-            <%= link_to '戻る', admins_top_path %>
-
+            <%= product.submit "登録", class: "btn btn-default btn-sm" %>
+            <br>
         </div>
+        <%= link_to '戻る', admins_top_path %>
+    </div>
 
-    <% end %>
-<%= link_to "戻る", admins_top_path %>
+
+    <div class="col-md-6">
+        <div id="product_musics_body">
+            <%= product.fields_for :product_musics do |music| %>
+                <%= render 'product_music_fields', f: music %>
+                <%= link_to_add_association '追加', product, :product_musics %>
+<!--             data: {
+                association_insertion_node: '#product_musics_body',
+                association_insertion_method: 'append'
+            }, class: "btn btn-default btn-sm" %> -->
+            <% end %>
+        </div>
+    </div>
+    <br>
+    <br>
+<% end %>
 </div>
 
 <style>
-    h1  {
-        text-align: center;
-    }
-    #img{
-        margin-left: 15px;
-    }
+h1  {
+    text-align: center;
+}
+#img{
+    margin-left: 15px;
+}
 
-    .attr{
-        text-align: right;
-        width: 250px;
-    }
+.attr{
+    text-align: right;
+    width: 250px;
+}
 
 
-    .label{
-        display: inline-block;
-        width: 100px;
-    }
+.label{
+    display: inline-block;
+    width: 100px;
+}
 
-    .form{
+.form{
 
-        width: 130px;
-    }
+    width: 130px;
+}
 </style>

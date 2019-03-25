@@ -74,3 +74,4 @@ gem 'pry-rails'
 
 
 gem 'ransack'
+gem 'cocoon'

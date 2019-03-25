@@ -2,70 +2,75 @@
 <br>
 <br>
 <% if flash[:warning] %>
-       <p class="alert alert-danger"><%= flash[:warning] %></p>
+<p class="alert alert-danger"><%= flash[:warning] %></p>
 <% end %>
 <% if flash[:notice] %>
-       <p class="alert alert-success"><%= flash[:notice] %></p>
+<p class="alert alert-success"><%= flash[:notice] %></p>
 <% end %>
 
+<div class="col-md-offset-2 col-md-10">
+	<%= form_for(@product, url: update_product_path) do |product| %>
+	<div class="col-md-4">
+		<%= attachment_image_tag @product, :music_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "200x200" %>
+		<%= product.attachment_field :music_image, class: "" %><br>
 
-<%= form_for(@product, url: update_product_path) do |f| %>
-	<div class="col-md-3 col-md-offset-2">
-		<%= attachment_image_tag @product, :music_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
-		<%= f.attachment_field :music_image, class: "" %><br>
-
-	</div>
-
-	<div class="col-md-5">
+		<!-- <div class="col-md-5"> -->
 		<table class="table">
 			<tbody>
 				<tr>
 					<td>商品名</td>
-					<td><%= f.text_field :title  %></td>
+					<td><%= product.text_field :title  %></td>
 				</tr>
 				<tr>
 					<td>値段</td>
-					<td><%= f.text_field :price %></td>
+					<td><%= product.text_field :price %></td>
 				</tr>
 				<tr>
 					<td>アーティスト</td>
-					<td><%= f.collection_select :artist_id, Artist.all, :id, :artist_name %></td>
+					<td><%= product.collection_select :artist_id, Artist.all, :id, :artist_name %></td>
 				</tr>
 				<tr>
 					<td>レーベル</td>
-					<td><%= f.collection_select :label_id, Label.all, :id, :label_name %></td>
+					<td><%= product.collection_select :label_id, Label.all, :id, :label_name %></td>
 				</tr>
 				<tr>
 					<td>ジャンル</td>
-					<td><%= f.collection_select :genre_id, Genre.all, :id, :genre_name, {} %></td>
-
-
+					<td><%= product.collection_select :genre_id, Genre.all, :id, :genre_name %></td>
 				</tr>
 				<tr>
 					<td>シーン</td>
-					<td><%= f.collection_select :scene_id, Scene.all, :id, :scene_name %></td>
+					<td><%= product.collection_select :scene_id, Scene.all, :id, :scene_name %></td>
 				</tr>
 				<tr>
 					<td>発売日</td>
-					<td><%= f.date_field :release_date %>
-</td>
+					<td><%= product.date_field :release_date %></td>
 				</tr>
 				<tr>
 					<td>在庫数</td>
-					<td> <%= f.text_field :stock %></td>
+					<td> <%= product.text_field :stock %></td>
 				</tr>
-
-
 			</tbody>
 		</table>
-		<%= f.submit "更新" %>
+		<%= product.submit "更新", class: "btn btn-default btn-sm" %>
 	</div>
 
-<% end %>
-
+	<div class="col-md-6">
+		<div id="product_musics_body">
+			<%= link_to_add_association '追加', product, :product_musics,
+			data: {
+				association_insertion_node: '#product_musics_body',
+				association_insertion_method: 'append'
+			}, class: "btn btn-default btn-sm" %>
+				<%= product.fields_for :product_musics do |music| %>
+				<%= render 'product_music_fields', f: music %>
+				<% end %>
+			</div>
+		</div>
+		<% end %>
+</div>
 
 <style>
-	h1{
-		text-align: center;
-	}
+h1{
+	text-align: center;
+}
 </style>

@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(version: 2019_03_21_085316) do
     t.string "music_image_id"
     t.integer "label_id"
     t.integer "stock"
-    t.boolean "is_deleted", default: false
+    t.boolean "is_deleted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "artist_id"
@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 2019_03_21_085316) do
     t.string "address"
     t.string "phone_number"
     t.string "profile_image_id"
-    t.boolean "is_deleted", default: false
+    t.boolean "is_deleted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
