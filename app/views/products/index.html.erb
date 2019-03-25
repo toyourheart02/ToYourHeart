@@ -1,15 +1,4 @@
 
-
-
-
-
-
-
-
-
-<div class="bg_move">
-
-
 <!-- スライドショー -->
 
 <div id="products", class="center">
@@ -20,7 +9,7 @@
 					<%= link_to products_show_path(product.id) do %>
 						<%= attachment_image_tag product, :music_image, :fill, 200, 200, fallback: "no_image.jpg",class: "slideimg" %>
 					<% end %>
-					
+
               		<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
 					<% if (Date.today - product.release_date) < 7 %>
 					<% end %>
@@ -32,7 +21,6 @@
 			<!-- 検索バー -->
 
 <div class="search col-md-2">
-	
 
 	<%= search_form_for @search do |f| %>
 		<h2>検索メニュー</h2>
@@ -120,9 +108,9 @@
 
 						<!-- お気に入りの追加・削除をアイコンのクリックで変更できるようにするか検討中 -->
 					<% if user_signed_in? %>
-						<div class="favoriteicon">
+						<div class="sweetalert">
 							<%= link_to favorites_create_path(product_id: product.id), remote: true do %>
-							<i class="favorite-icon glyphicon glyphicon-heart" aria-hidden="true"></i>
+							<i class="sweetalert favorite-icon glyphicon glyphicon-heart" aria-hidden="true"></i>
 							<% end %>
 						</div>
 					<% end %>
@@ -178,6 +166,21 @@
 			})
 		})
 	})
+
+
+$('.sweetalert').click(function(){
+  swal('お気に入りに登録しました！');
+  $(this).css('color', 'red');
+  });
+
+$('.cart-icon').click(function(){
+	swal({
+  title: "カートに追加しました！",
+  icon: "success",
+  button: "OK",
+});
+});
+
 </script>
 
 <style>
@@ -234,17 +237,5 @@
 	color: #fff;
 	font-size: 14px;
 	float: right;
-}
-
-
-
-.bg_move{
-    background-image: url('amechan.jpg');
-    height: 500px;
-    animation: moveBg 5s infinite linear;
-}
-@keyframes moveBg{
-    0%    { background-position: 0 0; }
-    100%  { background-position: -256px 256px; }
 }
 </style>
