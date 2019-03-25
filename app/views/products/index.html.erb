@@ -100,21 +100,24 @@
 							<i class="cart-icon glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
 							<% end %>
 						</div>
-					<% end %>
+
 						<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
 						<% if (Date.today - product.release_date) < 7 %>
 						<span class="new">New</span>
 						<% end %>
 
 						<!-- お気に入りの追加・削除をアイコンのクリックで変更できるようにするか検討中 -->
-					<% if user_signed_in? %>
-						<div class="sweetalert">
-							<%= link_to favorites_create_path(product_id: product.id), remote: true do %>
-							<i class="sweetalert favorite-icon glyphicon glyphicon-heart" aria-hidden="true"></i>
-							<% end %>
-						</div>
-					<% end %>
+						<% if product.favorited_by?(current_user) %>
+							<%= link_to favorite_path(product), :method => :delete, remote: true do %>
+								<i class="glyphicon glyphicon-heart delete-icon" aria-hidden="true" style="color: red;"></i>
+	                		<% end %>
 
+						<% else %>
+							<%= link_to favorites_create_path(product_id: product.id), remote: true, class: "" do %>
+								<i class="glyphicon glyphicon-heart-empty favorite-icon" aria-hidden="true"></i>
+							<% end %>
+						<% end %>
+				<% end %>
 				</div>
 				<% end %>
 			</div>
@@ -140,45 +143,50 @@
 
 
 <script>
-	$(function(){
-		$("#sorting").on("change", function(){
-			console.log($(this).val())
+$(function(){
+	$("body").on("click", ".favorite-icon", function(){
+		swal('お気に入りに登録しました！');
+		$(this).attr("class","glyphicon glyphicon-heart delete-icon")
+		$(this).css("color", "red")
+	});
+	$("body").on("click", ".delete-icon", function(){
+		swal('お気に入りから削除しました！')
+		$(this).attr("class","glyphicon glyphicon-heart-empty favorite-icon")
+	});
 
-			const sortValue = $(this).val()
-			$.ajax({
-				url: '/products/sort',
-				type: 'post',
-				dataType: 'json',
-				data: {
-					sortValue: sortValue
-				},
-				beforeSend: function(xhr){
-					xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-				}
-			})
-			.done((e)=>{
-				console.log(e)
-				$("#products").empty()
-				e.forEach((value)=>{
-					console.log(value)
-					$('#products').append('<div class="product_index"><p>'+value.title+'</p></div>')
-				})
-			})
-		})
-	})
+	$("body").on("click", ".cart-icon", function(){
+		swal({
+			title: "カートに追加しました！",
+			icon: "success",
+			button: "OK",
+		});
+	});
 
+	// 	$("#sorting").on("change", function(){
+	// 		console.log($(this).val())
 
-$('.sweetalert').click(function(){
-  swal('お気に入りに登録しました！');
-  $(this).css('color', 'red');
-  });
-
-$('.cart-icon').click(function(){
-	swal({
-  title: "カートに追加しました！",
-  icon: "success",
-  button: "OK",
-});
+	// 		const sortValue = $(this).val()
+	// 		$.ajax({
+	// 			url: '/products/sort',
+	// 			type: 'post',
+	// 			dataType: 'json',
+	// 			data: {
+	// 				sortValue: sortValue
+	// 			},
+	// 			beforeSend: function(xhr){
+	// 				xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+	// 			}
+	// 		})
+	// 		.done((e)=>{
+	// 			console.log(e)
+	// 			$("#products").empty()
+	// 			e.forEach((value)=>{
+	// 				console.log(value)
+	// 				$('#products').append('<div class="product_index"><p>'+value.title+'</p></div>')
+	// 			})
+	// 		})
+	// 	})
+	// })
 });
 
 </script>
@@ -191,6 +199,9 @@ $('.cart-icon').click(function(){
 
 }
 
+.favorite-icon{
+	color: gray;
+}
 
 
 
@@ -222,12 +233,19 @@ $('.cart-icon').click(function(){
 
 .slideimg{
 }
-.favorite-icon{
+.favorite-icon {
 	height: 30px;
 	width: 30px;
 	font-size: 24px;
 	float: left;
 }
+.delete-icon {
+	height: 30px;
+	width: 30px;
+	font-size: 24px;
+	float: left;
+}
+
 
 .new {
 	display: inline-block;
