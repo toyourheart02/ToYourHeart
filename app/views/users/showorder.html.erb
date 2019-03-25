@@ -1,5 +1,5 @@
 <div class="title">
-	<h3>カート内商品</h3>
+	<h3>購入履歴</h3>
 </div>
 <% if flash[:notice] %>
        <p class="alert alert-success"><%= flash[:notice] %></p>
@@ -11,6 +11,7 @@
 	<% totalamount = 0 %>
 	<!-- ８桁の番号になるように左から０埋め -->
 	<div class="order-content">
+		<p style="border-bottom: solid 3px"><strong>購入日：<%= order.created_at.strftime('%Y/%m/%d') %></strong></p>
 		<div class="left-content">
 		<p><strong>注文番号：<%= "%08d" % order.id %></strong></p>
 		<!-- それぞれカラムの値によって表示を変更 -->
@@ -38,19 +39,26 @@
   		<% if order.status == 0 %>
   			<%= link_to '注文キャンセル', order_path, method: :delete, "data-confirm" => '注文をキャンセルしてよろしいですか？', class: "btn btn-warning" %>
   		<% end %>
+  			<br><br><br><br>
+  			<label style="border-bottom: solid 3px">配送先</label><br>
+  			<label>宛名：<%= order.destination.friend_name %></label><br>
+  			<label>〒<%= order.destination.zip_code %></label><br>
+  			<label><%= order.destination.address %></label>
+
   		</div>
+
 
   		<div class="right-content">
   			<!-- orderproductテーブルのレコード -->
-  			<div class="">
   			<% @orderproducts.each do |product| %>
 				<% if product.order_id == order.id %>
+					<div class="product-img">
 					<%= link_to products_show_path(product.product.id) do %>
-					<div class="">
-						<%= attachment_image_tag product.product, :music_image, class: "", fallback: "no_image.jpg", size: "100x100" %>
-					</div>
+						<%= attachment_image_tag product.product, :music_image, class: "", fallback: "no_image.jpg", size: "120x120" %>
 					<% end %>
-					<div class="">
+					</div>
+
+					<div class="product-text">
 					<%= link_to products_show_path(product.product.id) do %>
 						<p><%= product.product.title %></p>
 					<% end %>
@@ -67,16 +75,12 @@
 			<p id="amount">合計：<%= totalamount %>円</p>
 			</div>
 		</div>
-		</div>
 	<% end %>
 </div>
 
 
 
 <style>
-	h1{
-		text-align: center;
-	}
 
 	.orders{
 		margin-top: 70px;
@@ -84,6 +88,7 @@
 	}
 
 	.order-content{
+		/*overflow: hidden;*/
 		margin-bottom: 30px;
 		padding: 20px;
 		width: 80%;
@@ -92,34 +97,50 @@
 	}
 
 
-
-	
-.title{
-	width: 80%;
-    padding: 0.5em 1em;
-    margin: 0 10%;
-    color: black;
-    background: white;
-    border-bottom: solid 10px black;
-}
+	.title{
+		width: 80%;
+	    padding: 0.5em 1em;
+	    margin: 0 10%;
+	    color: black;
+	    background: white;
+	    border-bottom: solid 10px black;
+	}
 
 	.left-content{
 		width: 30%;
-		margin-right: 120px;
+		margin-top: 20px;
+		margin-left: 20px;
+		margin-right: 60px;
 		float: left;
 	}
 
 	.right-content{
+		/*overflow: hidden;*/
+		height: 120px;
+		margin-top: 20px;
+		float: left;
+	}
+
+	.product-img{
+		margin-right: 20px;
+		margin-bottom: 20px;
+		float: left;
+	}
+
+	.product-text{
+		padding-top: 5px;
+		margin-bottom: 20px;
 		float: left;
 	}
 
 	.status {
-	display: inline-block;
-	padding: 5px 5px;
-	border-radius: 3px;
-	color: #fff;
-	font-size: 14px;
+		display: inline-block;
+		padding: 5px 5px;
+		border-radius: 3px;
+		color: #fff;
+		font-size: 14px;
 	}
+
 	.pay{
 		margin-left: 28px;
 		background-color: gray;
@@ -137,4 +158,7 @@
 		background-color: gray;
 	}
 
+	#amount{
+		text-align: right;
+	}
 </style>

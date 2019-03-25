@@ -1,14 +1,6 @@
-<div id="master-login">
-	<% if admin_signed_in? %>
-	<%= current_admin.email %>
-	<span>ログイン中</span>
-	<br>
-	<br>
-	<%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "" %>
-	<% end %>
-	<br>
-</div>
-
+<% if flash[:notice] %>
+       <p class="alert alert-success"><%= flash[:notice] %></p>
+<% end %>
 <div id="master-content">
 	<br>
 	<%= link_to "商品登録", products_new_path, class: "master-content-link" %>

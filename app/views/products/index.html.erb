@@ -89,19 +89,24 @@
 					<!-- カートアイコンをカート追加のリンクにする -->
 					<!-- カートへの追加は非同期処理で行う　-->
 					<% if user_signed_in? %>
-
-						<div class="carticon">
-							<%= link_to carts_create_path(product_id: product.id),remote: true do %>
-							<i class="cart-icon glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-							<% end %>
-						</div>
+							<div class="carticon">
+								<%= link_to carts_create_path(product_id: product.id),remote: true do %>
+								<i class="cart-icon glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
+								<% end %>
+							</div>
+					<% end %>
 
 						<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
 						<% if (Date.today - product.release_date) < 7 %>
 						<span class="new">New</span>
 						<% end %>
 
+						<% if product.stock == 0 %>
+						<span class="soldout">Soldout</span>
+						<% end %>
+
 						<!-- お気に入りの追加・削除をアイコンのクリックで変更できるようにするか検討中 -->
+          
 						<% if product.favorited_by?(current_user) %>
 							<%= link_to favorite_path(product), :method => :delete, remote: true do %>
 								<i class="glyphicon glyphicon-heart delete-icon" aria-hidden="true" style="color: red;"></i>
@@ -332,6 +337,17 @@ $(function(){
 	display: inline-block;
 	padding: 5px 8px;
 	background-color: #ffc0cb;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 14px;
+	float: right;
+}
+
+.soldout{
+	display: inline-block;
+	padding: 5px 8px;
+	margin-right: 10px;
+	background-color: red;
 	border-radius: 3px;
 	color: #fff;
 	font-size: 14px;
