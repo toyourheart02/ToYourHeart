@@ -5,15 +5,23 @@ $('.slider').slick();
 $('.center').slick({
 	  adaptiveHeight: false,
 	    autoplay: true,
-	      prevArrow: '<a class="slick-prev" href="#">前へ</a>',
+variableWidth: true,
+autoplaySpeed: 0, //待ち時間を０に
+  speed: 10000, // スピードをゆっくり
+  swipe: false, // 操作による切り替えはさせない
+  cssEase: 'linear', // 切り替えイージングを'linear'に
+  // 以下、操作後に止まってしまう仕様の対策
+  pauseOnFocus: false,
+  pauseOnHover: false,
+  pauseOnDotsHover: false,
+
+arrows: false,
 
 
 
-  centerMode: true,
-  centerPadding: '0px',
-  infinite: true,
-  speed: 300,
-  slidesToShow: 3,
+
+
+
 
 
  
@@ -38,6 +46,20 @@ $('.center').slick({
     }
   ]
 });
+
+$('.slick').slick({
+   asNavFor:'.thumbnail',
+   arrows: true,
+   slidesToShow:1,
+   prevArrow:'<div class="arrow prev">PREV</div>',
+   nextArrow:'<div class="arrow next">NEXT</div>',
+ });
+ $('.thumbnail').slick({
+   asNavFor:'.slick',
+   focusOnSelect: true,
+   arrows: false,
+   slidesToShow:4,
+ });
 
 
 

@@ -55,8 +55,7 @@ class OrdersController < ApplicationController
 
 	# order, order_productsテーブルから削除。
 	def destroy
-		binding.pry
-		orders = Order.find(params[:id])
+		orders = Order.find_by(params[:id])
 		orderproducts = OrderProduct.where(order_id: orders.id)
 		orderproducts.each do |orderproduct|
 			orderproduct.destroy
