@@ -1,21 +1,15 @@
 class ProductsController < ApplicationController
 	def index
   	# config/initializers/kaminari_configで1ページの表示件数20件に設定
-    @slideproducts = Product.page(params[:page]).reverse_order
+    # @slideproducts = Product.page(params[:page]).reverse_order
 
-        # if params[:q]
-        #   @search = Product.search(params[:q])
-        #   # @products = @search.result
-        #   @products = Product.where(title: params[:q][:title]).or(Product.where(:genre_id params[:q][:genre_id]))
-        # else
+    @slideproducts = Product.limit(20).order('release_date DESC')
 
-        #   @products = Product.page(params[:page]).reverse_order
-        #   @search = Product.search(params[:q])
-        # end
-        @products = Product.page(params[:page]).reverse_order
+    # @products = Product.page(params[:page]).reverse_order
 
-        @search = Product.ransack(params[:q])
-        @result = @search.result.page(params[:page]).reverse_order
+    @search = Product.ransack(params[:q])
+    @result = @search.result.page(params[:page]).reverse_order
+
   end
 
     def sort
@@ -42,6 +36,7 @@ class ProductsController < ApplicationController
 	def new
 		@product = Product.new
     @product.product_musics.build
+    @artists = Artist.all.order(:artist_kana)
 	end
 
 	def create

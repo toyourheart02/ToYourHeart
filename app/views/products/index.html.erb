@@ -20,7 +20,6 @@
 </div>
 
 <!-- 検索メニュー -->
-
 <div class="search col-md-2">
 	<%= search_form_for @search do |f| %>
 	<h4>検索メニュー</h4>
@@ -108,7 +107,7 @@
 <!-- ページャ -->
 
 <div class="col-md-10 col-md-offset-1">
-	<%= paginate @products, class: "paginate" %>
+	<%= paginate @result, class: "paginate" %>
 </div>
 
 <script>
@@ -123,7 +122,6 @@
 			$(this).attr("class","glyphicon glyphicon-heart-empty favorite-icon");
 			$(this).css("color", "gray");
 		});
-
 		$("body").on("click", ".cart-icon", function(){
 			swal({
 				title: "カートに追加しました！",
@@ -132,32 +130,10 @@
 			});
 		});
 
-	// 	$("#sorting").on("change", function(){
-	// 		console.log($(this).val())
+});
 
-	// 		const sortValue = $(this).val()
-	// 		$.ajax({
-	// 			url: '/products/sort',
-	// 			type: 'post',
-	// 			dataType: 'json',
-	// 			data: {
-	// 				sortValue: sortValue
-	// 			},
-	// 			beforeSend: function(xhr){
-	// 				xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-	// 			}
-	// 		})
-	// 		.done((e)=>{
-	// 			console.log(e)
-	// 			$("#products").empty()
-	// 			e.forEach((value)=>{
-	// 				console.log(value)
-	// 				$('#products').append('<div class="product_index"><p>'+value.title+'</p></div>')
-	// 			})
-	// 		})
-	// 	})
-	// })
-	});
+
+
 </script>
 
 <style>
@@ -165,35 +141,27 @@
 	margin: 11px;
 	border-style: solid;
 }
-
 .product_title{
-
 	border-bottom: solid 3px;
 	background-color: #f2f2f2;
 	width: 147px;
 }
-
 .sort_box{
 	color: red;
 }
-
 .search{
 	margin-top: 10px;
 }
-
 .form{
 	width: 90%;
 	margin-top: 10px;
 }
-
 .kensaku{
 	padding:4px;
 }
-
 .favorite-icon{
 	color: gray;
 }
-
 .form-group{
 	border-style: 10px;
 	border-top: 3px solid #000000;
@@ -201,16 +169,13 @@
 	height: 300px;
 	border-style: solid 10px;
 }
-
 .form-box{
 	text-align: center;
 	padding-bottom: 50px;
 }
-
 .container {
 	width: 1000px;
 }
-
 .product_index {
 	background-color: #D4D7D8;
 	margin: 5px;
@@ -219,12 +184,10 @@
 	width: 230px;
 	float: left;
 	border-style: solid;
-
 }
 .dropdown {
 	float: right;
 }
-
 .cart-icon{
 	height: 30px;
 	width: 30px;
@@ -243,8 +206,6 @@
 	font-size: 24px;
 	float: left;
 }
-
-
 .new {
 	display: inline-block;
 	padding: 5px 8px;
@@ -254,7 +215,6 @@
 	font-size: 14px;
 	float: right;
 }
-
 .soldout{
 	display: inline-block;
 	padding: 5px 8px;
@@ -265,7 +225,6 @@
 	font-size: 14px;
 	float: right;
 }
-
 .slick-list
 {
 	width: 100%;

@@ -13,6 +13,7 @@
 
 //= require jquery
 //= require rails-ujs
+//= require select2
 //= require bootstrap-sprockets
 //= require_tree .
 //= require cocoon

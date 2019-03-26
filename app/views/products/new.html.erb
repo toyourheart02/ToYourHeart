@@ -37,7 +37,7 @@
             <br>
             <!-- アーティストの入力方法はより良いものに変更予定 -->
             <label>アーティスト</label>
-            <%= product.collection_select :artist_id, Artist.all, :id, :artist_name, { include_blank: true}, class: "form" %>
+             <%= product.select :artist_id, options_from_collection_for_select(@artists, :id, :artist_name), {include_blank: true}, class: "searchable form" %>
             <br>
 
             <label>レーベル</label>
@@ -69,14 +69,14 @@
 
 
     <div class="col-md-6">
-        <div id="product_musics_body">
+        <div>
             <%= product.fields_for :product_musics do |music| %>
                 <%= render 'product_music_fields', f: music %>
-                <%= link_to_add_association '追加', product, :product_musics %>
-<!--             data: {
+                <%= link_to_add_association '追加', product, :product_musics,
+            data: {
                 association_insertion_node: '#product_musics_body',
                 association_insertion_method: 'append'
-            }, class: "btn btn-default btn-sm" %> -->
+            }, class: "btn btn-default btn-sm" %>
             <% end %>
         </div>
     </div>
@@ -85,10 +85,14 @@
 <% end %>
 </div>
 
+<script >
+    $(document).ready(function() {
+    $('.searchable').select2();
+});
+
+</script>
+
 <style>
-h1  {
-    text-align: center;
-}
 #img{
     margin-left: 15px;
 }
@@ -97,7 +101,6 @@ h1  {
     text-align: right;
     width: 250px;
 }
-
 
 .label{
     display: inline-block;
