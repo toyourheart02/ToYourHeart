@@ -119,7 +119,7 @@
 			$(this).css("color", "red");
 		});
 		$("body").on("click", ".delete-icon", function(){
-			swal('お気に入りから削除しました！')
+			swal('お気に入りから削除しました！');
 			$(this).attr("class","glyphicon glyphicon-heart-empty favorite-icon");
 			$(this).css("color", "gray");
 		});
@@ -128,10 +128,10 @@
 			swal({
 				title: "カートに追加しました！",
 				icon: "success",
-				button: "OK",
+				button: "OK"
 			});
 		});
-
+	});
 	// 	$("#sorting").on("change", function(){
 	// 		console.log($(this).val())
 
@@ -157,7 +157,7 @@
 	// 		})
 	// 	})
 	// })
-	});
+
 </script>
 
 <style>

@@ -29,10 +29,24 @@
 
 	<div class="panel panel-default disc_form">
   		<div class="panel-body">
+  			<% b = @product.product_musics.order(track_num: :asc) %>
+
+  			<% a = [] %>
   			<% @product.product_musics.each do |product_music| %>
-  				<p>Disc<%= product_music.disc_num %></p>
-    			<p><%= product_music.track_num %> : <%= product_music.music.music_name %></p>
-    		<% end %>
+  				<% a.push(product_music.disc_num) %>
+  			<% end %>
+
+  			<% n = a.max %>
+  			<% for i in 1..n do %>
+  				<div>
+  					<p>Disc<%= i %></p>
+  					<% b.each do |product_music| %>
+  						<% if product_music.disc_num == i %>
+  							<p><%= product_music.track_num %> : <%= product_music.music.music_name %></p>
+  						<% end %>
+  					<% end %>
+  				</div>
+  			<% end %>
   		</div>
 	</div>
 </div>
