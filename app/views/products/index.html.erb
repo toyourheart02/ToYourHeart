@@ -20,7 +20,6 @@
 </div>
 
 <!-- 検索メニュー -->
-
 <div class="search col-md-2">
 	<%= search_form_for @search do |f| %>
 	<h4>検索メニュー</h4>
@@ -108,7 +107,7 @@
 <!-- ページャ -->
 
 <div class="col-md-10 col-md-offset-1">
-	<%= paginate @products, class: "paginate" %>
+	<%= paginate @result, class: "paginate" %>
 </div>
 
 <script>
@@ -129,31 +128,9 @@
 				button: "OK",
 			});
 		});
-	// 	$("#sorting").on("change", function(){
-	// 		console.log($(this).val())
-	// 		const sortValue = $(this).val()
-	// 		$.ajax({
-	// 			url: '/products/sort',
-	// 			type: 'post',
-	// 			dataType: 'json',
-	// 			data: {
-	// 				sortValue: sortValue
-	// 			},
-	// 			beforeSend: function(xhr){
-	// 				xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-	// 			}
-	// 		})
-	// 		.done((e)=>{
-	// 			console.log(e)
-	// 			$("#products").empty()
-	// 			e.forEach((value)=>{
-	// 				console.log(value)
-	// 				$('#products').append('<div class="product_index"><p>'+value.title+'</p></div>')
-	// 			})
-	// 		})
-	// 	})
-	// })
 });
+
+
 </script>
 
 <style>
