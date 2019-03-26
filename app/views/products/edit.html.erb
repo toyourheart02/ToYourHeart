@@ -27,7 +27,7 @@
 				</tr>
 				<tr>
 					<td>アーティスト</td>
-					<td><%= product.collection_select :artist_id, Artist.all, :id, :artist_name %></td>
+					<td> <%= product.select :artist_id, options_from_collection_for_select(@artists, :id, :artist_name), {}, class: "searchable form" %></td>
 				</tr>
 				<tr>
 					<td>レーベル</td>
@@ -68,6 +68,15 @@
 		</div>
 		<% end %>
 </div>
+
+<script >
+    $(document).ready(function() {
+    $('.searchable').select2();
+});
+
+    $('#inputID').select2('data', {id: 100, a_key: 'Lorem Ipsum'});
+
+</script>
 
 <style>
 h1{

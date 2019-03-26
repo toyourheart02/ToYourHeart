@@ -19,7 +19,7 @@
 				</td>
 				<td>
 					
-					<%= f.select :music_id, options_from_collection_for_select(Music.all, :id, :music_name), {include_blank: true}, class: "searchable" %>
+					<%= f.select :music_id, options_from_collection_for_select(Music.all, :id, :music_name), {}, class: "searchable" %>
 				</td>
 				<td>
 					<%= link_to_remove_association '削除', f %>
