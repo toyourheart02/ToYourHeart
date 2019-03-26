@@ -93,7 +93,7 @@
 				<i class="glyphicon glyphicon-heart delete-icon" aria-hidden="true" style="color: red;"></i>
 				<% end %>
 			<% else %>
-				<%= link_to favorites_create_path(product_id: product.id), remote: true, class: "" do %>
+				<%= link_to favorites_create_path(product_id: product.id), remote: true do %>
 				<i class="glyphicon glyphicon-heart-empty favorite-icon" aria-hidden="true"></i>
 				<% end %>
 			<% end %>
@@ -114,12 +114,13 @@
 	$(function(){
 		$("body").on("click", ".favorite-icon", function(){
 			swal('お気に入りに登録しました！');
-			$(this).attr("class","glyphicon glyphicon-heart delete-icon")
-			$(this).css("color", "red")
+			$(this).attr("class","glyphicon glyphicon-heart delete-icon");
+			$(this).css("color", "red");
 		});
 		$("body").on("click", ".delete-icon", function(){
 			swal('お気に入りから削除しました！')
-			$(this).attr("class","glyphicon glyphicon-heart-empty favorite-icon")
+			$(this).attr("class","glyphicon glyphicon-heart-empty favorite-icon");
+			$(this).css("color", "gray");
 		});
 		$("body").on("click", ".cart-icon", function(){
 			swal({
@@ -128,7 +129,9 @@
 				button: "OK",
 			});
 		});
+
 });
+
 
 
 </script>
