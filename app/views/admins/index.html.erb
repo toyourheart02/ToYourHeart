@@ -1,0 +1,43 @@
+<div class="title">
+		<h3>ユーザ一覧</h3>
+</div>
+<br>
+<div class="col-md-8 col-md-offset-2">
+	<table class="table table-bordered">
+		<thead>
+			<tr class="active">
+				<th>ID</th>
+				<th>ユーザ名</th>
+				<th>かな</th>
+				<th>電話番号</th>
+				<th>メールアドレス</th>
+				<th>登録状況</th>
+			</tr>
+		</thead>
+
+		<% @users.each do |user| %>
+		<tbody>
+			<tr class="active">
+				<th><%= user.id %></th>
+				<th><%= link_to user.user_name, admins_usershow_path(user), class: "user_name" %></th>
+				<th><%= user.user_kana %></th>
+				<th><%= user.phone_number %></th>
+				<th><%= user.email %></th>
+				<!-- 退会済みのユーザがわかるようにする -->
+				<th><% if user.is_deleted == true %> 退会　<% end %></th>
+			</tr>
+		</tbody>
+		<% end %>
+	</table>
+
+	<%= link_to "戻る", admins_top_path, class: "link" %>
+</div>
+
+<style>
+	.link {
+		color: black;
+	}
+	.user_name {
+		color: black;
+	}
+</style>

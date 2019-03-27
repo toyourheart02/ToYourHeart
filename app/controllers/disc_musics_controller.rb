@@ -1,0 +1,2 @@
+class DiscMusicsController < ApplicationController
+end

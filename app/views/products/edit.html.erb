@@ -1,0 +1,83 @@
+<div class="title">
+    <h3>商品編集</h3>
+</div>
+<br>
+<br>
+<% if flash[:warning] %>
+<p class="alert alert-danger"><%= flash[:warning] %></p>
+<% end %>
+<% if flash[:notice] %>
+<p class="alert alert-success"><%= flash[:notice] %></p>
+<% end %>
+
+<div class="col-md-offset-2 col-md-10">
+	<%= form_for(@product, url: update_product_path) do |product| %>
+	<div class="col-md-4">
+		<%= attachment_image_tag @product, :music_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "200x200" %>
+		<%= product.attachment_field :music_image, class: "" %><br>
+
+		<!-- <div class="col-md-5"> -->
+		<table class="table">
+			<tbody>
+				<tr class="active">
+					<td>商品名</td>
+					<td><%= product.text_field :title %></td>
+				</tr>
+				<tr class="active">
+					<td>値段</td>
+					<td><%= product.text_field :price %></td>
+				</tr>
+				<tr class="active">
+					<td>アーティスト</td>
+					<td> <%= product.select :artist_id, options_from_collection_for_select(@artists, :id, :artist_name, @product.artist_id), {}, class: "searchable form" %></td>
+				</tr>
+				<tr class="active">
+					<td>レーベル</td>
+					<td><%= product.collection_select :label_id, Label.all, :id, :label_name %></td>
+				</tr>
+				<tr class="active">
+					<td>ジャンル</td>
+					<td><%= product.collection_select :genre_id, Genre.all, :id, :genre_name %></td>
+				</tr>
+				<tr class="active">
+					<td>シーン</td>
+					<td><%= product.collection_select :scene_id, Scene.all, :id, :scene_name %></td>
+				</tr>
+				<tr class="active">
+					<td>発売日</td>
+					<td><%= product.date_field :release_date %></td>
+				</tr>
+				<tr class="active">
+					<td>在庫数</td>
+					<td> <%= product.text_field :stock %></td>
+				</tr>
+			</tbody>
+		</table>
+		<%= product.submit "更新", class: "btn btn-default btn-sm" %>
+
+		<br>
+		<br>
+
+		<%= link_to '戻る', admins_top_path %>
+	</div>
+
+	<div class="col-md-6">
+		<div id="product_musics_body">
+			<%= link_to_add_association '追加', product, :product_musics,
+			data: {
+				association_insertion_node: '#product_musics_body',
+				association_insertion_method: 'append'
+			}, class: "btn btn-default btn-sm" %>
+				<%= product.fields_for :product_musics do |music| %>
+				<%= render 'editproduct_music_fields', f: music %>
+				<% end %>
+			</div>
+		</div>
+		<% end %>
+</div>
+
+<script>
+    $(document).ready(function() {
+    $('.searchable').select2();
+});
+</script>

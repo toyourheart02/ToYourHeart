@@ -1,0 +1,174 @@
+<div class="title">
+	<h3>購入履歴</h3>
+</div>
+<% if flash[:notice] %>
+       <p class="alert alert-success"><%= flash[:notice] %></p>
+<% end %>
+<br>
+<% if @orders.length == 0 %>
+	<h4>購入履歴はありません</h4>
+<% end %>
+
+<div class="orders">
+	<% @orders.each do |order| %>
+	<!-- 注文ごとの合計金額変数 -->
+	<% totalamount = 0 %>
+	<!-- ８桁の番号になるように左から０埋め -->
+	<div class="order-content">
+		<p style="border-bottom: solid 3px"><strong>購入日：<%= order.created_at.strftime('%Y/%m/%d') %></strong></p>
+		<div class="left-content">
+		<p><strong>注文番号：<%= "%08d" % order.id %></strong></p>
+		<!-- それぞれカラムの値によって表示を変更 -->
+		<label>配送ステータス</label>
+
+			<% case order.status
+				when 0 %>
+					<span id="status1" class="status">受付中</span>
+				<%when 1%>
+  					<span id="status2" class="status">配送中</span>
+  				<%when 2%>
+  					<span id="status3" class="status">配送済</span>
+  			<% end %>
+  			<br>
+  			<br>
+		<label>支払い方法</label>
+		<% case order.pay
+				when 0 %>
+					<span class="pay status">代引き</span>
+				<%when 1%>
+  					<span class="pay status">クレジットカード</span>
+  		<% end %>
+  		<br>
+  		<br>
+  		<% if order.status == 0 %>
+  			<%= link_to '注文キャンセル', order_path, method: :delete, "data-confirm" => '注文をキャンセルしてよろしいですか？', class: "btn btn-warning" %>
+  		<% end %>
+  			<br><br><br><br>
+  			<label style="border-bottom: solid 3px">配送先</label><br>
+  			<label>宛名：<%= order.destination.friend_name %></label><br>
+  			<label>〒<%= order.destination.zip_code %></label><br>
+  			<label><%= order.destination.address %></label>
+
+  		</div>
+
+
+  		<div class="right-content ">
+  			<!-- orderproductテーブルのレコード -->
+  			<% @orderproducts.each do |product| %>
+				<% if product.order_id == order.id %>
+					<div class="product-img">
+					<%= link_to products_show_path(product.product.id) do %>
+						<%= attachment_image_tag product.product, :music_image, class: "", fallback: "no_image.jpg", size: "120x120" %>
+					<% end %>
+					</div>
+
+					<div class="product-text">
+					<%= link_to products_show_path(product.product.id) do %>
+						<p><%= product.product.title %></p>
+					<% end %>
+					<p><%= product.price %>円</p>
+					<p><%= product.quantity %>個</p>
+					<p>小計：<%= sum = product.price * product.quantity %>円</p>
+					</div>
+					<% totalamount += sum %>
+					<br>
+					<br>
+
+				<% end %>
+			<% end %>
+			<p id="amount">合計：<%= totalamount %>円</p>
+			</div>
+		</div>
+	<% end %>
+</div>
+
+
+
+<style>
+	h4{
+		margin-top: 50px;
+		text-align: center
+	}
+
+	.orders{
+		margin-top: 70px;
+		margin-left: 20%;
+	}
+
+	.order-content{
+		/*overflow: hidden;*/
+		position: relative;
+		margin-bottom: 30px;
+		padding: 20px;
+		width: 80%;
+		background-color: #f5f5f5;
+		overflow: hidden;
+	}
+
+
+	.title{
+		width: 80%;
+	    padding: 0.5em 1em;
+	    margin: 0 10%;
+	    color: black;
+	    /*background: white;*/
+	    border-bottom: solid 10px black;
+	}
+
+	.left-content{
+		width: 30%;
+		margin-top: 20px;
+		margin-left: 20px;
+		margin-right: 60px;
+		float: left;
+	}
+
+	.right-content{
+		/*overflow: hidden;*/
+		margin-top: 20px;
+		float: left;
+	}
+
+	.product-img{
+		margin-right: 20px;
+		margin-bottom: 20px;
+		float: left;
+	}
+
+	.product-text{
+		padding-top: 5px;
+		margin-bottom: 20px;
+		float: left;
+	}
+
+	.status {
+		display: inline-block;
+		padding: 5px 5px;
+		border-radius: 3px;
+		color: #fff;
+		font-size: 14px;
+	}
+
+	.pay{
+		margin-left: 28px;
+		background-color: gray;
+	}
+
+	#status1{
+		background-color: #1e90ff;
+	}
+
+	#status2{
+		background-color: green;
+	}
+
+	#status3{
+		background-color: gray;
+	}
+
+	#amount{
+		position: absolute;
+		right: 50px;
+		bottom: 0px;
+	}
+</style>

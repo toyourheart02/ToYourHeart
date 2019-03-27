@@ -1,0 +1,121 @@
+<!-- ログイン中のユーザのカート内一覧を表示 -->
+
+	<div class="title">
+	<h3>カート内商品</h3>
+	</div>
+	<br>
+	<% if flash[:notice] %>
+	<p class="alert alert-success"><%= flash[:notice] %></p>
+	<% end %>
+	<% if flash[:warning] %>
+	<p class="alert alert-success"><%= flash[:warning] %></p>
+	<% end %>
+
+	<% if @products.length == 0 %>
+	<div class="orderlink col-md-12">
+	<h4>カート内に商品はありません</h4><br><br><br><br>
+	<%= link_to '注文履歴一覧へ', showorder_path(current_user), class: "orderlink" %>
+	</div>
+	<% end %>
+
+<div class="cart col-md-offset-2">
+	<% @products.each do |product| %>
+	<div class="cart-content col-md-8">
+		<div class="col-md-3">
+			<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %>
+		</div>
+
+		<div class="product-status col-md-4 col-md-offset-1">
+			<p><%= product.title %></p>
+			<p><%= product.artist.artist_name %></p>
+			<p><%= product.price %> 円</p>
+			<p>在庫数：<%= product.stock %> 個</p>
+		</div>
+		<!-- 該当する商品の注文個数をDBから引っ張る -->
+		<% quantity = product.carts.find_by(user_id: current_user.id).quantity %>
+
+		<!-- 個数の選択タブ　デフォルトの値をquantityにする -->
+		<% @cart = product.carts.find_by(user_id: current_user.id) %>
+		<div class="product-status col-md-3">
+			<%= form_for(@cart) do |f| %>
+				<%= f.select :quantity, [[1,1], [2,2], [3,3], [4,4], [5,5], [6,6], [7,7], [8,8], [9,9]] ,:selected => quantity %>
+				<!-- 個数更新ボタン　個数変更後にクリックすることでDB更新、画面更新する -->
+				<%= f.submit '更新', class: "cart_update btn btn-default" %>
+			<% end %>
+
+			<!-- 選択済みのタブの個数をかけて非同期で金額を変えられるのがベスト -->
+			<p class="subtotal">小計：<%= product.price * quantity %> 円</p>
+		</div>
+			<%= link_to '削除', cart_path(product), :method => :delete, data: { confirm: '削除しますか？' } , class: "cart_delete btn btn-default col-md-1" %>
+	</div>
+	<% end %>
+</div>
+
+<div class="orderbtn col-md-12">
+	<!--会計処理リンクはカート内に商品があるときのみ表示  -->
+	<% if @products.length != 0 %>
+	<%= link_to '会計へ進む',new_order_path , class: "neworderbtn btn btn-default" %>
+	<br><br><br>
+	<%= link_to '注文履歴一覧へ', showorder_path(current_user), class: "orderlink" %>
+	<% end %>
+</div>
+
+<style >
+h4{
+	margin-top: 100px;
+	text-align: center;
+}
+
+.title{
+	width: 80%;
+    padding: 0.5em 1em;
+    margin: 0 10%;
+    color: black;
+    /*background: white;*/
+    border-bottom: solid 10px black;
+}
+
+.orderlink{
+	text-align: center;
+	font-size: 16px;
+	/*color: black;*/
+}
+.space{
+	height: 200px;
+}
+
+.cart-content{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.product-status{
+	font-size: 16px;
+	height: 200px;
+	padding-top: 10px;
+}
+.product-status p{
+	margin-bottom: 30px;
+}
+
+.subtotal{
+	/*float: left;*/
+}
+
+.cart_update{
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+
+.cart_delete{
+	margin-top: 90px;
+}
+
+.orderbtn{
+	margin-top: 50px;
+	text-align: center;
+}
+
+.neworderbtn{
+	width: 40%;
+}
+</style>

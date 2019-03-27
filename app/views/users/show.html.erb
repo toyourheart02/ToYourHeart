@@ -1,0 +1,73 @@
+<div class="title">
+	<h3>マイページ</h3>
+</div>
+
+<% if flash[:notice] %>
+       <p class="alert alert-success"><%= flash[:notice] %></p>
+<% end %>
+
+<br>
+<br>
+
+<div class="profile col-md-offset-2">
+	<div class="col-md-3">
+		<label>プロフィール画像</label>
+		<%= attachment_image_tag @user, :profile_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
+	</div>
+
+	<br>
+	<br>
+	<div class="col-md-5 col-md-offset-1">
+		<table class="table">
+			<tbody>
+				<tr class="active">
+					<td>ユーザ名</td>
+					<td><%= @user.user_name %></td>
+				</tr>
+				<tr class="active">
+					<td>かな</td>
+					<td><%= @user.user_kana %></td>
+				</tr>
+				<tr class="active">
+					<td>郵便番号</td>
+					<td><%= @user.zip_code %></td>
+				</tr>
+				<tr class="active">
+					<td>住所</td>
+					<td><%= @user.address %></td>
+				</tr>
+				<tr class="active">
+					<td>電話番号</td>
+					<td><%= @user.phone_number %></td>
+				</tr>
+			</tbody>
+		</table>
+		<%= link_to 'ユーザ情報変更', edit_user_path(current_user.id) %><br><br>
+		<%= link_to '注文履歴一覧', showorder_path %><br><br>
+		<%= link_to '退会する', user_path(current_user.id) ,method: :delete, "data-confirm" => '退会してよろしいですか？' %>
+
+	</div>
+</div>
+
+
+
+<style>
+	h1{
+		text-align: center;
+	}
+
+	.title{
+	width: 80%;
+    padding: 0.5em 1em;
+    margin: 0 10%;
+    color: black;
+    /*background: white;*/
+    border-bottom: solid 10px black;
+	}
+	.link{
+		margin-top: 100px;
+	}
+	.profile{
+		margin-bottom: 50px;
+	}
+</style>

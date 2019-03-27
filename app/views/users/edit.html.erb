@@ -1,0 +1,56 @@
+<div class="title">
+	<h3>ユーザ情報更新ページ</h3>
+</div>
+<br>
+<br>
+<% if flash[:warning] %>
+       <p class="alert alert-danger"><%= flash[:warning] %></p>
+<% end %>
+
+<div class="col-md-offset-2">
+<%= form_for(@user) do |user| %>
+	<div class="col-md-3">
+		<label>プロフィール画像</label>
+		<%= attachment_image_tag @user, :profile_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
+		<%= user.attachment_field :profile_image, class: "" %><br>
+
+	</div>
+	<br>
+	<br>
+	<div class="col-md-5 col-md-offset-1">
+		<table class="table">
+			<tbody>
+				<tr class="active">
+					<td>ユーザ名</td>
+					<td><%= user.text_field :user_name %></td>
+				</tr>
+				<tr class="active">
+					<td>かな</td>
+					<td><%= user.text_field :user_kana %></td>
+				</tr>
+				<tr class="active">
+					<td>郵便番号</td>
+					<td><%= user.text_field :zip_code %></td>
+				</tr>
+				<tr class="active">
+					<td>住所</td>
+					<td><%= user.text_field :address %></td>
+				</tr>
+				<tr class="active">
+					<td>電話番号</td>
+					<td><%= user.text_field :phone_number %></td>
+				</tr>
+			</tbody>
+		</table>
+			<%= user.submit "更新", class: "btn btn-primary" %>
+		</div>
+</div>
+
+<% end %>
+
+<style>
+	.btn-primary{
+		padding: 5px;
+		text-align: right;
+	}
+</style>

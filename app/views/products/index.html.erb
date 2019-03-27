@@ -1,0 +1,253 @@
+<% if flash[:notice] %>
+<p class="alert alert-success"><%= flash[:notice] %></p>
+<% elsif flash[:warning] %>
+<p class="alert alert-warning"><%= flash[:warning] %></p>
+<% end %>
+<!-- スライドショー -->
+
+<div id="products", class="center">
+	<% @slideproducts.each do |product| %>
+	<div class="img-width">
+		<%= link_to products_show_path(product.id) do %>
+		<%= attachment_image_tag product, :music_image, :fill, 300, 300, fallback: "no_image.jpg",class: "slideimg" %>
+		<% end %>
+
+		<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
+		<% if (Date.today - product.release_date) < 7 %>
+		<% end %>
+	</div>
+	<% end %>
+</div>
+
+<!-- 検索メニュー -->
+<div class="search col-md-1">
+
+	<%= search_form_for @search do |f| %>
+	<h4>検索メニュー</h4>
+	<div class="form-group">
+		<div class="form-box">
+			<label>タイトル</label>
+			<%= f.text_field :title_cont,:placeholder => "" ,class: "form"%>
+			<br>
+			<label>アーティスト</label>
+			<%= f.select :artist_id_eq, options_from_collection_for_select(Artist.all.order(:artist_kana), :id, :artist_name), {include_blank: true}, class: "searchable form" %>
+			<label>ジャンル</label>
+			<%= f.collection_select :genre_id_eq, Genre.all, :id, :genre_name, { include_blank: true, placeholder: "ジャンル"} ,class: "form" %><br>
+			<label>プレゼントシーン</label>
+			<%= f.collection_select :scene_id_eq, Scene.all, :id, :scene_name, { include_blank: true} ,class: "form" %><br>
+
+			<div class="actions glyphicon glyphicon-zoom-in">
+				<%= f.submit "検索",class: "kensaku" %>
+			</div>
+		</div>
+	</div>
+	<% end %>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="title">
+			<h3>商品一覧</h3>
+		</div>
+		<div class="col-md-9 col-md-offset-1">
+			<!-- 並べ替えプルダウン -->
+			<table border="2" width="150"  class="sort_box" >
+				　<tr>
+					　　<th class="sort_link"><%= sort_link(@search, :price, '値段順') %></th>
+					　　<th class="sort_link"><%= sort_link(@search, :release_date, '発売日順') %></th>
+				　</tr>
+			</table>
+		</div>
+
+<!-- 商品一覧（ransack） -->
+<div id="products">
+	<% @result.each do |product| %>
+
+	<div class="product_index">
+		<%= link_to products_show_path(product.id) do %>
+		<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %>
+		<% end %>
+		<%= link_to products_show_path(product.id) do %>
+		<p class="product_title_color"><%= product.title.truncate(20) %></p>
+		<% end %>
+		<p><%= product.artist.artist_name %></p>
+
+		<!-- カートアイコンをカート追加のリンクにする -->
+		<!-- カートへの追加は非同期処理で行う　-->
+		<% if user_signed_in? %>
+		<div class="carticon">
+			<%= link_to carts_create_path(product_id: product.id), data: {confirm: 'カートに追加しますか？'}, remote: true do %>
+			<i class="cart-icon glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
+			<% end %>
+		</div>
+		<% end %>
+
+		<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
+		<% if (Date.today - product.release_date) < 7 %>
+		<span class="new">New</span>
+		<% end %>
+
+		<% if product.stock == 0 %>
+		<span class="soldout">Soldout</span>
+		<% end %>
+
+		<!-- お気に入りの追加・削除をアイコンのクリックで変更できるようにするか検討中 -->
+		<% if user_signed_in? %>
+			<% if product.favorited_by?(current_user) %>
+				<%= link_to favorite_path(product), :method => :delete, remote: true do %>
+				<i class="glyphicon glyphicon-heart delete-icon" aria-hidden="true" style="color: red;"></i>
+				<% end %>
+			<% else %>
+				<%= link_to favorites_create_path(product_id: product.id), remote: true do %>
+				<i class="glyphicon glyphicon-heart-empty favorite-icon" aria-hidden="true"></i>
+				<% end %>
+			<% end %>
+		<% end %>
+	</div>
+
+	<% end %>
+</div>
+</div>
+</div>
+
+<!-- ページャ -->
+
+<div class="col-md-10 col-md-offset-1">
+	<%= paginate @result, class: "paginate" %>
+</div>
+
+<script>
+
+	$(document).ready(function() {
+    	$('.searchable').select2();
+	});
+
+	$(function(){
+		$("body").on("click", ".favorite-icon", function(){
+			// swal('お気に入りに登録しました！');
+			$(this).attr("class","glyphicon glyphicon-heart delete-icon");
+			$(this).css("color", "red");
+		});
+		$("body").on("click", ".delete-icon", function(){
+			// swal('お気に入りから削除しました！');
+			$(this).attr("class","glyphicon glyphicon-heart-empty favorite-icon");
+			$(this).css("color", "gray");
+		});
+	});
+</script>
+
+<style>
+h4 {
+	width: 150px;
+}
+<style>
+label{
+	margin-top: 10px;
+}
+
+.searchable{
+	margin-top: 10px;
+	/*height: 35px;*/
+}
+.img-width{
+	margin: 11px;
+	/*border-style: solid;*/
+}
+.product_title{
+	border-bottom: solid 3px;
+	background-color: #f2f2f2;
+	width: 147px;
+}
+.sort_box{
+	background-color: #f0f8ff;
+}
+.search{
+	margin-top: 10px;
+}
+.form{
+	width: 90%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.kensaku{
+	padding:4px;
+}
+.favorite-icon{
+	color: gray;
+}
+.form-group{
+	border-style: 10px;
+	border-top: 3px solid #000000;
+	width: 200px;
+	height: 300px;
+	border-style: solid 10px;
+}
+.form-box{
+	text-align: center;
+	padding-bottom: 50px;
+}
+.container {
+	width: 1000px;
+}
+.product_index {
+	background-color: #f0f8ff;
+	margin: 10px;
+	padding: 10px;
+	height: 310px;
+	width: 220px;
+	float: left;
+	border-radius: 10px
+	/*border-style: solid;*/
+}
+
+.sort_link {
+	color: black
+}
+
+.dropdown {
+	float: right;
+}
+.cart-icon{
+	height: 30px;
+	width: 30px;
+	font-size: 24px;
+	float: left;
+	color: gray;
+}
+.favorite-icon {
+	height: 30px;
+	width: 30px;
+	font-size: 24px;
+	float: left;
+}
+.delete-icon {
+	height: 30px;
+	width: 30px;
+	font-size: 24px;
+	float: left;
+}
+.new {
+	display: inline-block;
+	padding: 5px 8px;
+	background-color: #ffc0cb;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 14px;
+	float: right;
+}
+.soldout{
+	display: inline-block;
+	padding: 5px 8px;
+	margin-right: 10px;
+	background-color: red;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 14px;
+	float: right;
+}
+.slick-list
+{
+	width: 100%;
+}
+
+</style>

@@ -10,6 +10,22 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require select2
  *= require_tree .
  *= require_self
  */
+  @import "bootstrap-sprockets";  /*ここを追加*/
+    @import "bootstrap";            /*ここを追加*/
+
+body {
+	font-family: 'Kosugi Maru', sans-serif;
+	background-image: url("HeartMusic.jpg");
+	background-position: 50% 0%;
+	position: relative;
+}
+
+header {
+	background-image: url("HeartMusic.jpg");
+	background-position: top;
+	 background: rgba(255,255,255,0.1);
+}
