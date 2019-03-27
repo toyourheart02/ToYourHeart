@@ -16,3 +16,13 @@
   @import "bootstrap-sprockets";  /*ここを追加*/
     @import "bootstrap";            /*ここを追加*/
 
+body {
+	font-family: 'Kosugi Maru', sans-serif;
+	background-image: url("HeartMusic.jpg");
+	background-position: 50% 0%;
+}
+
+header {
+	background-image: url("HeartMusic.jpg");
+	background-position: top;
+}

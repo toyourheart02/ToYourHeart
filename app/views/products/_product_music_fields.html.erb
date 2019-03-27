@@ -1,4 +1,5 @@
 <div class='nested-fields'>
+	<div id="product_musics_body">
 	<table class="table">
 		<thead>
 			<tr>
@@ -20,9 +21,10 @@
 					<%= f.collection_select :music_id, Music.all, :id, :music_name, :include_blank => true %>
 				</td>
 				<td>
-					<%= link_to_remove_association '削除', f %>
+					<%= link_to_remove_association '削除', f, class: "btn btn-default btn-sm" %>
 				</td>
 			</tr>
 		</tbody>
 	</table>
+</div>
 </div>

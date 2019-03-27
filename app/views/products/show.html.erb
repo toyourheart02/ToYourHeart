@@ -15,6 +15,7 @@
 </div>
 
 <div class="col-md-4">
+	<div class="products_show">
 	<div class="">商品名：<%= @product.title %></div>
 	<div class="">アーティスト：<%= @product.artist.artist_name %></div>
 	<div class="">価格：<%= @product.price %>円</div>
@@ -22,7 +23,9 @@
 	<div class="">ジャンル：<%= @product.genre.genre_name %></div>
 	<div class="">総レビュー数：<%= link_to "#product_review" do %>
 		<%= @product.reviews.count %><% end %>件</div>
-	<%= link_to "カートに入れる", carts_create_path(product_id: @product.id),remote: true, class: "btn btn-default btn-sm" %>
+		<% if user_signed_in? %>
+			<%= link_to "カートに入れる", carts_create_path(product_id: @product.id),remote: true, class: "btn btn-default btn-sm" %>
+		<% end %>
 
 	<br>
 	<br>
@@ -50,6 +53,8 @@
   		</div>
 	</div>
 </div>
+</div>
+</div>
 
 
 <% if user_signed_in? %>
@@ -76,9 +81,7 @@
 	<!-- current_userにレビュー削除機能を追加する -->
 	<h3 id="product_review">商品レビュー</h3>
 	<% if @product.reviews.length == 0 %>
-		<h4>商品レビューがありません</h4>
-		<!-- 件数が０のときにフッタが上にきてしまうのを防ぐためのdiv -->
-		<div class="space"></div>
+			<h4 class="space">商品レビューがありません</h4>
 	<% end %>
 
 	<% @product.reviews.each do |review| %>
@@ -105,6 +108,15 @@
 <style>
 	h1{
 		text-align: center;
+	}
+	.products_show {
+		background-color: #f0f8ff;
+		border-radius: 10px;
+		padding: 20px;
+		width: 400px;
+	}
+	.space {
+		margin-bottom: 30px;
 	}
 	.disc_form {
 		width: 250px;

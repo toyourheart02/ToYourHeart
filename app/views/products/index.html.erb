@@ -49,8 +49,8 @@
 			<!-- 並べ替えプルダウン -->
 			<table border="2" width="150"  class="sort_box" >
 				　<tr>
-					　　<th><%= sort_link(@search, :price, '値段順') %></th>
-					　　<th><%= sort_link(@search, :release_date, '発売日順') %></th>
+					　　<th class="sort_link"><%= sort_link(@search, :price, '値段順') %></th>
+					　　<th class="sort_link"><%= sort_link(@search, :release_date, '発売日順') %></th>
 				　</tr>
 			</table>
 		</div>
@@ -64,7 +64,7 @@
 		<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %>
 		<% end %>
 		<%= link_to products_show_path(product.id) do %>
-		<p><%= product.title.truncate(15) %></p>
+		<p class="product_title_color"><%= product.title.truncate(20) %></p>
 		<% end %>
 		<p><%= product.artist.artist_name %></p>
 
@@ -163,11 +163,10 @@
 <style>
 .img-width{
 	margin: 11px;
-	border-style: solid;
+	/*border-style: solid;*/
 }
 
 .product_title{
-
 	border-bottom: solid 3px;
 	background-color: #f2f2f2;
 	width: 147px;
@@ -212,15 +211,23 @@
 }
 
 .product_index {
-	background-color: #D4D7D8;
-	margin: 5px;
+	background-color: #f0f8ff;
+	margin: 10px;
 	padding: 10px;
 	height: 310px;
-	width: 230px;
+	width: 220px;
 	float: left;
-	border-style: solid;
-
+	border-radius: 10px
+	/*border-style: solid;*/
 }
+.product_title_color {
+	color: black;
+}
+
+.sort_link {
+	color: black
+}
+
 .dropdown {
 	float: right;
 }
@@ -230,6 +237,7 @@
 	width: 30px;
 	font-size: 24px;
 	float: left;
+	color: gray;
 }
 .favorite-icon {
 	height: 30px;
@@ -270,4 +278,5 @@
 {
 	width: 100%;
 }
+
 </style>

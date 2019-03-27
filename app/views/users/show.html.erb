@@ -42,9 +42,9 @@
 				</tr>
 			</tbody>
 		</table>
-		<%= link_to 'ユーザ情報変更', edit_user_path(current_user.id), class: "" %><br><br>
-		<%= link_to '注文履歴一覧', showorder_path, class: "" %><br><br>
-		<%= link_to '退会する', user_path(current_user.id) ,method: :delete, "data-confirm" => '退会してよろしいですか？', class: "" %>
+		<%= link_to 'ユーザ情報変更', edit_user_path(current_user.id), class: "links" %><br><br>
+		<%= link_to '注文履歴一覧', showorder_path, class: "links" %><br><br>
+		<%= link_to '退会する', user_path(current_user.id) ,method: :delete, "data-confirm" => '退会してよろしいですか？', class: "links" %>
 
 	</div>
 </div>
@@ -55,16 +55,20 @@
 	h1{
 		text-align: center;
 	}
+
 	.title{
 	width: 80%;
     padding: 0.5em 1em;
     margin: 0 10%;
     color: black;
-    background: white;
+    /*background: white;*/
     border-bottom: solid 10px black;
 	}
 	.link{
 		margin-top: 100px;
+	}
+	.links {
+		color: black;
 	}
 	.profile{
 		margin-bottom: 50px;

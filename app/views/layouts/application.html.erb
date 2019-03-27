@@ -7,6 +7,7 @@
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Kosugi+Maru" rel="stylesheet">
 
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -24,7 +25,6 @@
         <br>
         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "" %>
       </div>
-      
       <!-- adminでサインインしてない場合の処理 -->
       <% else %>
       <!-- ロゴをクリックしてもHOMEと同じ動きをするようにする必要あり -->
@@ -43,27 +43,27 @@
 
           <li class="">
             <%= link_to user_path(current_user.id), class: "icons mypage" do %>
-            <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
-            <span>マイページ</span>
+            <i class="glyphicon glyphicon-home" aria-hidden="true" style="color:black"></i>
+            <span class="links">マイページ</span>
 
             <% end %>
           </li>
           <li class="">
             <%= link_to carts_path, class: "icons cart" do %>
-            <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-            <span>カート</span>
+            <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true" style="color:black"></i>
+            <span class="links">カート</span>
             <% end %>
           </li>
           <li class="">
             <%= link_to favorites_path, class: "favorite icons" do %>
-            <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
-            <span>お気に入り</span>
+            <i class="glyphicon glyphicon-heart" aria-hidden="true" style="color:black"></i>
+            <span class="links">お気に入り</span>
             <% end %>
           </li>
           <li class="">
             <%= link_to destroy_user_session_path, method: :delete, class: "logout icons" do %>
-            <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
-            <span>ログアウト</span>
+            <i class="glyphicon glyphicon-log-out" aria-hidden="true" style="color:black"></i>
+            <span class="links">ログアウト</span>
             <% end %>
           </li>
 
@@ -71,24 +71,24 @@
           <% else %>
           <li class="">
             <%= link_to new_user_registration_path, class: "sign_up icons" do %>
-            <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-            <span>新規ユーザ登録</span>
+            <i class="glyphicon glyphicon-user" aria-hidden="true" style="color:black"></i>
+            <span class="links">新規ユーザ登録</span>
             <% end %>
           </li>
           <li class="">
             <%= link_to user_session_path, class: "sign_in icons" do %>
-            <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
-            <span>ログイン</span>
+            <i class="glyphicon glyphicon-log-in" aria-hidden="true" style="color:black"></i>
+            <span class="links">ログイン</span>
             <% end %>
           </li>
           <% end %>
         </ul>
 
         <ul class="nav navbar-nav" id="site_link">
-          <li><%= link_to "トップページ", products_path %></li>       
-          <li><a href="#">当サイトついて</a></li>
-          <li><a href="#footer">アクセス</a></li>
-          <li><a href="#footer">お問い合わせ</a></li>
+          <li><%= link_to "トップページ", products_path, style: "color:black" %></li>
+          <li><a href="#" class="links">当サイトついて</a></li>
+          <li><a href="#footer" class="links">アクセス</a></li>
+          <li><a href="#footer" class="links">お問い合わせ</a></li>
         </ul>
         <% end %>
       </nav>
@@ -98,32 +98,17 @@
       <%= yield %>
     </div>
 
-</div>
-
     <footer id="footer">
       <div class="container">
-          <div class="col-xs-3 col-xs-offset-9">
-            <h3>アクセス</h3>
-            <p>〒105-8335</p>
-            <p>東京都港区芝3-23-1 セレスティン芝三井ビルディング 12・13階</p>
-          </div>
-           <p class="footer_logo">CopyRight Infratop.inc</p>
-
-  </div>
-
-
-  <footer id="footer">
-    <div class="container">
-      <div class="row">
         <div class="col-xs-3 col-xs-offset-9">
           <h3>アクセス</h3>
-          <p>CopyRight Infratop.inc</p>
+          <p>〒105-8335</p>
+          <p>東京都港区芝3-23-1 セレスティン芝三井ビルディング 12・13階</p>
         </div>
+        <p class="footer_logo">CopyRight Infratop.inc</p>
 
       </div>
-    </div>
-  </div>
-</footer>
+    </footer>
 </body>
 </html>
 
@@ -169,6 +154,10 @@ header{
   padding-top: 80px;
   padding-right: 30px;
   text-align: right;
+}
+
+.links {
+  color: black;
 }
 
 #sitelogo_img{
@@ -223,7 +212,6 @@ header{
   padding: 0.5em 1em;
   margin: 0 10%;
   color: black;
-  background: white;
   border-bottom: solid 10px black;
 }
 
@@ -233,68 +221,5 @@ footer{
   background-color: black;
   color:white;
 }
-
-  
-.wrapper {
- flex: 1;
-}
-
-  header{
-    height: 120px;
-    width: 100%;
-    background-color: #f8f8f8;
-  }
-
-  #sitelogo_img{
-    text-align: right;
-  }
-
-  #user_name{
-    padding: 15px;
-  }
-
-  #user_link{
-    /*強引なやり方なので左揃えに指定する必要あり*/
-    padding-left: 30%;
-    height: 50px;
-    width: 100%;
-    text-align: right;
-  }
-
-  #user_link li{
-    display: inline;
-  }
-
-
-  #site_link{
-    height: 50px;
-    width: 100%;
-    text-align: center;
-    margin-top: 20px;
-    padding-left: 100px;
-  }
-
-  #site_link li{
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 17px;
-    display: inline;
-  }
-
-
-  .main-content{
-    margin-bottom: 50px;
-    /*height: 1000px;*/
-  }
-
-  footer{
-    /*position: fixed;*/
-    bottom: 0;
-    /*width: 100%;*/
-    height: 200px;
-    background-color: black;
-    color: white;
-  }
-
 
 </style>

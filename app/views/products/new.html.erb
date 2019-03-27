@@ -64,19 +64,19 @@
             <%= product.submit "登録", class: "btn btn-default btn-sm" %>
             <br>
         </div>
-        <%= link_to '戻る', admins_top_path %>
+        <%= link_to '戻る', admins_top_path, class: "link" %>
     </div>
 
 
     <div class="col-md-6">
-        <div id="product_musics_body">
+        <div>
             <%= product.fields_for :product_musics do |music| %>
                 <%= render 'product_music_fields', f: music %>
-                <%= link_to_add_association '追加', product, :product_musics %>
-<!--             data: {
+                <%= link_to_add_association '追加', product, :product_musics,
+            data: {
                 association_insertion_node: '#product_musics_body',
                 association_insertion_method: 'append'
-            }, class: "btn btn-default btn-sm" %> -->
+            }, class: "btn btn-default btn-sm" %>
             <% end %>
         </div>
     </div>
@@ -97,7 +97,9 @@ h1  {
     text-align: right;
     width: 250px;
 }
-
+.link {
+    color: black;
+}
 
 .label{
     display: inline-block;
