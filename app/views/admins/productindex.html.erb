@@ -38,8 +38,8 @@
 					<td><%= product.stock %></td>
 				</tr>
 				<tr class="active">
-					<td><button type="button" class="btn btn-success"><%=link_to "編集", product_path(product), class: "button" %></button></td>
-					<td><button type="button" class="btn btn-danger"><%= link_to "削除", admins_destroy_path(product), method: :delete, "data-confirm" => "本当に削除しますか？", class: "button" %></button></td>
+					<td><button type="button" class="btn btn-success btn-sm"><%=link_to "編集", product_path(product), class: "button" %></button></td>
+					<td><button type="button" class="btn btn-danger btn-sm"><%= link_to "削除", admins_destroy_path(product), method: :delete, "data-confirm" => "本当に削除しますか？", class: "button" %></button></td>
 				</tr>
 			</tbody>
 		</table>
@@ -59,10 +59,9 @@
 	margin-bottom: 5px;
 }
 .link {
-	color: black;
 	margin-left: 55px;
 }
 .button {
-	color: black;
+	color: white;
 }
 </style>

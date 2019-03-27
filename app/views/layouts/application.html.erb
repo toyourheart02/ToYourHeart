@@ -5,13 +5,14 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   <link href="https://fonts.googleapis.com/css?family=Kosugi+Maru" rel="stylesheet">
+  <!-- <link rel="stylesheet" type="text/css" href="sweetalert.css"> -->
 
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application' %>
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 </head>
 
 <body>
@@ -97,6 +98,7 @@
     <div class="main-content clearfix">
       <%= yield %>
     </div>
+  </div>
 
     <footer id="footer">
       <div class="container">
@@ -106,14 +108,14 @@
           <p>東京都港区芝3-23-1 セレスティン芝三井ビルディング 12・13階</p>
         </div>
         <p class="footer_logo">CopyRight Infratop.inc</p>
-
       </div>
     </footer>
+    <!-- <script type="text/javascript" src="sweetalert.min.js"></script> -->
 </body>
 </html>
 
 
-<style>
+<!-- <style>
 html {
   height: 100%;
 }
@@ -124,6 +126,7 @@ body {
 }
 .wrapper {
   flex: 1;
+  background: rgba(255,255,255,0.3);
 }
 
 .footer_logo{
@@ -146,7 +149,6 @@ body {
 header{
   height: 140px;
   width: 100%;
-  background-color: #f8f8f8;
 }
 
 #adminheader{
@@ -222,4 +224,4 @@ footer{
   color:white;
 }
 
-</style>
+</style> -->

@@ -105,6 +105,7 @@
 </div>
 </div>
 </div>
+
 <!-- ページャ -->
 
 <div class="col-md-10 col-md-offset-1">
@@ -114,23 +115,23 @@
 <script>
 	$(function(){
 		$("body").on("click", ".favorite-icon", function(){
-			swal('お気に入りに登録しました！');
+			// swal('お気に入りに登録しました！');
 			$(this).attr("class","glyphicon glyphicon-heart delete-icon");
 			$(this).css("color", "red");
 		});
 		$("body").on("click", ".delete-icon", function(){
-			swal('お気に入りから削除しました！');
+			// swal('お気に入りから削除しました！');
 			$(this).attr("class","glyphicon glyphicon-heart-empty favorite-icon");
 			$(this).css("color", "gray");
 		});
 
-		$("body").on("click", ".cart-icon", function(){
-			swal({
-				title: "カートに追加しました！",
-				icon: "success",
-				button: "OK"
-			});
-		});
+		// $("body").on("click", ".cart-icon", function(){
+		// 	swal({
+		// 		title: "カートに追加しました！",
+		// 		icon: "success",
+		// 		button: "OK"
+		// 	});
+		// });
 	});
 	// 	$("#sorting").on("change", function(){
 	// 		console.log($(this).val())
@@ -173,7 +174,7 @@
 }
 
 .sort_box{
-	color: red;
+	background-color: #f0f8ff;
 }
 
 .search{
@@ -220,9 +221,7 @@
 	border-radius: 10px
 	/*border-style: solid;*/
 }
-.product_title_color {
-	color: black;
-}
+
 
 .sort_link {
 	color: black

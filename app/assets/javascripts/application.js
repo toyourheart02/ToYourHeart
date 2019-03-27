@@ -16,3 +16,13 @@
 //= require bootstrap-sprockets
 //= require_tree .
 //= require cocoon
+
+// $(function(){
+// 	swal("aaaaaaaaaa");
+// })
+
+// console.log("test");
+
+$(window).load(function(){
+	swal("aaaaaaaaaa");
+});

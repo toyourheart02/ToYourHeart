@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
 	    cart = Cart.where(user_id: current_user.id)
 	    #取得したカートのレコード一件ごとに処理する。注文数と在庫数を比較
 	    cart.each do |cart|
-	    	# 商品の在庫数と注文数を比較して注文可能なら処理を行う。
+	    	# 商品の在庫数と注文数を比較して注文可能なら処理を行う。o
 		     if cart.product.stock > cart.quantity
 
 		     	orderproduct = OrderProduct.new

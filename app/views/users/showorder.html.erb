@@ -4,6 +4,10 @@
 <% if flash[:notice] %>
        <p class="alert alert-success"><%= flash[:notice] %></p>
 <% end %>
+<br>
+<% if @orders.length == 0 %>
+	<h4>購入履歴はありません</h4>
+<% end %>
 
 <div class="orders">
 	<% @orders.each do |order| %>
@@ -81,6 +85,10 @@
 
 
 <style>
+	h4{
+		margin-top: 50px;
+		text-align: center
+	}
 
 	.orders{
 		margin-top: 70px;
