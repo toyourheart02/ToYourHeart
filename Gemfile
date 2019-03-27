@@ -75,3 +75,4 @@ gem 'pry-rails'
 
 gem 'ransack'
 gem 'cocoon'
+gem "select2-rails"

@@ -1,4 +1,6 @@
-<h1>商品編集ページ</h1>
+<div class="title">
+    <h3>商品編集</h3>
+</div>
 <br>
 <br>
 <% if flash[:warning] %>
@@ -27,7 +29,7 @@
 				</tr>
 				<tr class="active">
 					<td>アーティスト</td>
-					<td><%= product.collection_select :artist_id, Artist.all, :id, :artist_name %></td>
+					<td> <%= product.select :artist_id, options_from_collection_for_select(@artists, :id, :artist_name, @product.artist_id), {}, class: "searchable form" %></td>
 				</tr>
 				<tr class="active">
 					<td>レーベル</td>
@@ -52,28 +54,30 @@
 			</tbody>
 		</table>
 		<%= product.submit "更新", class: "btn btn-default btn-sm" %>
+
 		<br>
 		<br>
-		<%= link_to "戻る", admins_products_path, class: "link" %>
+
+		<%= link_to '戻る', admins_top_path %>
 	</div>
 
-   <div class="col-md-6">
-        <div>
-        	<%= product.fields_for :product_musics do |music| %>
-        		<%= render 'product_music_fields', f: music %>
-            <% end %>
-            <%= link_to_add_association '追加', product, :product_musics,
-	            data: {
-	                association_insertion_node: '#product_musics_body',
-	                association_insertion_method: 'append'
-	            }, class: "btn btn-default btn-sm" %>
-        </div>
-    </div>
-	<% end %>
+	<div class="col-md-6">
+		<div id="product_musics_body">
+			<%= link_to_add_association '追加', product, :product_musics,
+			data: {
+				association_insertion_node: '#product_musics_body',
+				association_insertion_method: 'append'
+			}, class: "btn btn-default btn-sm" %>
+				<%= product.fields_for :product_musics do |music| %>
+				<%= render 'editproduct_music_fields', f: music %>
+				<% end %>
+			</div>
+		</div>
+		<% end %>
 </div>
 
-<style>
-h1{
-	text-align: center;
-}
-</style>
+<script>
+    $(document).ready(function() {
+    $('.searchable').select2();
+});
+</script>

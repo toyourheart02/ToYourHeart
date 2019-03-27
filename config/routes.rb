@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   post 'scenes' => 'scenes#create'
   get 'scene' => 'master#new'
 
+  get 'contact' => 'products#contact'
+  
   get 'products/new' => 'products#new'
   post 'products' => 'products#create'
 

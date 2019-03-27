@@ -20,16 +20,20 @@
 </div>
 
 <!-- 検索メニュー -->
-
 <div class="search col-md-1">
+
 	<%= search_form_for @search do |f| %>
 	<h4>検索メニュー</h4>
 	<div class="form-group">
 		<div class="form-box">
-			<%= f.text_field :title_cont,:placeholder => "商品名" ,class: "form"%>
-			<%= f.search_field :artist_id_eq,:placeholder => "アーティスト名" ,class: "form"%><br />
-			<%= f.collection_select :artist_id_eq, Artist.all, :id, :artist_name, { include_blank: true} ,class: "form"%><br>
-			<%= f.collection_select :genre_id_eq, Genre.all, :id, :genre_name, { include_blank: true} ,class: "form" %><br>
+			<label>タイトル</label>
+			<%= f.text_field :title_cont,:placeholder => "" ,class: "form"%>
+			<br>
+			<label>アーティスト</label>
+			<%= f.select :artist_id_eq, options_from_collection_for_select(Artist.all.order(:artist_kana), :id, :artist_name), {include_blank: true}, class: "searchable form" %>
+			<label>ジャンル</label>
+			<%= f.collection_select :genre_id_eq, Genre.all, :id, :genre_name, { include_blank: true, placeholder: "ジャンル"} ,class: "form" %><br>
+			<label>プレゼントシーン</label>
 			<%= f.collection_select :scene_id_eq, Scene.all, :id, :scene_name, { include_blank: true} ,class: "form" %><br>
 
 			<div class="actions glyphicon glyphicon-zoom-in">
@@ -109,10 +113,15 @@
 <!-- ページャ -->
 
 <div class="col-md-10 col-md-offset-1">
-	<%= paginate @products, class: "paginate" %>
+	<%= paginate @result, class: "paginate" %>
 </div>
 
 <script>
+
+	$(document).ready(function() {
+    	$('.searchable').select2();
+	});
+
 	$(function(){
 		$("body").on("click", ".favorite-icon", function(){
 			// swal('お気に入りに登録しました！');
@@ -125,70 +134,47 @@
 			$(this).css("color", "gray");
 		});
 	});
-	// 	$("#sorting").on("change", function(){
-	// 		console.log($(this).val())
-
-	// 		const sortValue = $(this).val()
-	// 		$.ajax({
-	// 			url: '/products/sort',
-	// 			type: 'post',
-	// 			dataType: 'json',
-	// 			data: {
-	// 				sortValue: sortValue
-	// 			},
-	// 			beforeSend: function(xhr){
-	// 				xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-	// 			}
-	// 		})
-	// 		.done((e)=>{
-	// 			console.log(e)
-	// 			$("#products").empty()
-	// 			e.forEach((value)=>{
-	// 				console.log(value)
-	// 				$('#products').append('<div class="product_index"><p>'+value.title+'</p></div>')
-	// 			})
-	// 		})
-	// 	})
-	// })
-
 </script>
 
 <style>
 h4 {
 	width: 150px;
 }
+<style>
+label{
+	margin-top: 10px;
+}
+
+.searchable{
+	margin-top: 10px;
+	/*height: 35px;*/
+}
 .img-width{
 	margin: 11px;
 	/*border-style: solid;*/
 }
-
 .product_title{
 	border-bottom: solid 3px;
 	background-color: #f2f2f2;
 	width: 147px;
 }
-
 .sort_box{
 	background-color: #f0f8ff;
 }
-
 .search{
 	margin-top: 10px;
 }
-
 .form{
 	width: 90%;
 	margin-top: 10px;
+	margin-bottom: 10px;
 }
-
 .kensaku{
 	padding:4px;
 }
-
 .favorite-icon{
 	color: gray;
 }
-
 .form-group{
 	border-style: 10px;
 	border-top: 3px solid #000000;
@@ -196,16 +182,13 @@ h4 {
 	height: 300px;
 	border-style: solid 10px;
 }
-
 .form-box{
 	text-align: center;
 	padding-bottom: 50px;
 }
-
 .container {
 	width: 1000px;
 }
-
 .product_index {
 	background-color: #f0f8ff;
 	margin: 10px;
@@ -217,7 +200,6 @@ h4 {
 	/*border-style: solid;*/
 }
 
-
 .sort_link {
 	color: black
 }
@@ -225,7 +207,6 @@ h4 {
 .dropdown {
 	float: right;
 }
-
 .cart-icon{
 	height: 30px;
 	width: 30px;
@@ -245,8 +226,6 @@ h4 {
 	font-size: 24px;
 	float: left;
 }
-
-
 .new {
 	display: inline-block;
 	padding: 5px 8px;
@@ -256,7 +235,6 @@ h4 {
 	font-size: 14px;
 	float: right;
 }
-
 .soldout{
 	display: inline-block;
 	padding: 5px 8px;
@@ -267,7 +245,6 @@ h4 {
 	font-size: 14px;
 	float: right;
 }
-
 .slick-list
 {
 	width: 100%;

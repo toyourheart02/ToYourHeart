@@ -36,7 +36,7 @@
             <br>
             <!-- アーティストの入力方法はより良いものに変更予定 -->
             <label>アーティスト</label>
-            <%= product.collection_select :artist_id, Artist.all, :id, :artist_name, { include_blank: true}, class: "form" %>
+             <%= product.select :artist_id, options_from_collection_for_select(@artists, :id, :artist_name), {include_blank: true}, class: "searchable form" %>
             <br>
 
             <label>レーベル</label>
@@ -86,10 +86,14 @@
 <% end %>
 </div>
 
+<script >
+    $(document).ready(function() {
+    $('.searchable').select2();
+});
+
+</script>
+
 <style>
-h1  {
-    text-align: center;
-}
 #img{
     margin-left: 15px;
 }
