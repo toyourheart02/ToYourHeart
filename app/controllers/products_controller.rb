@@ -68,6 +68,10 @@ class ProductsController < ApplicationController
   end
 
 
+    def contact
+      
+    end
+
 	 private
 
     def product_params
