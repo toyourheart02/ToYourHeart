@@ -20,7 +20,8 @@
 </div>
 
 <!-- 検索メニュー -->
-<div class="search col-md-2">
+<div class="search col-md-1">
+
 	<%= search_form_for @search do |f| %>
 	<h4>検索メニュー</h4>
 	<div class="form-group">
@@ -52,8 +53,8 @@
 			<!-- 並べ替えプルダウン -->
 			<table border="2" width="150"  class="sort_box" >
 				　<tr>
-					　　<th><%= sort_link(@search, :price, '値段順') %></th>
-					　　<th><%= sort_link(@search, :release_date, '発売日順') %></th>
+					　　<th class="sort_link"><%= sort_link(@search, :price, '値段順') %></th>
+					　　<th class="sort_link"><%= sort_link(@search, :release_date, '発売日順') %></th>
 				　</tr>
 			</table>
 		</div>
@@ -67,7 +68,7 @@
 		<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %>
 		<% end %>
 		<%= link_to products_show_path(product.id) do %>
-		<p><%= product.title.truncate(15) %></p>
+		<p class="product_title_color"><%= product.title.truncate(20) %></p>
 		<% end %>
 		<p><%= product.artist.artist_name %></p>
 
@@ -75,7 +76,7 @@
 		<!-- カートへの追加は非同期処理で行う　-->
 		<% if user_signed_in? %>
 		<div class="carticon">
-			<%= link_to carts_create_path(product_id: product.id),remote: true do %>
+			<%= link_to carts_create_path(product_id: product.id), data: {confirm: 'カートに追加しますか？'}, remote: true do %>
 			<i class="cart-icon glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
 			<% end %>
 		</div>
@@ -108,6 +109,7 @@
 </div>
 </div>
 </div>
+
 <!-- ページャ -->
 
 <div class="col-md-10 col-md-offset-1">
@@ -122,29 +124,22 @@
 
 	$(function(){
 		$("body").on("click", ".favorite-icon", function(){
-			swal('お気に入りに登録しました！');
+			// swal('お気に入りに登録しました！');
 			$(this).attr("class","glyphicon glyphicon-heart delete-icon");
 			$(this).css("color", "red");
 		});
 		$("body").on("click", ".delete-icon", function(){
-			swal('お気に入りから削除しました！')
+			// swal('お気に入りから削除しました！');
 			$(this).attr("class","glyphicon glyphicon-heart-empty favorite-icon");
 			$(this).css("color", "gray");
 		});
-		$("body").on("click", ".cart-icon", function(){
-			swal({
-				title: "カートに追加しました！",
-				icon: "success",
-				button: "OK",
-			});
-		});
-
-});
-
-
-
+	});
 </script>
 
+<style>
+h4 {
+	width: 150px;
+}
 <style>
 label{
 	margin-top: 10px;
@@ -154,10 +149,9 @@ label{
 	margin-top: 10px;
 	/*height: 35px;*/
 }
-
 .img-width{
 	margin: 11px;
-	border-style: solid;
+	/*border-style: solid;*/
 }
 .product_title{
 	border-bottom: solid 3px;
@@ -165,7 +159,7 @@ label{
 	width: 147px;
 }
 .sort_box{
-	color: red;
+	background-color: #f0f8ff;
 }
 .search{
 	margin-top: 10px;
@@ -196,14 +190,20 @@ label{
 	width: 1000px;
 }
 .product_index {
-	background-color: #D4D7D8;
-	margin: 5px;
+	background-color: #f0f8ff;
+	margin: 10px;
 	padding: 10px;
 	height: 310px;
-	width: 230px;
+	width: 220px;
 	float: left;
-	border-style: solid;
+	border-radius: 10px
+	/*border-style: solid;*/
 }
+
+.sort_link {
+	color: black
+}
+
 .dropdown {
 	float: right;
 }
@@ -212,6 +212,7 @@ label{
 	width: 30px;
 	font-size: 24px;
 	float: left;
+	color: gray;
 }
 .favorite-icon {
 	height: 30px;
@@ -248,4 +249,5 @@ label{
 {
 	width: 100%;
 }
+
 </style>

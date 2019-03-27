@@ -20,36 +20,36 @@
 	<div class="col-md-5 col-md-offset-1">
 		<table class="table">
 			<tbody>
-				<tr>
+				<tr class="active">
 					<td>ユーザ名</td>
 					<td><%= user.text_field :user_name %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>かな</td>
 					<td><%= user.text_field :user_kana %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>郵便番号</td>
 					<td><%= user.text_field :zip_code %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>住所</td>
 					<td><%= user.text_field :address %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>電話番号</td>
 					<td><%= user.text_field :phone_number %></td>
 				</tr>
 			</tbody>
 		</table>
-			<%= user.submit "更新", class: "update-profile-btn" %>
+			<%= user.submit "更新", class: "btn btn-primary" %>
 		</div>
 </div>
 
 <% end %>
 
 <style>
-	.update-profile-btn{
+	.btn-primary{
 		padding: 5px;
 		text-align: right;
 	}

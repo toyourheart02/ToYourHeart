@@ -20,31 +20,31 @@
 	<div class="col-md-5 col-md-offset-1">
 		<table class="table">
 			<tbody>
-				<tr>
+				<tr class="active">
 					<td>ユーザ名</td>
 					<td><%= @user.user_name %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>かな</td>
 					<td><%= @user.user_kana %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>郵便番号</td>
 					<td><%= @user.zip_code %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>住所</td>
 					<td><%= @user.address %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>電話番号</td>
 					<td><%= @user.phone_number %></td>
 				</tr>
 			</tbody>
 		</table>
-		<%= link_to 'ユーザ情報変更', edit_user_path(current_user.id), class: "" %><br><br>
-		<%= link_to '注文履歴一覧', showorder_path, class: "" %><br><br>
-		<%= link_to '退会する', user_path(current_user.id) ,method: :delete, "data-confirm" => '退会してよろしいですか？', class: "" %>
+		<%= link_to 'ユーザ情報変更', edit_user_path(current_user.id) %><br><br>
+		<%= link_to '注文履歴一覧', showorder_path %><br><br>
+		<%= link_to '退会する', user_path(current_user.id) ,method: :delete, "data-confirm" => '退会してよろしいですか？' %>
 
 	</div>
 </div>
@@ -55,12 +55,13 @@
 	h1{
 		text-align: center;
 	}
+
 	.title{
 	width: 80%;
     padding: 0.5em 1em;
     margin: 0 10%;
     color: black;
-    background: white;
+    /*background: white;*/
     border-bottom: solid 10px black;
 	}
 	.link{

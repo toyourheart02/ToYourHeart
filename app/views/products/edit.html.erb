@@ -19,41 +19,45 @@
 		<!-- <div class="col-md-5"> -->
 		<table class="table">
 			<tbody>
-				<tr>
+				<tr class="active">
 					<td>商品名</td>
 					<td><%= product.text_field :title %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>値段</td>
 					<td><%= product.text_field :price %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>アーティスト</td>
 					<td> <%= product.select :artist_id, options_from_collection_for_select(@artists, :id, :artist_name, @product.artist_id), {}, class: "searchable form" %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>レーベル</td>
 					<td><%= product.collection_select :label_id, Label.all, :id, :label_name %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>ジャンル</td>
 					<td><%= product.collection_select :genre_id, Genre.all, :id, :genre_name %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>シーン</td>
 					<td><%= product.collection_select :scene_id, Scene.all, :id, :scene_name %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>発売日</td>
 					<td><%= product.date_field :release_date %></td>
 				</tr>
-				<tr>
+				<tr class="active">
 					<td>在庫数</td>
 					<td> <%= product.text_field :stock %></td>
 				</tr>
 			</tbody>
 		</table>
 		<%= product.submit "更新", class: "btn btn-default btn-sm" %>
+
+		<br>
+		<br>
+
 		<%= link_to '戻る', admins_top_path %>
 	</div>
 
@@ -77,7 +81,3 @@
     $('.searchable').select2();
 });
 </script>
-
-<style>
-
-</style>

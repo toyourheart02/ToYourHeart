@@ -4,6 +4,10 @@
 <% if flash[:notice] %>
        <p class="alert alert-success"><%= flash[:notice] %></p>
 <% end %>
+<br>
+<% if @orders.length == 0 %>
+	<h4>購入履歴はありません</h4>
+<% end %>
 
 <div class="orders">
 	<% @orders.each do |order| %>
@@ -81,6 +85,10 @@
 
 
 <style>
+	h4{
+		margin-top: 50px;
+		text-align: center
+	}
 
 	.orders{
 		margin-top: 70px;
@@ -89,6 +97,7 @@
 
 	.order-content{
 		/*overflow: hidden;*/
+		position: relative;
 		margin-bottom: 30px;
 		padding: 20px;
 		width: 80%;
@@ -102,7 +111,7 @@
 	    padding: 0.5em 1em;
 	    margin: 0 10%;
 	    color: black;
-	    background: white;
+	    /*background: white;*/
 	    border-bottom: solid 10px black;
 	}
 
@@ -116,7 +125,6 @@
 
 	.right-content{
 		/*overflow: hidden;*/
-		height: 120px;
 		margin-top: 20px;
 		float: left;
 	}
@@ -159,6 +167,8 @@
 	}
 
 	#amount{
-		text-align: right;
+		position: absolute;
+		right: 50px;
+		bottom: 0px;
 	}
 </style>

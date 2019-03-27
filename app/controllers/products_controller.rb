@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
 	def index
   	# config/initializers/kaminari_configで1ページの表示件数20件に設定
     # @slideproducts = Product.page(params[:page]).reverse_order
@@ -66,6 +67,9 @@ class ProductsController < ApplicationController
       flash[:warning] = '商品情報の更新に失敗しました。'
       redirect_to product_path(product.id)
     end
+  end
+
+  def about
   end
 
 

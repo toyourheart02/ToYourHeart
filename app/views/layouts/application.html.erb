@@ -5,13 +5,14 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+  <link href="https://fonts.googleapis.com/css?family=Kosugi+Maru" rel="stylesheet">
   <link href="select2.min.css" rel="stylesheet" />
 
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application' %>
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="select2.min.js"></script>
 </head>
 
@@ -26,11 +27,14 @@
         <br>
         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "" %>
       </div>
-      
       <!-- adminでサインインしてない場合の処理 -->
       <% else %>
       <!-- ロゴをクリックしてもHOMEと同じ動きをするようにする必要あり -->
-      <nav class="col-md-2" id="sitelogo" style="text-align:center"><%= image_tag 'sitelogo.png', :size =>'160x100' %></nav>
+      <nav class="col-md-2" id="sitelogo" style="text-align:center">
+        <%= link_to products_path do %>
+          <%= image_tag 'sitelogo.png', :size =>'160x100' %>
+        <% end %>
+      </nav>
 
       <nav class="navbar col-md-10">
         <ul class="" id="user_link">
@@ -45,27 +49,27 @@
 
           <li class="">
             <%= link_to user_path(current_user.id), class: "icons mypage" do %>
-            <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
-            <span>マイページ</span>
+            <i class="glyphicon glyphicon-home" aria-hidden="true" style="color:black"></i>
+            <span class="links">マイページ</span>
 
             <% end %>
           </li>
           <li class="">
             <%= link_to carts_path, class: "icons cart" do %>
-            <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-            <span>カート</span>
+            <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true" style="color:black"></i>
+            <span class="links">カート</span>
             <% end %>
           </li>
           <li class="">
             <%= link_to favorites_path, class: "favorite icons" do %>
-            <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
-            <span>お気に入り</span>
+            <i class="glyphicon glyphicon-heart" aria-hidden="true" style="color:black"></i>
+            <span class="links">お気に入り</span>
             <% end %>
           </li>
           <li class="">
             <%= link_to destroy_user_session_path, method: :delete, class: "logout icons" do %>
-            <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
-            <span>ログアウト</span>
+            <i class="glyphicon glyphicon-log-out" aria-hidden="true" style="color:black"></i>
+            <span class="links">ログアウト</span>
             <% end %>
           </li>
 
@@ -73,24 +77,26 @@
           <% else %>
           <li class="">
             <%= link_to new_user_registration_path, class: "sign_up icons" do %>
-            <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-            <span>新規ユーザ登録</span>
+            <i class="glyphicon glyphicon-user" aria-hidden="true" style="color:black"></i>
+            <span class="links">新規ユーザ登録</span>
             <% end %>
           </li>
           <li class="">
             <%= link_to user_session_path, class: "sign_in icons" do %>
-            <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
-            <span>ログイン</span>
+            <i class="glyphicon glyphicon-log-in" aria-hidden="true" style="color:black"></i>
+            <span class="links">ログイン</span>
             <% end %>
           </li>
           <% end %>
         </ul>
 
-        <ul class="nav navbar-nav" id="site_link">
-          <li><%= link_to "トップページ", products_path %></li>       
-          <li><a href="#">当サイトついて</a></li>
-          <li><a href="#footer">アクセス</a></li>
+
+        <ul class="navbar-nav" id="site_link">
+          <li><%= link_to "トップページ", products_path, style: "color:black" %></li>
+          <li><a href="about" class="links">当サイトついて</a></li>
+          <li><a href="#footer" class="links">アクセス</a></li>
           <li><a href="contact">お問い合わせ</a></li>
+
         </ul>
         <% end %>
       </nav>
@@ -99,8 +105,7 @@
     <div class="main-content clearfix">
       <%= yield %>
     </div>
-
-</div>
+  </div>
 
     <footer id="footer">
       <div class="container">
@@ -127,6 +132,7 @@ body {
 }
 .wrapper {
   flex: 1;
+  background: rgba(255,255,255,0.3);
 }
 
 .footer_logo{
@@ -149,7 +155,6 @@ body {
 header{
   height: 140px;
   width: 100%;
-  background-color: #f8f8f8;
 }
 
 #adminheader{
@@ -157,6 +162,10 @@ header{
   padding-top: 80px;
   padding-right: 30px;
   text-align: right;
+}
+
+.links {
+  color: black;
 }
 
 #sitelogo_img{
@@ -185,7 +194,7 @@ header{
   width: 100%;
   text-align: center;
   margin-top: 20px;
-  padding-left: 100px;
+  padding-left: 200px;
 }
 
 #site_link li{
@@ -211,7 +220,6 @@ header{
   padding: 0.5em 1em;
   margin: 0 10%;
   color: black;
-  background: white;
   border-bottom: solid 10px black;
 }
 
