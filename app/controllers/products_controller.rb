@@ -54,6 +54,7 @@ class ProductsController < ApplicationController
 
   def edit
         @product = Product.find(params[:id])
+         @artists = Artist.all.order(:artist_kana)
   end
 
   def update
