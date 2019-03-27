@@ -12,7 +12,7 @@
 
   <%= javascript_include_tag 'application' %>
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -29,7 +29,11 @@
       <!-- adminでサインインしてない場合の処理 -->
       <% else %>
       <!-- ロゴをクリックしてもHOMEと同じ動きをするようにする必要あり -->
-      <nav class="col-md-2" id="sitelogo" style="text-align:center"><%= image_tag 'sitelogo.png', :size =>'160x100' %></nav>
+      <nav class="col-md-2" id="sitelogo" style="text-align:center">
+        <%= link_to products_path do %>
+          <%= image_tag 'sitelogo.png', :size =>'160x100' %>
+        <% end %>
+      </nav>
 
       <nav class="navbar col-md-10">
         <ul class="" id="user_link">
@@ -85,9 +89,9 @@
           <% end %>
         </ul>
 
-        <ul class="nav navbar-nav" id="site_link">
+        <ul class="navbar-nav" id="site_link">
           <li><%= link_to "トップページ", products_path, style: "color:black" %></li>
-          <li><a href="#" class="links">当サイトついて</a></li>
+          <li><a href="about" class="links">当サイトついて</a></li>
           <li><a href="#footer" class="links">アクセス</a></li>
           <li><a href="#footer" class="links">お問い合わせ</a></li>
         </ul>
@@ -115,7 +119,7 @@
 </html>
 
 
-<!-- <style>
+<style>
 html {
   height: 100%;
 }
@@ -188,7 +192,7 @@ header{
   width: 100%;
   text-align: center;
   margin-top: 20px;
-  padding-left: 100px;
+  padding-left: 200px;
 }
 
 #site_link li{
@@ -224,4 +228,4 @@ footer{
   color:white;
 }
 
-</style> -->
+</style>

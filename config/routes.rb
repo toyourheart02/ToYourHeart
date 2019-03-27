@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   patch '/products/:id' => 'products#update', as: 'update_product'
   get 'products/:id' => 'products#show', as: 'products_show'
 
+  get 'about' => 'products#about'
+
   post 'products/:id/reviews' => 'reviews#create', as: 'reviews'
   resources :reviews, only: [:destroy]
 

@@ -73,6 +73,9 @@ class ProductsController < ApplicationController
     end
   end
 
+  def about
+  end
+
 
 	 private
 

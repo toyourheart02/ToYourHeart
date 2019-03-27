@@ -57,19 +57,19 @@
 		<%= link_to "戻る", admins_products_path, class: "link" %>
 	</div>
 
-	<div class="col-md-6">
-		<div id="product_musics_body">
-			<%= link_to_add_association '追加', product, :product_musics,
-			data: {
-				association_insertion_node: '#product_musics_body',
-				association_insertion_method: 'append'
-			}, class: "btn btn-default btn-sm" %>
-				<%= product.fields_for :product_musics do |music| %>
-				<%= render 'product_music_fields', f: music %>
-				<% end %>
-			</div>
-		</div>
-		<% end %>
+   <div class="col-md-6">
+        <div>
+        	<%= product.fields_for :product_musics do |music| %>
+        		<%= render 'product_music_fields', f: music %>
+            <% end %>
+            <%= link_to_add_association '追加', product, :product_musics,
+	            data: {
+	                association_insertion_node: '#product_musics_body',
+	                association_insertion_method: 'append'
+	            }, class: "btn btn-default btn-sm" %>
+        </div>
+    </div>
+	<% end %>
 </div>
 
 <style>

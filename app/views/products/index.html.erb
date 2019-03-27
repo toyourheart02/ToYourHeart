@@ -21,7 +21,7 @@
 
 <!-- 検索メニュー -->
 
-<div class="search col-md-2">
+<div class="search col-md-1">
 	<%= search_form_for @search do |f| %>
 	<h4>検索メニュー</h4>
 	<div class="form-group">
@@ -72,7 +72,7 @@
 		<!-- カートへの追加は非同期処理で行う　-->
 		<% if user_signed_in? %>
 		<div class="carticon">
-			<%= link_to carts_create_path(product_id: product.id),remote: true do %>
+			<%= link_to carts_create_path(product_id: product.id), data: {confirm: 'カートに追加しますか？'}, remote: true do %>
 			<i class="cart-icon glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
 			<% end %>
 		</div>
@@ -124,14 +124,6 @@
 			$(this).attr("class","glyphicon glyphicon-heart-empty favorite-icon");
 			$(this).css("color", "gray");
 		});
-
-		// $("body").on("click", ".cart-icon", function(){
-		// 	swal({
-		// 		title: "カートに追加しました！",
-		// 		icon: "success",
-		// 		button: "OK"
-		// 	});
-		// });
 	});
 	// 	$("#sorting").on("change", function(){
 	// 		console.log($(this).val())
@@ -162,6 +154,9 @@
 </script>
 
 <style>
+h4 {
+	width: 150px;
+}
 .img-width{
 	margin: 11px;
 	/*border-style: solid;*/
