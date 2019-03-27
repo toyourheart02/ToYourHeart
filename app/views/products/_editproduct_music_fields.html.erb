@@ -1,5 +1,5 @@
 <div class='nested-fields'>
-		<div id="product_musics_body">
+		<div id="editproduct_musics_body">
 	<table class="table">
 		<thead>
 			<tr>
@@ -19,7 +19,7 @@
 				</td>
 				<td>
 					
-					<%= f.select :music_id, options_from_collection_for_select(Music.all, :id, :music_name), {include_blank: true}, class: "searchable" %>
+					<%= f.collection_select :music_id, Music.all, :id, :music_name, :include_blank => true %>
 				</td>
 				<td>
 					<%= link_to_remove_association '削除', f %>
@@ -29,9 +29,3 @@
 	</table>
 </div>
 </div>
-
-<script >
-    $(document).ready(function() {
-    $('.searchable').select2();
-});
-</script>

@@ -1,4 +1,6 @@
-<h1>商品編集ページ</h1>
+<div class="title">
+    <h3>商品編集</h3>
+</div>
 <br>
 <br>
 <% if flash[:warning] %>
@@ -27,7 +29,7 @@
 				</tr>
 				<tr>
 					<td>アーティスト</td>
-					<td> <%= product.select :artist_id, options_from_collection_for_select(@artists, :id, :artist_name), {}, class: "searchable form" %></td>
+					<td> <%= product.select :artist_id, options_from_collection_for_select(@artists, :id, :artist_name, @product.artist_id), {}, class: "searchable form" %></td>
 				</tr>
 				<tr>
 					<td>レーベル</td>
@@ -52,6 +54,7 @@
 			</tbody>
 		</table>
 		<%= product.submit "更新", class: "btn btn-default btn-sm" %>
+		<%= link_to '戻る', admins_top_path %>
 	</div>
 
 	<div class="col-md-6">
@@ -62,24 +65,19 @@
 				association_insertion_method: 'append'
 			}, class: "btn btn-default btn-sm" %>
 				<%= product.fields_for :product_musics do |music| %>
-				<%= render 'product_music_fields', f: music %>
+				<%= render 'editproduct_music_fields', f: music %>
 				<% end %>
 			</div>
 		</div>
 		<% end %>
 </div>
 
-<script >
+<script>
     $(document).ready(function() {
     $('.searchable').select2();
 });
-
-    $('#inputID').select2('data', {id: 100, a_key: 'Lorem Ipsum'});
-
 </script>
 
 <style>
-h1{
-	text-align: center;
-}
+
 </style>
