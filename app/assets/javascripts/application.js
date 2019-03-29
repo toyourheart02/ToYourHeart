@@ -17,3 +17,23 @@
 //= require bootstrap-sprockets
 //= require_tree .
 //= require cocoon
+
+window.onload = function(){
+	$("body").on("click", ".favorite-icon", function(){
+			swal('お気に入りに登録しました！');
+			$(this).attr("class","glyphicon glyphicon-heart delete-icon");
+			$(this).css("color", "red");
+		});
+		$("body").on("click", ".delete-icon", function(){
+			swal('お気に入りから削除しました！');
+			$(this).attr("class","glyphicon glyphicon-heart-empty favorite-icon");
+			$(this).css("color", "gray");
+		});
+	$("body").on("click", ".cart-icon", function(){
+		swal({
+			title: "カートに追加しました！",
+			icon: "success",
+			button: "OK",
+		});
+	});
+}

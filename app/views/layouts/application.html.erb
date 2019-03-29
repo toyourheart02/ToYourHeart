@@ -14,6 +14,8 @@
   <%= javascript_include_tag 'application' %>
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="select2.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body>
@@ -92,10 +94,10 @@
 
 
         <ul class="navbar-nav" id="site_link">
-          <li><%= link_to "トップページ", products_path, style: "color:black" %></li>
-          <li><a href="about" class="links">当サイトついて</a></li>
+          <li><%= link_to "トップページ", products_path, class: "links" %></li>
+          <li><%= link_to "当サイトについて", about_path, class: "links" %></li>
           <li><a href="#footer" class="links">アクセス</a></li>
-          <li><a href="contact">お問い合わせ</a></li>
+          <li><%= link_to "お問い合わせ", contact_path, class: "links" %></li>
 
         </ul>
         <% end %>
@@ -132,7 +134,7 @@ body {
 }
 .wrapper {
   flex: 1;
-  background: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.4);
 }
 
 .footer_logo{

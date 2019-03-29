@@ -19,28 +19,28 @@
 		<br>
 		<label class="">よみがな</label>
 		<%= f.text_field :artist_kana %>
-		<%= f.submit "登録", class: "" %>
+		<%= f.submit "登録", class: "submit btn btn-default btn-sm" %>
 	<% end %>
 
 	<h3>レーベル登録</h3>
 	<%= form_for(@label) do |f| %>
 		<label class="">レーベル名</label>
 		<%= f.text_field :label_name %>
-		<%= f.submit "登録", class: "" %>
+		<%= f.submit "登録", class: "submit btn btn-default btn-sm" %>
 	<% end %>
 
 	<h3>プレゼントシーン登録</h3>
 	<%= form_for(@scene) do |f| %>
 		<label class="">シーン名</label>
 		<%= f.text_field :scene_name %>
-		<%= f.submit "登録", class: "" %>
+		<%= f.submit "登録", class: "submit btn btn-default btn-sm" %>
 	<% end %>
 
 	<h3>ジャンル登録</h3>
 	<%= form_for(@genre) do |f| %>
 		<label class="">ジャンル名</label>
 		<%= f.text_field :genre_name %>
-		<%= f.submit "登録", class: "" %>
+		<%= f.submit "登録", class: "submit btn btn-default btn-sm" %>
 	<% end %>
 
 	<h3>楽曲登録</h3>
@@ -53,11 +53,12 @@
 		<br>
 		<label class="">アーティスト名</label>
 	     <%= f.select :artist_id, options_from_collection_for_select(@artists, :id, :artist_name), {include_blank: true}, class: "searchable" %>
-        <br>
-        <br>
-		<%= f.submit "登録", class: "" %>
+		<%= f.submit "登録", class: "submit btn btn-default btn-sm" %>
 	<% end %>
 	<br>
+</div>
+
+<div class="masternew-link">
 	<%= link_to '戻る', admins_top_path%>
 </div>
 
@@ -87,6 +88,18 @@
 	.master{
 		margin-left: 30%;
 		width: 40%;
+		background-color: #f5f5f5;
+		border-radius: 10px;
+		padding: 20px 10px 20px 70px;
+		position: relative;
+	}
+	.submit {
+		position: absolute;
+		right: 180px;
+	}
+	.masternew-link {
+		margin-left: 30%;
+		margin-top: 10px;
 	}
 </style>
 

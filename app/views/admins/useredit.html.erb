@@ -11,9 +11,9 @@
 <%= form_for(@user,url: admins_userupdate_path) do |user| %>
 	<div class="col-md-2 col-md-offset-2">
 		<label>プロフィール画像</label>
-		<%= attachment_image_tag @user, :profile_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
+		<%= attachment_image_tag @user, :profile_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "220x220" %>
+		<br><br>
 		<%= user.attachment_field :profile_image, class: "" %><br>
-
 	</div>
 
 	<div class="col-md-5 col-md-offset-1">
@@ -41,9 +41,15 @@
 				</tr>
 			</tbody>
 		</table>
-		<%= user.submit "更新" %>
+		<%= user.submit "更新", class: "btn btn-default btn-sm" %>
 		<br><br><br><br>
 		<%= link_to "戻る", :back %>
 	</div>
 <% end %>
 
+<style>
+	.table {
+		background-color: #f5f5f5;
+		border-radius: 10px;
+	}
+</style>

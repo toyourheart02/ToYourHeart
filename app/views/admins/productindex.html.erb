@@ -7,37 +7,37 @@
 		<table class="table">
 			<tbody>
 
-				<%= attachment_image_tag product, :music_image,  format: 'jpeg', class: "music_image", fallback: "no_image.jpg", size: "150x150" %>
+				<%= attachment_image_tag product, :music_image,  format: 'jpeg', class: "music_image", fallback: "CD_NO_IMAGE.jpg", size: "150x150" %>
 
 				<% if  product.is_deleted == true  %>
 				<span class="sakujyo">削除済み</span>
 				<% end %>
 
-				<tr class="active">
+				<tr>
 					<td>タイトル</td>
 					<td><%= product.title %></td>
 				</tr>
-				<tr class="active">
+				<tr>
 					<td>アーティスト</td>
 					<td><%= product.artist.artist_name %></td>
 				</tr>
-				<tr class="active">
+				<tr>
 					<td>レーベル</td>
 					<td><%= product.label.label_name %></td>
 				</tr>
-				<tr class="active">
+				<tr>
 					<td>ジャンル</td>
 					<td><%= product.genre.genre_name %></td>
 				</tr>
-				<tr class="active">
+				<tr>
 					<td>価格</td>
 					<td><%= product.price %></td>
 				</tr>
-				<tr class="active">
+				<tr>
 					<td>在庫数</td>
 					<td><%= product.stock %></td>
 				</tr>
-				<tr class="active">
+				<tr>
 					<td><button type="button" class="btn btn-success btn-sm"><%=link_to "編集", product_path(product), class: "button" %></button></td>
 					<td><button type="button" class="btn btn-danger btn-sm"><%= link_to "削除", admins_destroy_path(product), method: :delete, "data-confirm" => "本当に削除しますか？", class: "button" %></button></td>
 				</tr>
@@ -63,5 +63,9 @@
 }
 .button {
 	color: white;
+}
+.table {
+	background-color: #f5f5f5;
+	border-radius: 10px;
 }
 </style>

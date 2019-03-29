@@ -5,11 +5,11 @@
 <% end %>
 <!-- スライドショー -->
 
-<div id="products", class="center">
+<div id="products" class="center">
 	<% @slideproducts.each do |product| %>
 	<div class="img-width">
 		<%= link_to products_show_path(product.id) do %>
-		<%= attachment_image_tag product, :music_image, :fill, 300, 300, fallback: "no_image.jpg",class: "slideimg" %>
+		<%= attachment_image_tag product, :music_image, :fill, 300, 300, fallback: "CD_NO_IMAGE.jpg",class: "slideimg" %>
 		<% end %>
 
 		<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
@@ -65,7 +65,7 @@
 
 	<div class="product_index">
 		<%= link_to products_show_path(product.id) do %>
-		<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %>
+		<%= attachment_image_tag product, :music_image, class: "", fallback: "CD_NO_IMAGE.jpg", size: "200x200" %>
 		<% end %>
 		<%= link_to products_show_path(product.id) do %>
 		<p class="product_title_color"><%= product.title.truncate(20) %></p>
@@ -76,8 +76,8 @@
 		<!-- カートへの追加は非同期処理で行う　-->
 		<% if user_signed_in? %>
 		<div class="carticon">
-			<%= link_to carts_create_path(product_id: product.id), data: {confirm: 'カートに追加しますか？'}, remote: true do %>
-			<i class="cart-icon glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
+			<%= link_to carts_create_path(product_id: product.id), remote: true do %>
+			<i class="cart-icon glyphicon glyphicon-shopping-cart" aria-hidden="true" style="color:darkorange"></i>
 			<% end %>
 		</div>
 		<% end %>
@@ -112,7 +112,7 @@
 
 <!-- ページャ -->
 
-<div class="col-md-10 col-md-offset-1">
+<div class="col-md-10 col-md-offset-2">
 	<%= paginate @result, class: "paginate" %>
 </div>
 
@@ -122,25 +122,13 @@
     	$('.searchable').select2();
 	});
 
-	$(function(){
-		$("body").on("click", ".favorite-icon", function(){
-			// swal('お気に入りに登録しました！');
-			$(this).attr("class","glyphicon glyphicon-heart delete-icon");
-			$(this).css("color", "red");
-		});
-		$("body").on("click", ".delete-icon", function(){
-			// swal('お気に入りから削除しました！');
-			$(this).attr("class","glyphicon glyphicon-heart-empty favorite-icon");
-			$(this).css("color", "gray");
-		});
-	});
 </script>
 
 <style>
 h4 {
 	width: 150px;
 }
-<style>
+
 label{
 	margin-top: 10px;
 }
@@ -152,6 +140,10 @@ label{
 .img-width{
 	margin: 11px;
 	/*border-style: solid;*/
+}
+
+#products {
+	margin-left: 30px;
 }
 .product_title{
 	border-bottom: solid 3px;
@@ -190,14 +182,13 @@ label{
 	width: 1000px;
 }
 .product_index {
-	background-color: #f0f8ff;
+	background-color: #f5f5f5;
 	margin: 10px;
 	padding: 10px;
 	height: 310px;
 	width: 220px;
 	float: left;
 	border-radius: 10px
-	/*border-style: solid;*/
 }
 
 .sort_link {

@@ -12,7 +12,7 @@
 <div class="profile col-md-offset-2">
 	<div class="col-md-3">
 		<label>プロフィール画像</label>
-		<%= attachment_image_tag @user, :profile_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "240x280" %>
+		<%= attachment_image_tag @user, :profile_image,  format: 'jpeg', class: "", fallback: "no_image.jpg", size: "220x220" %>
 	</div>
 
 	<br>
@@ -20,23 +20,23 @@
 	<div class="col-md-5 col-md-offset-1">
 		<table class="table">
 			<tbody>
-				<tr class="active">
+				<tr>
 					<td>ユーザ名</td>
 					<td><%= @user.user_name %></td>
 				</tr>
-				<tr class="active">
+				<tr>
 					<td>かな</td>
 					<td><%= @user.user_kana %></td>
 				</tr>
-				<tr class="active">
+				<tr>
 					<td>郵便番号</td>
 					<td><%= @user.zip_code %></td>
 				</tr>
-				<tr class="active">
+				<tr>
 					<td>住所</td>
 					<td><%= @user.address %></td>
 				</tr>
-				<tr class="active">
+				<tr>
 					<td>電話番号</td>
 					<td><%= @user.phone_number %></td>
 				</tr>
@@ -69,5 +69,9 @@
 	}
 	.profile{
 		margin-bottom: 50px;
+	}
+	.table {
+	background-color: #f5f5f5;
+	border-radius: 10px;
 	}
 </style>
