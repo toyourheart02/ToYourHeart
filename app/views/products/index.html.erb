@@ -9,7 +9,7 @@
 	<% @slideproducts.each do |product| %>
 	<div class="img-width">
 		<%= link_to products_show_path(product.id) do %>
-		<%= attachment_image_tag product, :music_image, :fill, 300, 300, fallback: "CD_NO_IMAGE.jpg",class: "slideimg" %>
+		<%= attachment_image_tag product, :music_image, size: "300x300", fallback: "CD_NO_IMAGE.jpg",class: "slideimg" %>
 		<% end %>
 
 		<!-- 発売日が１週間以内のものにNEWと表示。登録日に変更も可能 -->
@@ -68,7 +68,7 @@
 		<%= attachment_image_tag product, :music_image, class: "", fallback: "CD_NO_IMAGE.jpg", size: "200x200" %>
 		<% end %>
 		<%= link_to products_show_path(product.id) do %>
-		<p class="product_title_color"><%= product.title.truncate(20) %></p>
+		<p class="product_title_color"><%= product.title.truncate(14) %></p>
 		<% end %>
 		<p><%= product.artist.artist_name %></p>
 

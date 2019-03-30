@@ -1,54 +1,56 @@
-<div class="col-md-10 col-md-offset-1 ">
-	<div class="title">
-		<h3>商品一覧ページ</h3>
-	</div>
-	<% @products.each do |product| %>
-	<div class="col-md-5 col-md-offset-1">
-		<table class="table">
-			<tbody>
+<div class="title">
+	<h3>商品一覧ページ</h3>
+</div>
+<% @products.each do |product| %>
+<div class="col-md-4 col-md-offset-1 index_area">
+	<table class="table">
+		<tbody>
+			<%= attachment_image_tag product, :music_image,  format: 'jpeg', class: "music_image", fallback: "CD_NO_IMAGE.jpg", size: "150x150" %>
 
-				<%= attachment_image_tag product, :music_image,  format: 'jpeg', class: "music_image", fallback: "CD_NO_IMAGE.jpg", size: "150x150" %>
-
-				<% if  product.is_deleted == true  %>
+			<% if  product.is_deleted == true  %>
 				<span class="sakujyo">削除済み</span>
-				<% end %>
+			<% end %>
 
-				<tr>
-					<td>タイトル</td>
-					<td><%= product.title %></td>
-				</tr>
-				<tr>
-					<td>アーティスト</td>
-					<td><%= product.artist.artist_name %></td>
-				</tr>
-				<tr>
-					<td>レーベル</td>
-					<td><%= product.label.label_name %></td>
-				</tr>
-				<tr>
-					<td>ジャンル</td>
-					<td><%= product.genre.genre_name %></td>
-				</tr>
-				<tr>
-					<td>価格</td>
-					<td><%= product.price %></td>
-				</tr>
-				<tr>
-					<td>在庫数</td>
-					<td><%= product.stock %></td>
-				</tr>
-				<tr>
-					<td><button type="button" class="btn btn-success btn-sm"><%=link_to "編集", product_path(product), class: "button" %></button></td>
-					<td><button type="button" class="btn btn-danger btn-sm"><%= link_to "削除", admins_destroy_path(product), method: :delete, "data-confirm" => "本当に削除しますか？", class: "button" %></button></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<% end %>
-	<p class="link"><%= link_to "戻る", admins_top_path, class: "link" %></p>
+			<tr>
+				<td>タイトル</td>
+				<td><%= product.title.truncate(25) %></td>
+			</tr>
+			<tr>
+				<td>アーティスト</td>
+				<td><%= product.artist.artist_name %></td>
+			</tr>
+			<tr>
+				<td>レーベル</td>
+				<td><%= product.label.label_name %></td>
+			</tr>
+			<tr>
+				<td>ジャンル</td>
+				<td><%= product.genre.genre_name %></td>
+			</tr>
+			<tr>
+				<td>価格</td>
+				<td><%= product.price %></td>
+			</tr>
+			<tr>
+				<td>在庫数</td>
+				<td><%= product.stock %></td>
+			</tr>
+			<tr>
+				<td><button type="button" class="btn btn-success btn-sm"><%=link_to "編集", product_path(product), class: "button" %></button></td>
+				<td><button type="button" class="btn btn-danger btn-sm"><%= link_to "削除", admins_destroy_path(product), method: :delete, "data-confirm" => "本当に削除しますか？", class: "button" %></button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<% end %>
+<div class="col-md-5">
+	<p><%= link_to "戻る", admins_top_path, class: "link" %></p>
 </div>
 
 <style>
+.index_area {
+	margin-left: 160px;
+}
 .sakujyo{
 	background-color: black;
 	color: white;
@@ -56,10 +58,11 @@
 	padding: 10px;
 }
 .music_image {
-	margin-bottom: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 .link {
-	margin-left: 55px;
+	margin-left: 160px;
 }
 .button {
 	color: white;

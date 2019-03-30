@@ -15,7 +15,7 @@
 				<%= attachment_image_tag product, :music_image, class: "", fallback: "no_image.jpg", size: "200x200" %><br>
 			<% end %>
 			<%= link_to products_show_path(product.id) do %>
-				<%= product.title.truncate(15) %><br>
+				<%= product.title.truncate(14) %><br>
 			<% end %>
 			<%= product.artist.artist_name %>
 			<%= link_to favorite_path(product), :method => :delete, data: { confirm: '削除しますか？' } , class: "btn btn-default btn-xs" do %>
